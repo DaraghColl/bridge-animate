@@ -10,11 +10,11 @@ const Keyframes: FC = () => {
 
 const Keyframe: FC = () => {
   return (
-    <div className="flex h-2 w-full items-center justify-between rounded-sm bg-gray-800">
-      <div className="h-5 w-5 cursor-pointer rounded-full border-2 border-gray-800 bg-white"></div>
-      <div className="h-5 w-5 cursor-pointer rounded-full border-2 border-gray-800 bg-white"></div>
-      <div className="h-5 w-5 cursor-pointer rounded-full border-2 border-gray-800 bg-white"></div>
-      <div className="h-5 w-5 cursor-pointer rounded-full border-2 border-gray-800 bg-white"></div>
+    <div className="bg-white-400 flex h-2 w-full items-center justify-between rounded-sm bg-white">
+      <div className="h-5 w-5 rotate-45 cursor-pointer rounded-sm bg-white"></div>
+      <div className="h-5 w-5 rotate-45 cursor-pointer rounded-sm bg-white"></div>
+      <div className="h-5 w-5 rotate-45 cursor-pointer rounded-sm bg-white"></div>
+      <div className="h-5 w-5 rotate-45 cursor-pointer rounded-sm bg-white"></div>
     </div>
   );
 };
