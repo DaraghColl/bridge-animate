@@ -4,12 +4,12 @@ import { ElementList } from './components/element-list/element-list';
 
 function App() {
   return (
-    <main className="flex h-screen flex-col gap-4 bg-dark-primary p-4 text-white">
+    <main className="bg-dark-primary flex h-screen flex-col gap-4 p-4 text-white">
       <div className="flex h-3/4 flex-row gap-4">
-        <div className="basis-1/5 overflow-scroll rounded-md bg-dark-secondary">
+        <div className="bg-dark-secondary basis-1/5 overflow-scroll rounded-md">
           <ElementList />
         </div>
-        <div id="canvas" className="flex basis-3/5 items-center justify-center rounded-md bg-dark-secondary">
+        <div id="canvas" className="bg-dark-secondary flex basis-3/5 items-center justify-center rounded-md">
           <svg width="100" height="100" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="guy-projects">
               <circle id="body" cx="15.7037" cy="8.99998" r="7.5" stroke="white" />
@@ -37,7 +37,7 @@ function App() {
             </g>
           </svg>
         </div>
-        <div className="basis-1/5 overflow-scroll rounded-md bg-dark-secondary">right</div>
+        <div className="bg-dark-secondary basis-1/5 overflow-scroll rounded-md">right</div>
       </div>
       <Timeline />
     </main>
