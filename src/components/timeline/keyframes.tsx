@@ -15,6 +15,7 @@ const Keyframe: FC = () => {
       <div className="h-5 w-5 rotate-45 cursor-pointer rounded-sm bg-white"></div>
       <div className="h-5 w-5 rotate-45 cursor-pointer rounded-sm bg-white"></div>
       <div className="h-5 w-5 rotate-45 cursor-pointer rounded-sm bg-white"></div>
+      <div className="h-5 w-5 rotate-45 cursor-pointer rounded-sm bg-white"></div>
     </div>
   );
 };
