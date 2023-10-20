@@ -2,6 +2,7 @@ import './App.css';
 import { Timeline } from './components/timeline/timeline';
 import { ElementList } from './components/element-list/element-list';
 import { Canvas } from './components/canvas/canvas';
+import { Controls } from './components/controls/controls';
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
           <ElementList />
         </div>
         <Canvas />
-        <div className="basis-1/5 overflow-scroll rounded-md bg-dark-secondary">right</div>
+        <div className="basis-1/5 overflow-scroll rounded-md bg-dark-secondary">
+          <Controls />
+        </div>
       </div>
       <Timeline />
     </main>

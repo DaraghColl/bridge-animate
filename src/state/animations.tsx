@@ -1,28 +1,26 @@
-import { FC, ReactNode, createContext, useContext, useEffect, useState } from 'react';
+import { Dispatch, FC, ReactNode, SetStateAction, createContext, useContext, useState } from 'react';
 
-interface Animations {
-  opacity?: string;
-  rotate?: string;
-  translateX?: string;
-  translateY?: string;
-}
+export type Style = 'opacity' | 'rotate' | 'translateX' | 'translateY';
 
 export type KeyframeTime = '0' | '0.25' | '0.50' | '0.75' | '1';
 
 interface Keyframe {
   time: KeyframeTime;
-  animations?: Animations[];
+  styles: string[];
 }
 
 interface AnimationsList {
   name: string;
-  keyframes: Keyframe[] | null;
+  keyframes: Keyframe[];
 }
 
 interface AnimationsValue {
   animations: AnimationsList[] | null;
   createNewAnimation: (elementId: string) => void;
   createKeyframe: (animationName: string, keyframeTime: KeyframeTime) => void;
+  selectedKeyFrameTime: KeyframeTime | null;
+  setSelectedKeyFrameTime: Dispatch<SetStateAction<KeyframeTime | null>>;
+  createKeyframeStyles: (selectedElementID: string, style: Style, value: string) => void;
 }
 
 const AnimationsContext = createContext<AnimationsValue | undefined>(undefined);
@@ -33,10 +31,7 @@ interface AnimationsProviderProps {
 
 const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
   const [animations, setAnimations] = useState<AnimationsList[] | []>([]);
-
-  useEffect(() => {
-    console.log(animations);
-  }, [animations]);
+  const [selectedKeyFrameTime, setSelectedKeyFrameTime] = useState<KeyframeTime | null>(null);
 
   const createNewAnimation = (elementId: string) => {
     if (animations.some((animation) => animation.name === elementId)) {
@@ -52,10 +47,9 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
   };
 
   const createKeyframe = (animationName: string, keyframeTime: KeyframeTime) => {
-    console.log(animationName);
-    console.log(keyframeTime);
     const keyframe: Keyframe = {
       time: keyframeTime,
+      styles: [],
     };
 
     const animationsCopy = [...animations];
@@ -64,14 +58,35 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
         if (animation.keyframes && !animation.keyframes.find((keyframe) => keyframe.time === keyframeTime)) {
           animation.keyframes.push(keyframe);
         }
+        setSelectedKeyFrameTime(keyframe.time);
       }
     });
 
     setAnimations(animationsCopy);
   };
 
+  const createKeyframeStyles = (selectedElementID: string, style: string, value: string) => {
+    const animationsCopy = [...animations];
+    const elementToAnimate = animationsCopy.find((animation) => animation.name === selectedElementID);
+    const keyframeToAddStyles = elementToAnimate?.keyframes.find(
+      (keyframes) => keyframes.time === selectedKeyFrameTime,
+    );
+
+    // keyframeToAddStyles?.styles.push(`${style}: ${value}`);
+    keyframeToAddStyles?.styles.push(`${style}: ${value}`);
+  };
+
   return (
-    <AnimationsContext.Provider value={{ animations, createNewAnimation, createKeyframe }}>
+    <AnimationsContext.Provider
+      value={{
+        animations,
+        createNewAnimation,
+        createKeyframe,
+        selectedKeyFrameTime,
+        setSelectedKeyFrameTime,
+        createKeyframeStyles,
+      }}
+    >
       {children}
     </AnimationsContext.Provider>
   );
