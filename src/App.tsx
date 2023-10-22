@@ -12,7 +12,7 @@ function App() {
           <ElementList />
         </div>
         <Canvas />
-        <div className="basis-1/5 overflow-scroll rounded-md bg-dark-secondary">
+        <div id="controls" className="w-[240px] min-w-[240px] basis-1/5 overflow-scroll rounded-md bg-dark-secondary">
           <Controls />
         </div>
       </div>

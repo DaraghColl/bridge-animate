@@ -9,7 +9,7 @@ interface Keyframe {
   styles: string[];
 }
 
-interface AnimationsList {
+export interface AnimationsList {
   name: string;
   keyframes: Keyframe[];
 }
@@ -72,7 +72,20 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
       (keyframes) => keyframes.time === selectedKeyFrameTime,
     );
 
-    // keyframeToAddStyles?.styles.push(`${style}: ${value}`);
+    // const styleFormattedForAnimation = style.split(':');
+    // const styleProp = styleFormattedForAnimation[0];
+
+    // if (keyframeToAddStyles && keyframeToAddStyles.styles.length) {
+    //   const hasDuplicate = keyframeToAddStyles?.styles[0].includes(styleProp.toString());
+    //   if (hasDuplicate) {
+    //     const index = keyframeToAddStyles.styles.findIndex((style) => style.split(':')[0] === styleProp.toString());
+    //     keyframeToAddStyles.styles.splice(index, 1);
+    //     keyframeToAddStyles?.styles.push(`${style}: ${value}`);
+    //   }
+    // } else {
+    //   keyframeToAddStyles?.styles.push(`${style}: ${value}`);
+    // }
+
     keyframeToAddStyles?.styles.push(`${style}: ${value}`);
   };
 
