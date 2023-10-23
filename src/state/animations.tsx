@@ -85,7 +85,6 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
 
     if (style && keyframeToAddStyles) {
       keyframeToAddStyles.styles[style] = value;
-      console.log(keyframeToAddStyles);
     }
   };
 
