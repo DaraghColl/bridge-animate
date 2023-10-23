@@ -15,13 +15,13 @@ const keyframes: string[] = ['0', '0.25', '0.50', '0.75', '1'];
 const Keyframe: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const { animations, createKeyframe, selectedKeyFrameTime } = useAnimationsContext();
-  const javascriptFormattedAnimations: Keyframe[] = [];
 
   const handlePlayAnimation = () => {
     if (animations) {
       // loop through all elements with animations
       animations.forEach((animation) => {
         const elementToAnimate = document.getElementById(animation.name);
+        const javascriptFormattedAnimations: Keyframe[] = [];
 
         animation.keyframes.forEach(({ styles, time }) => {
           for (const [key, value] of Object.entries(styles)) {
