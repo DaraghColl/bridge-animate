@@ -71,7 +71,13 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
         }
         setSelectedKeyFrameTime(keyframe.time);
       }
+
+      // sort keyframes by time ascending
+      // animate() will give error if keyframes not in correct order
+      animation.keyframes.sort((a, b) => Number(a.time) - Number(b.time));
     });
+
+    console.warn(animationsCopy);
 
     setAnimations(animationsCopy);
   };
