@@ -1,12 +1,18 @@
 import { Dispatch, FC, ReactNode, SetStateAction, createContext, useContext, useState } from 'react';
 
-export type Style = 'opacity' | 'rotate' | 'translateX' | 'translateY';
+export type StyleType = 'opacity' | 'rotate' | 'translateX' | 'translateY';
+export type Style = {
+  opacity?: string | null;
+  rotate?: string | null;
+  translateX?: string | null;
+  translateY?: string | null;
+};
 
 export type KeyframeTime = '0' | '0.25' | '0.50' | '0.75' | '1';
 
 interface Keyframe {
   time: KeyframeTime;
-  styles: string[];
+  styles: Style;
 }
 
 export interface AnimationsList {
@@ -20,7 +26,7 @@ interface AnimationsValue {
   createKeyframe: (animationName: string, keyframeTime: KeyframeTime) => void;
   selectedKeyFrameTime: KeyframeTime | null;
   setSelectedKeyFrameTime: Dispatch<SetStateAction<KeyframeTime | null>>;
-  createKeyframeStyles: (selectedElementID: string, style: Style, value: string) => void;
+  createKeyframeStyles: (selectedElementID: string, style: StyleType, value: string) => void;
 }
 
 const AnimationsContext = createContext<AnimationsValue | undefined>(undefined);
@@ -49,7 +55,12 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
   const createKeyframe = (animationName: string, keyframeTime: KeyframeTime) => {
     const keyframe: Keyframe = {
       time: keyframeTime,
-      styles: [],
+      styles: {
+        opacity: null,
+        rotate: null,
+        translateX: null,
+        translateY: null,
+      },
     };
 
     const animationsCopy = [...animations];
@@ -65,28 +76,17 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
     setAnimations(animationsCopy);
   };
 
-  const createKeyframeStyles = (selectedElementID: string, style: string, value: string) => {
+  const createKeyframeStyles = (selectedElementID: string, style: StyleType, value: string) => {
     const animationsCopy = [...animations];
     const elementToAnimate = animationsCopy.find((animation) => animation.name === selectedElementID);
     const keyframeToAddStyles = elementToAnimate?.keyframes.find(
       (keyframes) => keyframes.time === selectedKeyFrameTime,
     );
 
-    // const styleFormattedForAnimation = style.split(':');
-    // const styleProp = styleFormattedForAnimation[0];
-
-    // if (keyframeToAddStyles && keyframeToAddStyles.styles.length) {
-    //   const hasDuplicate = keyframeToAddStyles?.styles[0].includes(styleProp.toString());
-    //   if (hasDuplicate) {
-    //     const index = keyframeToAddStyles.styles.findIndex((style) => style.split(':')[0] === styleProp.toString());
-    //     keyframeToAddStyles.styles.splice(index, 1);
-    //     keyframeToAddStyles?.styles.push(`${style}: ${value}`);
-    //   }
-    // } else {
-    //   keyframeToAddStyles?.styles.push(`${style}: ${value}`);
-    // }
-
-    keyframeToAddStyles?.styles.push(`${style}: ${value}`);
+    if (style && keyframeToAddStyles) {
+      keyframeToAddStyles.styles[style] = value;
+      console.log(keyframeToAddStyles);
+    }
   };
 
   return (
