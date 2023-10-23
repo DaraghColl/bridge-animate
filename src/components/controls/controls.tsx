@@ -1,12 +1,12 @@
 import { FC, ChangeEvent, Fragment } from 'react';
-import { Style, useAnimationsContext } from '../../state/animations';
+import { StyleType, useAnimationsContext } from '../../state/animations';
 import { useSelectedElementContext } from '../../state/selected-element';
 
 const Controls: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const { createKeyframeStyles, selectedKeyFrameTime } = useAnimationsContext();
 
-  const handleInputChange = (style: Style, e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (style: StyleType, e: ChangeEvent<HTMLInputElement>) => {
     if (selectedElementID) {
       createKeyframeStyles(selectedElementID, style, e.target.value);
     }
