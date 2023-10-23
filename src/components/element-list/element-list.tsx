@@ -17,7 +17,7 @@ const setElementIds = (elements: Element[]): Element[] => {
 
 const ElementList: FC = () => {
   const [elements, setElements] = useState<Element[] | null>(null);
-  const { setSelectedElementId } = useSelectedElementContext();
+  const { selectedElementID, setSelectedElementId } = useSelectedElementContext();
 
   const handleElementSelect = (element: Element) => {
     setSelectedElementId(element.getAttribute('id'));
@@ -43,7 +43,11 @@ const ElementList: FC = () => {
       {elements &&
         elements.map((element, index) => {
           return (
-            <div key={index} className="px-4 py-2" onClick={() => handleElementSelect(element)}>
+            <div
+              key={index}
+              className={`px-4 py-2 ${selectedElementID === element.getAttribute('id') ? 'text-indigo-600' : ''}`}
+              onClick={() => handleElementSelect(element)}
+            >
               {element.getAttribute('id') ?? element.tagName}
             </div>
           );

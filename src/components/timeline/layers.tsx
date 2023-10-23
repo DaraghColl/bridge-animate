@@ -3,13 +3,17 @@ import { useAnimationsContext } from '../../state/animations';
 import { useSelectedElementContext } from '../../state/selected-element';
 
 const Layers: FC = () => {
-  const { selectedElementID } = useSelectedElementContext();
+  const { selectedElementID, setSelectedElementId } = useSelectedElementContext();
   const { animations, createNewAnimation } = useAnimationsContext();
 
   const handleCreateNewAnimation = () => {
     if (selectedElementID) {
       createNewAnimation(selectedElementID);
     }
+  };
+
+  const handleElementSelect = (name: string) => {
+    setSelectedElementId(name);
   };
 
   return (
@@ -32,8 +36,16 @@ const Layers: FC = () => {
 
       <div className="py-2 font-thin">
         {animations &&
-          animations.map((animation, index) => {
-            return <div key={index}>{animation.name}</div>;
+          animations.map(({ name }, index) => {
+            return (
+              <div
+                key={index}
+                className={`${selectedElementID === name ? 'text-indigo-600' : ''}`}
+                onClick={() => handleElementSelect(name)}
+              >
+                {name}
+              </div>
+            );
           })}
       </div>
     </div>
