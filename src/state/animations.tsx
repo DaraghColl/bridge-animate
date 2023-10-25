@@ -77,8 +77,6 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
       animation.keyframes.sort((a, b) => Number(a.time) - Number(b.time));
     });
 
-    console.warn(animationsCopy);
-
     setAnimations(animationsCopy);
   };
 
