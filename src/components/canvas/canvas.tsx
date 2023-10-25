@@ -21,14 +21,7 @@ const Canvas: FC = () => {
 
   return (
     <div id="canvas" className="flex basis-3/5 items-center justify-center rounded-md bg-dark-secondary">
-      <svg width="100" height="100" viewBox="0 0 12 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g id="bars">
-          <rect id="bar__bottom" y="3" width="12" height="2" rx="1" fill="white" />
-          <rect id="bar__top" width="12" height="2" rx="1" fill="white" />
-        </g>
-      </svg>
-
-      {/* <svg width="200" height="200" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="200" height="200" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="guy-projects">
           <circle id="body" cx="15.7037" cy="8.99999" r="7.5" stroke="white" />
           <path
@@ -53,7 +46,7 @@ const Canvas: FC = () => {
             strokeLinejoin="round"
           />
         </g>
-      </svg> */}
+      </svg>
     </div>
   );
 };
