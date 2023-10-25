@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Layers } from './layers';
 import { Keyframe } from './keyframes';
 import { useAnimationsContext } from '../../state/animations';
@@ -22,8 +22,30 @@ interface FormattedStyleObject extends StyleObjectKeys {
 
 const Timeline: FC = () => {
   const { animations } = useAnimationsContext();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [animationsToPay, setAnimationsToPay] = useState<(Animation | undefined)[]>([]);
+
+  const handlePauseAnimation = () => {
+    setIsPlaying(false);
+    if (isPlaying) {
+      animationsToPay.forEach((animation) => {
+        if (animation) {
+          animation.pause();
+        }
+      });
+    }
+  };
 
   const handlePlayAnimation = () => {
+    setIsPlaying(true);
+    animationsToPay.forEach((animation) => {
+      if (animation) {
+        animation.play();
+      }
+    });
+  };
+
+  const handleSetAnimation = () => {
     if (animations) {
       // loop through all elements with animations
       animations.forEach((animation) => {
@@ -64,12 +86,16 @@ const Timeline: FC = () => {
           },
         );
 
-        elementToAnimate?.animate(formatTransform, {
-          duration: 1500,
+        const elementAnimation = elementToAnimate?.animate(formatTransform, {
+          duration: 5000,
           fill: 'auto',
           easing: 'ease-in-out',
           iterations: 1,
         });
+
+        elementAnimation?.finish();
+
+        setAnimationsToPay((prevAnimations) => [...prevAnimations, elementAnimation]);
       });
     }
   };
@@ -87,11 +113,31 @@ const Timeline: FC = () => {
         <div className="absolute bottom-5 right-5 mt-10 flex gap-4">
           <button
             className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            onClick={handleSetAnimation}
+          >
+            Set Animation
+          </button>
+          <button
+            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             onClick={handlePlayAnimation}
           >
             Play Animation
           </button>
+          <button
+            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            onClick={handlePauseAnimation}
+          >
+            Pause Animation
+          </button>
         </div>
+        {/* <div className="absolute bottom-5 right-5 mt-10 flex gap-4">
+          <button
+            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            onClick={handlePlayAnimation}
+          >
+            Play Animation
+          </button>
+        </div> */}
       </div>
     </div>
   );
