@@ -1,16 +1,36 @@
-import { FC, ChangeEvent, Fragment } from 'react';
-import { StyleType, useAnimationsContext } from '../../state/animations';
+import { FC, ChangeEvent, Fragment, useEffect, useState } from 'react';
+import { Style, StyleType, useAnimationsContext } from '../../state/animations';
 import { useSelectedElementContext } from '../../state/selected-element';
 
 const Controls: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
-  const { createKeyframeStyles, selectedKeyFrameTime } = useAnimationsContext();
+  const { createKeyframeStyles, selectedKeyFrameTime, animations } = useAnimationsContext();
+  const [currentKeyframeStyles, setCurrentKeyframeStyles] = useState<Style>({
+    opacity: '',
+    rotate: '',
+    translateX: '',
+    translateY: '',
+  });
 
   const handleInputChange = (style: StyleType, e: ChangeEvent<HTMLInputElement>) => {
     if (selectedElementID) {
       createKeyframeStyles(selectedElementID, style, e.target.value);
     }
+
+    setCurrentKeyframeStyles({ ...currentKeyframeStyles, [style]: e.target.value });
   };
+
+  useEffect(() => {
+    if (animations && animations?.length <= 0) return;
+
+    const currentKeyFrame = animations
+      ?.find((animation) => animation.name === selectedElementID)
+      ?.keyframes.find((keyframe) => keyframe.time === selectedKeyFrameTime)?.styles;
+
+    if (!currentKeyFrame) return;
+
+    setCurrentKeyframeStyles(currentKeyFrame);
+  }, [selectedElementID, animations, selectedKeyFrameTime]);
 
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -26,6 +46,7 @@ const Controls: FC = () => {
               type="number"
               className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
               onBlur={(e) => handleInputChange('opacity', e)}
+              value={currentKeyframeStyles.opacity}
             />
           </div>
 
@@ -41,6 +62,7 @@ const Controls: FC = () => {
                   type="number"
                   className="w-full rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
                   onBlur={(e) => handleInputChange('translateX', e)}
+                  value={currentKeyframeStyles.translateX}
                 />
               </div>
               <div className="basis-1/2">
@@ -52,6 +74,7 @@ const Controls: FC = () => {
                   type="number"
                   className="w-full rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
                   onBlur={(e) => handleInputChange('translateY', e)}
+                  value={currentKeyframeStyles.translateY}
                 />
               </div>
             </div>
@@ -64,10 +87,9 @@ const Controls: FC = () => {
             <input
               name="rotate"
               type="number"
-              // min={0}
-              // max={360}
               className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
               onBlur={(e) => handleInputChange('rotate', e)}
+              value={currentKeyframeStyles.rotate}
             />
           </div>
         </Fragment>

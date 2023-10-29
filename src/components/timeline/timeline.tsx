@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, Fragment, useState } from 'react';
 import { Layers } from './layers';
 import { Keyframe } from './keyframes';
 import { useAnimationsContext } from '../../state/animations';
@@ -21,7 +21,7 @@ interface FormattedStyleObject extends StyleObjectKeys {
 }
 
 const Timeline: FC = () => {
-  const { animations } = useAnimationsContext();
+  const { animations, selectedKeyFrameTime } = useAnimationsContext();
   const [isPlaying, setIsPlaying] = useState(false);
   const [animationsToPay, setAnimationsToPay] = useState<(Animation | undefined)[]>([]);
 
@@ -119,41 +119,45 @@ const Timeline: FC = () => {
         <Layers />
       </div>
       <div className="flex basis-3/4 flex-col gap-8 overflow-scroll bg-dark-secondary p-4">
-        <div className="flex gap-5">
-          <div className="flex basis-3/4 items-center">
-            <input
-              id="scrubber"
-              type="range"
-              className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200"
-              onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
-              min="0"
-              max="5000"
-              disabled={animationsToPay.length <= 0}
-            ></input>
-          </div>
-          <div className="flex basis-1/4 items-center gap-4">
-            <button
-              className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              onClick={handleSetAnimation}
-            >
-              Set
-            </button>
-            <button
-              className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              onClick={handlePlayAnimation}
-            >
-              Play
-            </button>
-            <button
-              className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              onClick={handlePauseAnimation}
-            >
-              Pause
-            </button>
-          </div>
-        </div>
+        {animations && selectedKeyFrameTime && (
+          <Fragment>
+            <div className="flex gap-5">
+              <div className="flex basis-3/4 items-center">
+                <input
+                  id="scrubber"
+                  type="range"
+                  className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
+                  min="0"
+                  max="5000"
+                  disabled={animationsToPay.length <= 0}
+                ></input>
+              </div>
+              <div className="flex basis-1/4 items-center gap-4">
+                <button
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                  onClick={handleSetAnimation}
+                >
+                  Set
+                </button>
+                <button
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                  onClick={handlePlayAnimation}
+                >
+                  Play
+                </button>
+                <button
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                  onClick={handlePauseAnimation}
+                >
+                  Pause
+                </button>
+              </div>
+            </div>
 
-        <Keyframe />
+            <Keyframe />
+          </Fragment>
+        )}
       </div>
     </div>
   );

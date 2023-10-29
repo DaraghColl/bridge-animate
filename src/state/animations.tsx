@@ -2,10 +2,10 @@ import { Dispatch, FC, ReactNode, SetStateAction, createContext, useContext, use
 
 export type StyleType = 'opacity' | 'rotate' | 'translateX' | 'translateY';
 export type Style = {
-  opacity?: string | null;
-  rotate?: string | null;
-  translateX?: string | null;
-  translateY?: string | null;
+  opacity?: string;
+  rotate?: string;
+  translateX?: string;
+  translateY?: string;
 };
 
 export type KeyframeTime = '0' | '0.25' | '0.50' | '0.75' | '1';
@@ -56,10 +56,10 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
     const keyframe: Keyframe = {
       time: keyframeTime,
       styles: {
-        opacity: null,
-        rotate: null,
-        translateX: null,
-        translateY: null,
+        opacity: '',
+        rotate: '',
+        translateX: '',
+        translateY: '',
       },
     };
 
