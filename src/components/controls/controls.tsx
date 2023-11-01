@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, Fragment, useEffect, useState } from 'react';
+import { FC, ChangeEvent, Fragment, useEffect, useState, useCallback } from 'react';
 import { Style, StyleType, useAnimationsContext } from '../../state/animations';
 import { useSelectedElementContext } from '../../state/selected-element';
 
@@ -12,13 +12,47 @@ const Controls: FC = () => {
     translateY: '',
   });
 
+  const updateSelectedElementTemporaryStyles = useCallback(() => {
+    const currentKeyFrame = animations
+      ?.find((animation) => animation.name === selectedElementID)
+      ?.keyframes.find((keyframe) => keyframe.time === selectedKeyFrameTime)?.styles;
+
+    if (selectedElementID) {
+      const selectedElement = document.getElementById(selectedElementID);
+      if (selectedElement && currentKeyFrame) {
+        const transformArray = [
+          `${currentKeyFrame.translateX !== '' ? `translateX(${currentKeyFrame.translateX}px)` : ''}`,
+          `${currentKeyFrame.translateY !== '' ? `translateY(${currentKeyFrame.translateY}px)` : ''}`,
+          `${currentKeyFrame.rotate !== '' ? `rotate(${currentKeyFrame.rotate}deg)` : ''}`,
+        ];
+
+        if (currentKeyFrame.opacity) selectedElement.style.opacity = currentKeyFrame.opacity;
+        if (transformArray) selectedElement.style.transform = transformArray.join(' ');
+      }
+    }
+  }, [animations, selectedElementID, selectedKeyFrameTime]);
+
   const handleInputChange = (style: StyleType, e: ChangeEvent<HTMLInputElement>) => {
     if (selectedElementID) {
       createKeyframeStyles(selectedElementID, style, e.target.value);
     }
 
+    updateSelectedElementTemporaryStyles();
+
     setCurrentKeyframeStyles({ ...currentKeyframeStyles, [style]: e.target.value });
   };
+
+  useEffect(() => {
+    if (selectedElementID) {
+      const selectedElement = document.getElementById(selectedElementID);
+      if (selectedElement) {
+        selectedElement.style.opacity = '1';
+        selectedElement.style.transform = '';
+      }
+
+      updateSelectedElementTemporaryStyles();
+    }
+  }, [selectedElementID, updateSelectedElementTemporaryStyles]);
 
   useEffect(() => {
     if (animations && animations?.length <= 0) return;
