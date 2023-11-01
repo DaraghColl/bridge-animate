@@ -13,7 +13,7 @@ const Keyframe: FC = () => {
     const selectedAnimation = animations?.find((animation) => animation.name === selectedElementID);
     const hasKeyframe = selectedAnimation?.keyframes.find((keyframe) => keyframe.time === keyframeTime);
 
-    return hasKeyframe;
+    return !!hasKeyframe;
   };
 
   return (
@@ -24,10 +24,10 @@ const Keyframe: FC = () => {
             return (
               <Fragment key={index}>
                 <div
-                  className={`h-5 w-5 rotate-45 cursor-pointer rounded-sm bg-white ${
-                    selectedKeyFrameTime === keyframe ? 'border-2 border-white' : ''
+                  className={`h-5 w-5 rotate-45 cursor-pointer rounded-sm ${
+                    selectedKeyFrameTime === keyframe ? 'border-white-500 border-2' : ''
                   }
-                  ${checkIfKeyframeExists(keyframe) ? 'bg-indigo-500' : ''}
+                  ${checkIfKeyframeExists(keyframe) ? 'bg-indigo-500' : 'bg-slate-400'}
                   `}
                   onClick={() => {
                     createKeyframe(selectedElementID, keyframe as KeyframeTime);
