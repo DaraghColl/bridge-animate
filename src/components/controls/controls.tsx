@@ -34,7 +34,11 @@ const Controls: FC = () => {
 
   return (
     <div className="flex flex-col gap-4 p-4">
-      {(selectedElementID === null || !selectedKeyFrameTime) && <h1>Select Element to see controls</h1>}
+      {(selectedElementID === null || !selectedKeyFrameTime) && (
+        <span className="text-sm tracking-wide">
+          Select Element, add an animation layer, and select keyframe to see controls
+        </span>
+      )}
       {selectedElementID && selectedKeyFrameTime && (
         <Fragment>
           <div className="flex flex-col">

@@ -128,6 +128,9 @@ const Timeline: FC = () => {
         <Layers />
       </div>
       <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll bg-dark-secondary p-4">
+        {animations && animations.length <= 0 && (
+          <span className="text-sm tracking-wide">Select Element and add an animation layer</span>
+        )}
         {animations && animations.length > 0 && (
           <Fragment>
             <div className="flex  items-center justify-between">
