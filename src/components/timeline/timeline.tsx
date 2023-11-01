@@ -114,47 +114,46 @@ const Timeline: FC = () => {
   };
 
   return (
-    <div className=" flex h-1/4 gap-4 rounded-md">
+    <div className=" flex h-1/3 gap-4 rounded-md">
       <div className="basis-1/4 overflow-scroll bg-dark-secondary p-2">
         <Layers />
       </div>
-      <div className="flex basis-3/4 flex-col gap-8 overflow-scroll bg-dark-secondary p-4">
+      <div className="relative flex basis-3/4 flex-col gap-8 overflow-scroll bg-dark-secondary p-4">
         {animations && animations.length > 0 && (
           <Fragment>
-            <div className="flex gap-5">
-              <div className="flex basis-3/4 items-center">
-                <input
-                  id="scrubber"
-                  type="range"
-                  className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
-                  min="0"
-                  max="5000"
-                  disabled={animationsToPay.length <= 0}
-                ></input>
-              </div>
-              <div className="flex basis-1/4 items-center gap-4">
-                <button
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                  onClick={handleSetAnimation}
-                >
-                  Set
-                </button>
-                <button
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                  onClick={handlePlayAnimation}
-                >
-                  Play
-                </button>
-                <button
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                  onClick={handlePauseAnimation}
-                >
-                  Pause
-                </button>
-              </div>
+            <div className="mb-5 flex items-center">
+              <input
+                id="scrubber"
+                type="range"
+                className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200"
+                onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
+                min="0"
+                max="5000"
+                disabled={animationsToPay.length <= 0}
+              ></input>
             </div>
             <Keyframe />
+
+            <div className="absolute bottom-2 right-2 flex basis-1/4 items-center gap-4">
+              <button
+                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                onClick={handleSetAnimation}
+              >
+                Set
+              </button>
+              <button
+                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                onClick={handlePlayAnimation}
+              >
+                Play
+              </button>
+              <button
+                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                onClick={handlePauseAnimation}
+              >
+                Pause
+              </button>
+            </div>
           </Fragment>
         )}
       </div>
