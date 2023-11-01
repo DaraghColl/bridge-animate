@@ -154,7 +154,6 @@ const Timeline: FC = () => {
                 </button>
               </div>
             </div>
-
             <Keyframe />
           </Fragment>
         )}
