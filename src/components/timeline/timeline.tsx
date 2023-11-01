@@ -21,7 +21,7 @@ interface FormattedStyleObject extends StyleObjectKeys {
 }
 
 const Timeline: FC = () => {
-  const { animations, selectedKeyFrameTime } = useAnimationsContext();
+  const { animations } = useAnimationsContext();
   const [isPlaying, setIsPlaying] = useState(false);
   const [animationsToPay, setAnimationsToPay] = useState<(Animation | undefined)[]>([]);
 
@@ -119,7 +119,7 @@ const Timeline: FC = () => {
         <Layers />
       </div>
       <div className="flex basis-3/4 flex-col gap-8 overflow-scroll bg-dark-secondary p-4">
-        {animations && selectedKeyFrameTime && (
+        {animations && animations.length > 0 && (
           <Fragment>
             <div className="flex gap-5">
               <div className="flex basis-3/4 items-center">
