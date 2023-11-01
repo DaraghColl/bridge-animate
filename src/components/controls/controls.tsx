@@ -46,6 +46,7 @@ const Controls: FC = () => {
               type="number"
               className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
               onBlur={(e) => handleInputChange('opacity', e)}
+              onChange={(e) => handleInputChange('opacity', e)}
               value={currentKeyframeStyles.opacity}
             />
           </div>
@@ -62,6 +63,7 @@ const Controls: FC = () => {
                   type="number"
                   className="w-full rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
                   onBlur={(e) => handleInputChange('translateX', e)}
+                  onChange={(e) => handleInputChange('translateX', e)}
                   value={currentKeyframeStyles.translateX}
                 />
               </div>
@@ -74,6 +76,7 @@ const Controls: FC = () => {
                   type="number"
                   className="w-full rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
                   onBlur={(e) => handleInputChange('translateY', e)}
+                  onChange={(e) => handleInputChange('translateY', e)}
                   value={currentKeyframeStyles.translateY}
                 />
               </div>
@@ -89,6 +92,7 @@ const Controls: FC = () => {
               type="number"
               className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
               onBlur={(e) => handleInputChange('rotate', e)}
+              onChange={(e) => handleInputChange('rotate', e)}
               value={currentKeyframeStyles.rotate}
             />
           </div>
