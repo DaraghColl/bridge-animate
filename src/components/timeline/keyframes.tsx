@@ -1,8 +1,7 @@
 import { FC, Fragment } from 'react';
 import { useSelectedElementContext } from '../../state/selected-element';
 import { KeyframeTime, useAnimationsContext } from '../../state/animations';
-
-const keyframes: KeyframeTime[] = ['0', '0.25', '0.50', '0.75', '1'];
+import { keyframeTimes } from '../../constants/constants';
 
 const Keyframe: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
@@ -19,18 +18,18 @@ const Keyframe: FC = () => {
   return (
     <div className="flex flex-col items-center justify-around">
       {selectedElementID && animations && animations?.length > 0 && animations !== null && (
-        <div className="relatice bg-white-400 flex h-1 w-full items-center justify-between rounded-sm bg-white">
-          {keyframes.map((keyframe, index) => {
+        <div className="bg-white-400 relative flex h-1 w-full items-center justify-between rounded-sm bg-white">
+          {keyframeTimes.map((keyframeTime, index) => {
             return (
               <Fragment key={index}>
                 <div
                   className={`h-5 w-5 rotate-45 cursor-pointer rounded-sm ${
-                    selectedKeyFrameTime === keyframe ? 'border-white-500 border-2' : ''
+                    selectedKeyFrameTime === keyframeTime ? 'border-white-500 border-2' : ''
                   }
-                  ${checkIfKeyframeExists(keyframe) ? 'bg-indigo-500' : 'bg-slate-400'}
+                  ${checkIfKeyframeExists(keyframeTime) ? 'bg-indigo-500' : 'bg-slate-400'}
                   `}
                   onClick={() => {
-                    createKeyframe(selectedElementID, keyframe as KeyframeTime);
+                    createKeyframe(selectedElementID, keyframeTime as KeyframeTime);
                   }}
                 />
               </Fragment>
