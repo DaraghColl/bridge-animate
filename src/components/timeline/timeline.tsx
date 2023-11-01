@@ -1,7 +1,8 @@
 import { ChangeEvent, FC, Fragment, useState } from 'react';
 import { Layers } from './layers';
 import { Keyframe } from './keyframes';
-import { useAnimationsContext } from '../../state/animations';
+import { KeyframeTime, useAnimationsContext } from '../../state/animations';
+import { keyframeTimes } from '../../constants/constants';
 
 interface StyleObjectKeys {
   [key: string]: string | number | null | undefined;
@@ -113,14 +114,27 @@ const Timeline: FC = () => {
     }
   };
 
+  const keyframePercentageMap: Record<KeyframeTime, string> = {
+    '0': '0%',
+    '0.25': '25%',
+    '0.50': '50%',
+    '0.75': '75%',
+    '1': '100%',
+  };
+
   return (
     <div className=" flex h-1/3 gap-4 rounded-md">
       <div className="basis-1/4 overflow-scroll bg-dark-secondary p-2">
         <Layers />
       </div>
-      <div className="relative flex basis-3/4 flex-col gap-8 overflow-scroll bg-dark-secondary p-4">
+      <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll bg-dark-secondary p-4">
         {animations && animations.length > 0 && (
           <Fragment>
+            <div className="flex  items-center justify-between">
+              {keyframeTimes.map((time) => (
+                <div key={time}>{keyframePercentageMap[time]}</div>
+              ))}
+            </div>
             <div className="mb-5 flex items-center">
               <input
                 id="scrubber"
