@@ -101,7 +101,7 @@ const Timeline: FC = () => {
         );
 
         const elementAnimation = elementToAnimate?.animate(formatTransform, {
-          duration: 5000,
+          duration: 2500,
           fill: 'auto',
           easing: 'ease-in-out',
           iterations: 1,
@@ -142,10 +142,10 @@ const Timeline: FC = () => {
               <input
                 id="scrubber"
                 type="range"
-                className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200"
+                className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-indigo-500"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
                 min="0"
-                max="5000"
+                max="2500"
                 disabled={animationsToPay.length <= 0}
               ></input>
             </div>
