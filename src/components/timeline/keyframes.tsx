@@ -28,7 +28,7 @@ const Keyframe: FC = () => {
                   }
                   ${checkIfKeyframeExists(keyframeTime) ? 'bg-indigo-500' : 'bg-slate-400'}
                   `}
-                  onClick={() => {
+                  onDoubleClick={() => {
                     createKeyframe(selectedElementID, keyframeTime as KeyframeTime);
                   }}
                 />
