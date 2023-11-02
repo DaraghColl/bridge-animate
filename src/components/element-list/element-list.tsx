@@ -38,7 +38,7 @@ const ElementList: FC = () => {
 
   return (
     <div>
-      {!elements && <h1>No element selected</h1>}
+      {!elements && <h1 data-cy="no_svg_message">No SVG in canvas</h1>}
 
       {elements &&
         elements.map((element, index) => {
