@@ -5,7 +5,7 @@ import { keyframeTimes } from '../../constants/constants';
 
 const Keyframe: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
-  const { animations, createKeyframe, selectedKeyFrameTime } = useAnimationsContext();
+  const { animations, createKeyframe, selectedKeyFrameTime, setSelectedKeyFrameTime } = useAnimationsContext();
   const checkIfKeyframeExists = (keyframeTime: KeyframeTime) => {
     if (!animations) return;
 
@@ -28,6 +28,11 @@ const Keyframe: FC = () => {
                   }
                   ${checkIfKeyframeExists(keyframeTime) ? 'bg-indigo-500' : 'bg-slate-400'}
                   `}
+                  onClick={() => {
+                    if (checkIfKeyframeExists(keyframeTime)) {
+                      setSelectedKeyFrameTime(keyframeTime);
+                    }
+                  }}
                   onDoubleClick={() => {
                     createKeyframe(selectedElementID, keyframeTime as KeyframeTime);
                   }}
