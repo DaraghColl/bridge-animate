@@ -3,30 +3,12 @@ import { Layers } from './layers';
 import { Keyframe } from './keyframes';
 import { KeyframeTime, useAnimationsContext } from '../../state/animations';
 import { keyframeTimes } from '../../constants/constants';
-
-interface StyleObjectKeys {
-  [key: string]: string | number | null | undefined;
-}
-interface StyleObject extends StyleObjectKeys {
-  opacity?: string | null;
-  rotate?: string | null;
-  translateX?: string | null;
-  translateY?: string | null;
-  offset: number;
-  fill?: string;
-}
-
-interface FormattedStyleObject extends StyleObjectKeys {
-  opacity?: string | null;
-  transform?: string | null;
-  offset: number;
-  fill?: string;
-}
+import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 
 const Timeline: FC = () => {
   const { animations } = useAnimationsContext();
   const [isPlaying, setIsPlaying] = useState(false);
-  const [animationsToPay, setAnimationsToPay] = useState<(Animation | undefined)[]>([]);
+  const animationsToPay = useCreateJSAnimations();
 
   const handlePauseAnimation = () => {
     setIsPlaying(false);
@@ -59,63 +41,6 @@ const Timeline: FC = () => {
 
       handlePauseAnimation();
     });
-  };
-
-  const handleSetAnimation = () => {
-    if (animations) {
-      // loop through all elements with animations
-      animations.forEach((animation) => {
-        const elementToAnimate = document.getElementById(animation.name);
-        // const javascriptFormattedAnimations: Keyframe[] = [];
-        const javascriptFormattedAnimations: FormattedStyleObject[] = [];
-
-        animation.keyframes.forEach(({ styles, time }) => {
-          const animationStyleObject: StyleObject = {
-            opacity: null,
-            rotate: null,
-            translateX: null,
-            translateY: null,
-            offset: Number(time),
-            fill: '',
-          };
-
-          for (const [key, value] of Object.entries(styles)) {
-            if (value !== null && value !== '') {
-              if (key === 'translateX' || key === 'translateY') {
-                animationStyleObject[key] = `${key}(${value}px)`;
-              } else if (key === 'rotate') {
-                animationStyleObject[key] = `${key}(${value}deg)`;
-              } else {
-                animationStyleObject[key] = value;
-              }
-            }
-          }
-          javascriptFormattedAnimations.push(animationStyleObject);
-        });
-
-        const formatTransform = javascriptFormattedAnimations.map(
-          ({ opacity, rotate, translateX, translateY, offset, fill }) => {
-            return {
-              opacity: opacity ? opacity : '1',
-              transform: `${rotate ? rotate : ''} ${translateX ? translateX : ''} ${translateY ? translateY : ''}`,
-              offset: offset,
-              fill: fill,
-            };
-          },
-        );
-
-        const elementAnimation = elementToAnimate?.animate(formatTransform, {
-          duration: 2500,
-          fill: 'auto',
-          easing: 'ease-in-out',
-          iterations: 1,
-        });
-
-        elementAnimation?.finish();
-
-        setAnimationsToPay((prevAnimations) => [...prevAnimations, elementAnimation]);
-      });
-    }
   };
 
   const keyframePercentageMap: Record<KeyframeTime, string> = {
@@ -157,25 +82,6 @@ const Timeline: FC = () => {
 
             <div className="absolute bottom-2 flex w-full justify-center">
               <div className="right-2 flex basis-1/4 items-center gap-4">
-                <button
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                  onClick={handleSetAnimation}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="h-5 w-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-                    />
-                  </svg>
-                </button>
                 <button
                   className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                   onClick={handlePlayAnimation}
