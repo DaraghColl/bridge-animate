@@ -11,6 +11,7 @@ const Controls: FC = () => {
     translateX: '',
     translateY: '',
     fill: '',
+    stroke: '',
   });
 
   // set temporary styles so user can have real time feedback of style changes at keyframe point
@@ -30,6 +31,7 @@ const Controls: FC = () => {
 
         if (currentKeyFrame.opacity) selectedElement.style.opacity = currentKeyFrame.opacity;
         if (currentKeyFrame.fill) selectedElement.style.fill = currentKeyFrame.fill;
+        if (currentKeyFrame.stroke) selectedElement.style.stroke = currentKeyFrame.stroke;
         if (transformArray) selectedElement.style.transform = transformArray.join(' ');
       }
     }
@@ -95,10 +97,10 @@ const Controls: FC = () => {
           </div>
 
           <div className="mb-2 flex flex-col">
-            <span>Position</span>
+            <span>position</span>
             <div className="mt-2 flex flex-row gap-2">
               <div className="basis-1/2">
-                <label htmlFor="xPosition" className="ml-2 text-indigo-500">
+                <label htmlFor="xPosition" className="ml-2 text-indigo-600">
                   x
                 </label>
                 <input
@@ -111,7 +113,7 @@ const Controls: FC = () => {
                 />
               </div>
               <div className="basis-1/2">
-                <label htmlFor="yPosition" className="ml-2 text-indigo-500">
+                <label htmlFor="yPosition" className="ml-2 text-indigo-600">
                   y
                 </label>
                 <input
@@ -124,34 +126,50 @@ const Controls: FC = () => {
                 />
               </div>
             </div>
+            <div className="mt-2 flex flex-col">
+              <label htmlFor="rotate" className="ml-2 text-indigo-600">
+                rotate
+              </label>
+              <input
+                name="rotate"
+                type="number"
+                className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                onBlur={(e) => handleInputChange('rotate', e)}
+                onChange={(e) => handleInputChange('rotate', e)}
+                value={currentKeyframeStyles.rotate}
+              />
+            </div>
           </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="rotate" className="mb-2 text-gray-100">
-              rotate
-            </label>
-            <input
-              name="rotate"
-              type="number"
-              className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
-              onBlur={(e) => handleInputChange('rotate', e)}
-              onChange={(e) => handleInputChange('rotate', e)}
-              value={currentKeyframeStyles.rotate}
-            />
-          </div>
+          <div>
+            <span>color</span>
+            <div className="mt-2 flex gap-4">
+              <div className="flex flex-col">
+                <label htmlFor="rotate" className="ml-2 text-indigo-600">
+                  fill
+                </label>
+                <input
+                  name="fill"
+                  type="color"
+                  className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  onChange={(e) => handleInputChange('fill', e)}
+                  // value={currentKeyframeStyles.fill}
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="rotate" className="ml-2 text-indigo-600">
+                  stroke
+                </label>
 
-          <div className="flex flex-col">
-            <label htmlFor="rotate" className="mb-2 text-gray-100">
-              fill
-            </label>
-            <input
-              name="fill"
-              type="color"
-              className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
-              // onBlur={(e) => handleInputChange('fill', e)}
-              onChange={(e) => handleInputChange('fill', e)}
-              // value={currentKeyframeStyles.fill}
-            />
+                <input
+                  name="stroke"
+                  type="color"
+                  className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  onChange={(e) => handleInputChange('stroke', e)}
+                  value={currentKeyframeStyles.fill}
+                />
+              </div>
+            </div>
           </div>
         </Fragment>
       )}

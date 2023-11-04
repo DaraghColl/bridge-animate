@@ -86,7 +86,7 @@ const Timeline: FC = () => {
                 ref={scrubberRef}
                 id="scrubber"
                 type="range"
-                className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-indigo-500"
+                className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-indigo-600"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
                 min="0"
                 max="2500"
@@ -98,7 +98,7 @@ const Timeline: FC = () => {
             <div className="absolute bottom-2 flex w-full justify-center">
               <div className="right-2 flex basis-1/4 items-center gap-4">
                 <button
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   onClick={handleStopAnimation}
                 >
                   <svg
@@ -117,7 +117,7 @@ const Timeline: FC = () => {
                   </svg>
                 </button>
                 <button
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   onClick={handlePlayAnimation}
                 >
                   <svg
@@ -136,7 +136,7 @@ const Timeline: FC = () => {
                   </svg>
                 </button>
                 <button
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   onClick={handlePauseAnimation}
                 >
                   <svg
