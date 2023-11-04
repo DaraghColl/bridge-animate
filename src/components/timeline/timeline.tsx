@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, Fragment, useState } from 'react';
+import { ChangeEvent, FC, Fragment, useRef, useState } from 'react';
 import { Layers } from './layers';
 import { Keyframe } from './keyframes';
 import { KeyframeTime, useAnimationsContext } from '../../state/animations';
@@ -9,6 +9,7 @@ const Timeline: FC = () => {
   const { animations } = useAnimationsContext();
   const [isPlaying, setIsPlaying] = useState(false);
   const animationsToPay = useCreateJSAnimations();
+  const scrubberRef = useRef<HTMLInputElement>(null);
 
   const handlePauseAnimation = () => {
     setIsPlaying(false);
@@ -26,6 +27,19 @@ const Timeline: FC = () => {
     animationsToPay.forEach((animation) => {
       if (animation) {
         animation.play();
+      }
+    });
+  };
+
+  const handleStopAnimation = () => {
+    setIsPlaying(false);
+    if (scrubberRef?.current) {
+      scrubberRef.current.value = '0';
+    }
+
+    animationsToPay.forEach((animation) => {
+      if (animation) {
+        animation.finish();
       }
     });
   };
@@ -69,6 +83,7 @@ const Timeline: FC = () => {
             </div>
             <div className="mb-5 flex items-center">
               <input
+                ref={scrubberRef}
                 id="scrubber"
                 type="range"
                 className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-indigo-500"
@@ -82,6 +97,25 @@ const Timeline: FC = () => {
 
             <div className="absolute bottom-2 flex w-full justify-center">
               <div className="right-2 flex basis-1/4 items-center gap-4">
+                <button
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                  onClick={handleStopAnimation}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="h-5 w-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z"
+                    />
+                  </svg>
+                </button>
                 <button
                   className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                   onClick={handlePlayAnimation}
