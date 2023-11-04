@@ -10,8 +10,10 @@ const Controls: FC = () => {
     rotate: '',
     translateX: '',
     translateY: '',
+    fill: '',
   });
 
+  // set temporary styles so user can have real time feedback of style changes at keyframe point
   const updateSelectedElementTemporaryStyles = useCallback(() => {
     const currentKeyFrame = animations
       ?.find((animation) => animation.name === selectedElementID)
@@ -27,6 +29,7 @@ const Controls: FC = () => {
         ];
 
         if (currentKeyFrame.opacity) selectedElement.style.opacity = currentKeyFrame.opacity;
+        if (currentKeyFrame.fill) selectedElement.style.fill = currentKeyFrame.fill;
         if (transformArray) selectedElement.style.transform = transformArray.join(' ');
       }
     }
@@ -42,18 +45,21 @@ const Controls: FC = () => {
     setCurrentKeyframeStyles({ ...currentKeyframeStyles, [style]: e.target.value });
   };
 
+  // set selected element temporary styles
+  // reset previous styles when element changes
   useEffect(() => {
     if (selectedElementID) {
       const selectedElement = document.getElementById(selectedElementID);
       if (selectedElement) {
-        selectedElement.style.opacity = '1';
-        selectedElement.style.transform = '';
+        selectedElement.removeAttribute('style');
       }
 
+      console.log('chamged');
       updateSelectedElementTemporaryStyles();
     }
   }, [selectedElementID, updateSelectedElementTemporaryStyles]);
 
+  // set keyframe styles
   useEffect(() => {
     if (animations && animations?.length <= 0) return;
 
@@ -132,6 +138,20 @@ const Controls: FC = () => {
               onBlur={(e) => handleInputChange('rotate', e)}
               onChange={(e) => handleInputChange('rotate', e)}
               value={currentKeyframeStyles.rotate}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label htmlFor="rotate" className="mb-2 text-gray-100">
+              fill
+            </label>
+            <input
+              name="fill"
+              type="color"
+              className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+              // onBlur={(e) => handleInputChange('fill', e)}
+              onChange={(e) => handleInputChange('fill', e)}
+              // value={currentKeyframeStyles.fill}
             />
           </div>
         </Fragment>

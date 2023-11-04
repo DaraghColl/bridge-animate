@@ -13,12 +13,14 @@ interface StyleObject extends StyleObjectKeys {
   translateX?: string | null;
   translateY?: string | null;
   offset: number;
+  fill?: string;
 }
 
 interface FormattedStyleObject extends StyleObjectKeys {
   opacity?: string | null;
   transform?: string | null;
   offset: number;
+  fill?: string;
 }
 
 const Timeline: FC = () => {
@@ -74,6 +76,7 @@ const Timeline: FC = () => {
             translateX: null,
             translateY: null,
             offset: Number(time),
+            fill: '',
           };
 
           for (const [key, value] of Object.entries(styles)) {
@@ -91,11 +94,12 @@ const Timeline: FC = () => {
         });
 
         const formatTransform = javascriptFormattedAnimations.map(
-          ({ opacity, rotate, translateX, translateY, offset }) => {
+          ({ opacity, rotate, translateX, translateY, offset, fill }) => {
             return {
               opacity: opacity ? opacity : '1',
               transform: `${rotate ? rotate : ''} ${translateX ? translateX : ''} ${translateY ? translateY : ''}`,
               offset: offset,
+              fill: fill,
             };
           },
         );
