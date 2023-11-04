@@ -54,7 +54,6 @@ const Controls: FC = () => {
         selectedElement.removeAttribute('style');
       }
 
-      console.log('chamged');
       updateSelectedElementTemporaryStyles();
     }
   }, [selectedElementID, updateSelectedElementTemporaryStyles]);
