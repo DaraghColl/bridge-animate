@@ -1,9 +1,11 @@
 import { FC, ChangeEvent, Fragment, useEffect, useState, useCallback } from 'react';
 import { Style, StyleType, useAnimationsContext } from '../../state/animations';
 import { useSelectedElementContext } from '../../state/selected-element';
+import { usePrevious } from '../../hooks/use-previous/use-previous';
 
 const Controls: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
+  const previousSelectedElementId = usePrevious(selectedElementID);
   const { createKeyframeStyles, selectedKeyFrameTime, animations } = useAnimationsContext();
   const [currentKeyframeStyles, setCurrentKeyframeStyles] = useState<Style>({
     opacity: '',
@@ -52,13 +54,20 @@ const Controls: FC = () => {
   useEffect(() => {
     if (selectedElementID) {
       const selectedElement = document.getElementById(selectedElementID);
+
       if (selectedElement) {
         selectedElement.removeAttribute('style');
       }
 
+      if (previousSelectedElementId && previousSelectedElementId !== selectedElementID) {
+        const previousSelectedElement = document.getElementById(previousSelectedElementId);
+        if (!previousSelectedElement) return;
+        previousSelectedElement.removeAttribute('style');
+      }
+
       updateSelectedElementTemporaryStyles();
     }
-  }, [selectedElementID, updateSelectedElementTemporaryStyles]);
+  }, [previousSelectedElementId, selectedElementID, updateSelectedElementTemporaryStyles]);
 
   // set keyframe styles
   useEffect(() => {
