@@ -5,8 +5,8 @@ import { usePrevious } from '../../hooks/use-previous/use-previous';
 
 const Controls: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
-  const previousSelectedElementId = usePrevious(selectedElementID);
   const { createKeyframeStyles, selectedKeyFrameTime, animations } = useAnimationsContext();
+  const previousSelectedElementId = usePrevious(selectedElementID);
   const [currentKeyframeStyles, setCurrentKeyframeStyles] = useState<Style>({
     opacity: '',
     rotate: '',
@@ -162,7 +162,7 @@ const Controls: FC = () => {
                   type="color"
                   className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
                   onChange={(e) => handleInputChange('fill', e)}
-                  // value={currentKeyframeStyles.fill}
+                  value={currentKeyframeStyles.fill}
                 />
               </div>
               <div className="flex flex-col">
@@ -175,7 +175,7 @@ const Controls: FC = () => {
                   type="color"
                   className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
                   onChange={(e) => handleInputChange('stroke', e)}
-                  value={currentKeyframeStyles.fill}
+                  value={currentKeyframeStyles.stroke}
                 />
               </div>
             </div>

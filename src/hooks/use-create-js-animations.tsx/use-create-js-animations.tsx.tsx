@@ -11,14 +11,16 @@ interface StyleObject extends StyleObjectKeys {
   translateX?: string | null;
   translateY?: string | null;
   offset: number;
-  fill?: string;
+  fill?: string | null;
+  stroke?: string | null;
 }
 
 interface FormattedStyleObject extends StyleObjectKeys {
   opacity?: string | null;
   transform?: string | null;
-  offset: number;
-  fill?: string;
+  offset?: number;
+  fill?: string | null;
+  stroke?: string | null;
 }
 
 const useCreateJSAnimations = () => {
@@ -41,6 +43,7 @@ const useCreateJSAnimations = () => {
             translateY: null,
             offset: Number(time),
             fill: '',
+            stroke: '',
           };
 
           for (const [key, value] of Object.entries(styles)) {
