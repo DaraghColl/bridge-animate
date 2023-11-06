@@ -29,6 +29,8 @@ interface AnimationsValue {
   selectedKeyFrameTime: KeyframeTime | null;
   setSelectedKeyFrameTime: Dispatch<SetStateAction<KeyframeTime | null>>;
   createKeyframeStyles: (selectedElementID: string, style: StyleType, value: string) => void;
+  isPlaying: boolean;
+  setIsPlaying: Dispatch<SetStateAction<boolean>>;
 }
 
 const AnimationsContext = createContext<AnimationsValue | undefined>(undefined);
@@ -40,6 +42,7 @@ interface AnimationsProviderProps {
 const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
   const [animations, setAnimations] = useState<AnimationsList[] | []>([]);
   const [selectedKeyFrameTime, setSelectedKeyFrameTime] = useState<KeyframeTime | null>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const createNewAnimation = (elementId: string) => {
     if (animations.some((animation) => animation.name === elementId)) {
@@ -103,6 +106,8 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
         selectedKeyFrameTime,
         setSelectedKeyFrameTime,
         createKeyframeStyles,
+        isPlaying,
+        setIsPlaying,
       }}
     >
       {children}

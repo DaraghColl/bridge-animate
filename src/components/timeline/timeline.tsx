@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, Fragment, useRef, useState } from 'react';
+import { ChangeEvent, FC, Fragment, useRef } from 'react';
 import { Layers } from './layers';
 import { Keyframe } from './keyframes';
 import { KeyframeTime, useAnimationsContext } from '../../state/animations';
@@ -6,8 +6,7 @@ import { keyframeTimes } from '../../constants/constants';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 
 const Timeline: FC = () => {
-  const { animations } = useAnimationsContext();
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { animations, isPlaying, setIsPlaying } = useAnimationsContext();
   const animationsToPay = useCreateJSAnimations();
   const scrubberRef = useRef<HTMLInputElement>(null);
 
