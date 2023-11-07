@@ -13,6 +13,8 @@ interface StyleObject extends StyleObjectKeys {
   offset: number;
   fill?: string | null;
   stroke?: string | null;
+  strokeDash?: string | null;
+  strokeDashoffset?: string | null;
 }
 
 interface FormattedStyleObject extends StyleObjectKeys {
@@ -21,6 +23,8 @@ interface FormattedStyleObject extends StyleObjectKeys {
   offset?: number;
   fill?: string | null;
   stroke?: string | null;
+  strokeDash?: string | null;
+  strokeDashoffset?: string | null;
 }
 
 const useCreateJSAnimations = () => {
@@ -32,18 +36,11 @@ const useCreateJSAnimations = () => {
       // loop through all elements with animations
       animations.forEach((animation) => {
         const elementToAnimate = document.getElementById(animation.name);
-        // const javascriptFormattedAnimations: Keyframe[] = [];
         const javascriptFormattedAnimations: FormattedStyleObject[] = [];
 
         animation.keyframes.forEach(({ styles, time }) => {
           const animationStyleObject: StyleObject = {
-            opacity: null,
-            rotate: null,
-            translateX: null,
-            translateY: null,
             offset: Number(time),
-            fill: '',
-            stroke: '',
           };
 
           for (const [key, value] of Object.entries(styles)) {
@@ -60,16 +57,33 @@ const useCreateJSAnimations = () => {
           javascriptFormattedAnimations.push(animationStyleObject);
         });
 
-        const formatTransform = javascriptFormattedAnimations.map(
-          ({ opacity, rotate, translateX, translateY, offset, fill }) => {
-            return {
-              opacity: opacity ? opacity : '1',
-              transform: `${rotate ? rotate : ''} ${translateX ? translateX : ''} ${translateY ? translateY : ''}`,
-              offset: offset,
-              fill: fill,
-            };
-          },
-        );
+        // set up object for the actual javascript animation API
+        // need to group all transforms together as one string
+        const formatTransform = javascriptFormattedAnimations.map((animation) => {
+          const formattedAnimationObject: FormattedStyleObject = {};
+          formattedAnimationObject.offset = animation.offset;
+          if (animation.opacity) formattedAnimationObject.opacity = animation.opacity;
+          if (animation.fill) formattedAnimationObject.fill = animation.fill;
+          if (animation.stroke) formattedAnimationObject.stroke = animation.stroke;
+          if (animation.strokeDash) formattedAnimationObject.strokeDash = animation.strokeDash;
+          if (animation.strokeDashoffset) formattedAnimationObject.strokeDashoffset = animation.strokeDashoffset;
+
+          const transformProperties: string[] = [];
+
+          if (animation.rotate && animation.rotate !== '') {
+            transformProperties.push(animation.rotate.toString());
+          }
+          if (animation.translateX && animation.translateX !== '') {
+            transformProperties.push(animation.translateX.toString());
+          }
+          if (animation.translateY && animation.translateY !== '') {
+            transformProperties.push(animation.translateY.toString());
+          }
+
+          if (transformProperties.length > 0) formattedAnimationObject.transform = transformProperties.join(' ');
+
+          return formattedAnimationObject;
+        });
 
         const elementAnimation = elementToAnimate?.animate(formatTransform, {
           duration: 2500,

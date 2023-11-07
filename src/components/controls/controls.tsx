@@ -3,6 +3,10 @@ import { Style, StyleType, useAnimationsContext } from '../../state/animations';
 import { useSelectedElementContext } from '../../state/selected-element';
 import { usePrevious } from '../../hooks/use-previous/use-previous';
 
+const getElementPathLength = (path: SVGPathElement) => {
+  return path.getTotalLength();
+};
+
 const Controls: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const { createKeyframeStyles, selectedKeyFrameTime, animations } = useAnimationsContext();
@@ -34,15 +38,43 @@ const Controls: FC = () => {
         if (currentKeyFrame.opacity) selectedElement.style.opacity = currentKeyFrame.opacity;
         if (currentKeyFrame.fill) selectedElement.style.fill = currentKeyFrame.fill;
         if (currentKeyFrame.stroke) selectedElement.style.stroke = currentKeyFrame.stroke;
+        if (currentKeyFrame.strokeDasharray) selectedElement.style.strokeDasharray = currentKeyFrame.strokeDasharray;
+        if (currentKeyFrame.strokeDashoffset) selectedElement.style.strokeDashoffset = currentKeyFrame.strokeDashoffset;
         if (transformArray) selectedElement.style.transform = transformArray.join(' ');
       }
     }
   }, [animations, selectedElementID, selectedKeyFrameTime]);
 
   const handleInputChange = (style: StyleType, e: ChangeEvent<HTMLInputElement>) => {
-    if (selectedElementID) {
-      createKeyframeStyles(selectedElementID, style, e.target.value);
+    const elementNameAttribute = e.target.getAttribute('name');
+    if (!selectedElementID) return;
+
+    let styleValue = e.target.value;
+
+    if (style === 'strokeDasharray') {
+      const pathElement = document.getElementById(selectedElementID)!;
+      if (pathElement.nodeName !== 'path') return;
+      const pathLength = getElementPathLength(pathElement as unknown as SVGPathElement);
+
+      styleValue = pathLength.toString();
+
+      createKeyframeStyles(selectedElementID, style, styleValue);
+      createKeyframeStyles(
+        selectedElementID,
+        'strokeDashoffset',
+
+        elementNameAttribute === 'stroke-dash-start' ? styleValue : '0',
+      );
+
+      updateSelectedElementTemporaryStyles();
+
+      setCurrentKeyframeStyles({ ...currentKeyframeStyles, strokeDasharray: pathLength.toString() });
+      setCurrentKeyframeStyles({ ...currentKeyframeStyles, strokeDashoffset: pathLength.toString() });
+
+      return;
     }
+
+    createKeyframeStyles(selectedElementID, style, e.target.value);
 
     updateSelectedElementTemporaryStyles();
 
@@ -109,7 +141,7 @@ const Controls: FC = () => {
             <span>position</span>
             <div className="mt-2 flex flex-row gap-2">
               <div className="basis-1/2">
-                <label htmlFor="xPosition" className="ml-2 text-indigo-600">
+                <label htmlFor="xPosition" className="ml-2 text-slate-200">
                   x
                 </label>
                 <input
@@ -122,7 +154,7 @@ const Controls: FC = () => {
                 />
               </div>
               <div className="basis-1/2">
-                <label htmlFor="yPosition" className="ml-2 text-indigo-600">
+                <label htmlFor="yPosition" className="ml-2 text-slate-200">
                   y
                 </label>
                 <input
@@ -136,7 +168,7 @@ const Controls: FC = () => {
               </div>
             </div>
             <div className="mt-2 flex flex-col">
-              <label htmlFor="rotate" className="ml-2 text-indigo-600">
+              <label htmlFor="rotate" className="ml-2 text-slate-200">
                 rotate
               </label>
               <input
@@ -152,9 +184,9 @@ const Controls: FC = () => {
 
           <div>
             <span>color</span>
-            <div className="mt-2 flex gap-4">
+            <div className="mt-2 flex flex-wrap gap-4">
               <div className="flex flex-col">
-                <label htmlFor="rotate" className="ml-2 text-indigo-600">
+                <label htmlFor="rotate" className="ml-2 text-slate-200">
                   fill
                 </label>
                 <input
@@ -166,7 +198,7 @@ const Controls: FC = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="rotate" className="ml-2 text-indigo-600">
+                <label htmlFor="rotate" className="ml-2 text-slate-200">
                   stroke
                 </label>
 
@@ -176,6 +208,37 @@ const Controls: FC = () => {
                   className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
                   onChange={(e) => handleInputChange('stroke', e)}
                   value={currentKeyframeStyles.stroke}
+                />
+              </div>
+            </div>
+          </div>
+          <div>
+            <span>stroke path</span>
+            <div className="flex gap-8">
+              <div className="flex flex-col">
+                <label htmlFor="stroke-dash" className="ml-2 text-slate-200">
+                  start
+                </label>
+
+                <input
+                  name="stroke-dash-start"
+                  type="checkbox"
+                  className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  onChange={(e) => handleInputChange('strokeDasharray', e)}
+                  value={currentKeyframeStyles.strokeDasharray}
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="stroke-dash" className="ml-2 text-slate-200">
+                  end
+                </label>
+
+                <input
+                  name="stroke-dash-end"
+                  type="checkbox"
+                  className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  onChange={(e) => handleInputChange('strokeDasharray', e)}
+                  value={currentKeyframeStyles.strokeDasharray}
                 />
               </div>
             </div>

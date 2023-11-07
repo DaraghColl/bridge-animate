@@ -1,6 +1,15 @@
 import { Dispatch, FC, ReactNode, SetStateAction, createContext, useContext, useState } from 'react';
 
-export type StyleType = 'opacity' | 'rotate' | 'translateX' | 'translateY' | 'fill' | 'stroke';
+export type StyleType =
+  | 'opacity'
+  | 'rotate'
+  | 'translateX'
+  | 'translateY'
+  | 'fill'
+  | 'stroke'
+  | 'strokeDasharray'
+  | 'strokeDashoffset';
+
 export type Style = {
   opacity?: string;
   rotate?: string;
@@ -8,6 +17,8 @@ export type Style = {
   translateY?: string;
   fill?: string;
   stroke?: string;
+  strokeDasharray?: string;
+  strokeDashoffset?: string;
 };
 
 export type KeyframeTime = '0' | '0.25' | '0.50' | '0.75' | '1';
