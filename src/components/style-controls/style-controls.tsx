@@ -11,14 +11,7 @@ const Controls: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const { createKeyframeStyles, selectedKeyFrameTime, animations } = useAnimationsContext();
   const previousSelectedElementId = usePrevious(selectedElementID);
-  const [currentKeyframeStyles, setCurrentKeyframeStyles] = useState<Style>({
-    opacity: '',
-    rotate: '',
-    translateX: '',
-    translateY: '',
-    fill: '',
-    stroke: '',
-  });
+  const [currentKeyframeStyles, setCurrentKeyframeStyles] = useState<Style>({});
 
   // set temporary styles so user can have real time feedback of style changes at keyframe point
   const updateSelectedElementTemporaryStyles = useCallback(() => {
