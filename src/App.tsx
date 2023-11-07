@@ -2,7 +2,7 @@ import './App.css';
 import { Timeline } from './components/timeline/timeline';
 import { ElementList } from './components/element-list/element-list';
 import { Canvas } from './components/canvas/canvas';
-import { Controls } from './components/controls/controls';
+import { Controls } from './components/style-controls/style-controls';
 
 function App() {
   return (
