@@ -4,11 +4,15 @@ import { Keyframe } from './keyframes';
 import { KeyframeTime, useAnimationsContext } from '../../state/animations';
 import { keyframeTimes } from '../../constants/constants';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
+import { useSelectedElementContext } from '../../state/selected-element.tsx';
+import { usePrevious } from '../../hooks/use-previous/use-previous.tsx';
 
 const Timeline: FC = () => {
+  const { selectedElementID } = useSelectedElementContext();
   const { animations, isPlaying, setIsPlaying } = useAnimationsContext();
   const animationsToPay = useCreateJSAnimations();
   const scrubberRef = useRef<HTMLInputElement>(null);
+  const previousSelectedElementId = usePrevious(selectedElementID);
 
   const handlePauseAnimation = () => {
     setIsPlaying(false);
@@ -22,6 +26,19 @@ const Timeline: FC = () => {
   };
 
   const handlePlayAnimation = () => {
+    if (!selectedElementID) return;
+
+    const selectedElement = document.getElementById(selectedElementID);
+
+    if (selectedElement) {
+      selectedElement.removeAttribute('style');
+    }
+
+    if (previousSelectedElementId && previousSelectedElementId !== selectedElementID) {
+      const previousSelectedElement = document.getElementById(previousSelectedElementId);
+      if (!previousSelectedElement) return;
+      previousSelectedElement.removeAttribute('style');
+    }
     setIsPlaying(true);
     animationsToPay.forEach((animation) => {
       if (animation) {

@@ -13,7 +13,7 @@ interface StyleObject extends StyleObjectKeys {
   offset: number;
   fill?: string | null;
   stroke?: string | null;
-  strokeDash?: string | null;
+  strokeDasharray?: string | null;
   strokeDashoffset?: string | null;
 }
 
@@ -23,7 +23,7 @@ interface FormattedStyleObject extends StyleObjectKeys {
   offset?: number;
   fill?: string | null;
   stroke?: string | null;
-  strokeDash?: string | null;
+  strokeDasharray?: string | null;
   strokeDashoffset?: string | null;
 }
 
@@ -65,7 +65,7 @@ const useCreateJSAnimations = () => {
           if (animation.opacity) formattedAnimationObject.opacity = animation.opacity;
           if (animation.fill) formattedAnimationObject.fill = animation.fill;
           if (animation.stroke) formattedAnimationObject.stroke = animation.stroke;
-          if (animation.strokeDash) formattedAnimationObject.strokeDash = animation.strokeDash;
+          if (animation.strokeDasharray) formattedAnimationObject.strokeDasharray = animation.strokeDasharray;
           if (animation.strokeDashoffset) formattedAnimationObject.strokeDashoffset = animation.strokeDashoffset;
 
           const transformProperties: string[] = [];
