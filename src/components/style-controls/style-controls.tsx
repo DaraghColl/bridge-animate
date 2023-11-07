@@ -108,7 +108,7 @@ const Controls: FC = () => {
   }, [selectedElementID, animations, selectedKeyFrameTime]);
 
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="flex flex-col gap-4 p-4 text-sm font-normal">
       {(selectedElementID === null || !selectedKeyFrameTime) && (
         <span className="text-sm tracking-wide">
           Select Element, add an animation layer, and select keyframe to see controls
@@ -116,7 +116,7 @@ const Controls: FC = () => {
       )}
       {selectedElementID && selectedKeyFrameTime && (
         <Fragment>
-          <div className="flex flex-col">
+          <div className="flex flex-col border-b-2 border-gray-100 pb-4">
             <label htmlFor="opacity" className="mb-2 text-gray-100">
               opacity
             </label>
@@ -130,11 +130,11 @@ const Controls: FC = () => {
             />
           </div>
 
-          <div className="mb-2 flex flex-col">
+          <div className="mb-2 flex flex-col border-b-2 border-slate-100 pb-4">
             <span>position</span>
             <div className="mt-2 flex flex-row gap-2">
               <div className="basis-1/2">
-                <label htmlFor="xPosition" className="ml-2 text-slate-200">
+                <label htmlFor="xPosition" className="ml-2 text-slate-500">
                   x
                 </label>
                 <input
@@ -147,7 +147,7 @@ const Controls: FC = () => {
                 />
               </div>
               <div className="basis-1/2">
-                <label htmlFor="yPosition" className="ml-2 text-slate-200">
+                <label htmlFor="yPosition" className="ml-2 text-slate-500">
                   y
                 </label>
                 <input
@@ -161,7 +161,7 @@ const Controls: FC = () => {
               </div>
             </div>
             <div className="mt-2 flex flex-col">
-              <label htmlFor="rotate" className="ml-2 text-slate-200">
+              <label htmlFor="rotate" className="ml-2 text-slate-500">
                 rotate
               </label>
               <input
@@ -175,11 +175,11 @@ const Controls: FC = () => {
             </div>
           </div>
 
-          <div>
+          <div className="mb-2 flex flex-col border-b-2 border-slate-100 pb-4">
             <span>color</span>
             <div className="mt-2 flex flex-wrap gap-4">
               <div className="flex flex-col">
-                <label htmlFor="rotate" className="ml-2 text-slate-200">
+                <label htmlFor="rotate" className="ml-2 text-slate-500">
                   fill
                 </label>
                 <input
@@ -191,7 +191,7 @@ const Controls: FC = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="rotate" className="ml-2 text-slate-200">
+                <label htmlFor="rotate" className="ml-2 text-slate-500">
                   stroke
                 </label>
 
@@ -205,11 +205,12 @@ const Controls: FC = () => {
               </div>
             </div>
           </div>
-          <div>
+
+          <div className="mb-2 flex flex-col border-b-2 border-slate-100 pb-4">
             <span>stroke path</span>
-            <div className="flex gap-8">
+            <div className="mt-2 flex gap-8">
               <div className="flex flex-col">
-                <label htmlFor="stroke-dash" className="ml-2 text-slate-200">
+                <label htmlFor="stroke-dash" className="ml-2 text-slate-500">
                   start
                 </label>
 
@@ -222,7 +223,7 @@ const Controls: FC = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="stroke-dash" className="ml-2 text-slate-200">
+                <label htmlFor="stroke-dash" className="ml-2 text-slate-500">
                   end
                 </label>
 

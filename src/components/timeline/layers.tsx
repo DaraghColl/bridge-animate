@@ -17,7 +17,7 @@ const Layers: FC = () => {
   };
 
   return (
-    <div className="text-gray-50 ">
+    <div className="text-sm font-normal text-gray-50">
       <div className="flex items-center justify-between">
         <span>Layers</span>
         <button onClick={handleCreateNewAnimation}>
