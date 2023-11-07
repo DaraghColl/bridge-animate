@@ -8,6 +8,10 @@ body {
   font-family: 'Spline Sans', sans-serif;
 }
 
+* {
+  transform-origin: center;
+}
+
 svg {
   overflow: visible;
 }
