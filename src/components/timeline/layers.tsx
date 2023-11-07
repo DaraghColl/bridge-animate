@@ -20,7 +20,7 @@ const Layers: FC = () => {
     <div className="text-sm font-normal text-gray-50">
       <div className="flex items-center justify-between">
         <span>Layers</span>
-        <button onClick={handleCreateNewAnimation}>
+        <button aria-label="add layer" onClick={handleCreateNewAnimation}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

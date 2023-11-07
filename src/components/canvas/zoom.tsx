@@ -8,7 +8,7 @@ const Zoom: FC<ZoomProps> = (props) => {
   const { onChangeZoom } = props;
   return (
     <div className="absolute right-2 top-2 flex gap-4">
-      <button onClick={() => onChangeZoom('minus')}>
+      <button aria-label="descrease zoom" onClick={() => onChangeZoom('minus')}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -19,7 +19,7 @@ const Zoom: FC<ZoomProps> = (props) => {
           <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </button>
-      <button onClick={() => onChangeZoom('plus')}>
+      <button aria-label="increase zoom" onClick={() => onChangeZoom('plus')}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
