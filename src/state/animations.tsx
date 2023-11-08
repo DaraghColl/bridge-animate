@@ -38,14 +38,14 @@ interface AnimationConfigPoperties {
   animationFillMode: FillMode;
 }
 
-export interface AnimationsList {
+export interface Animation {
   name: string;
   config: AnimationConfigPoperties;
   keyframes: Keyframe[];
 }
 
 interface AnimationsValue {
-  animations: AnimationsList[] | null;
+  animations: Animation[] | null;
   createNewAnimation: (elementId: string) => void;
   createKeyframe: (animationName: string, keyframeTime: KeyframeTime) => void;
   selectedKeyFrameTime: KeyframeTime | null;
@@ -62,7 +62,7 @@ interface AnimationsProviderProps {
 }
 
 const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
-  const [animations, setAnimations] = useState<AnimationsList[] | []>([]);
+  const [animations, setAnimations] = useState<Animation[] | []>([]);
   const [selectedKeyFrameTime, setSelectedKeyFrameTime] = useState<KeyframeTime | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
@@ -71,7 +71,7 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
       return;
     }
 
-    const newAnimation: AnimationsList = {
+    const newAnimation: Animation = {
       name: elementId,
       config: {
         animationName: elementId,
