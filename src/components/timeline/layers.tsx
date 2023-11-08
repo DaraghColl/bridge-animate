@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Disclosure } from '@headlessui/react';
 import { useAnimationsContext } from '../../state/animations';
 import { useSelectedElementContext } from '../../state/selected-element';
 
@@ -34,16 +35,28 @@ const Layers: FC = () => {
         </button>
       </div>
 
-      <div className="py-2 font-thin">
+      <div className="flex flex-col items-start gap-4 py-2 font-thin">
         {animations &&
-          animations.map(({ name }, index) => {
+          animations.map(({ name, config }, index) => {
             return (
-              <div
-                key={index}
-                className={`${selectedElementID === name ? 'text-indigo-600' : ''}`}
-                onClick={() => handleElementSelect(name)}
-              >
-                {name}
+              <div key={index}>
+                <Disclosure>
+                  <Disclosure.Button
+                    className={`${selectedElementID === name ? 'text-indigo-600' : ''}`}
+                    onClick={() => handleElementSelect(name)}
+                  >
+                    {name}
+                  </Disclosure.Button>
+                  <Disclosure.Panel className="ml-2 flex flex-col text-slate-500">
+                    <span>name: {config.animationName}</span>
+                    <span>duration: {config.animationDuration}</span>
+                    <span>delay: {config.animationDelay}</span>
+                    <span>iteration: {config.animationInterationCount}</span>
+                    <span>direction {config.animationDirection}</span>
+                    <span>timing function: {config.animationTimingFunction}</span>
+                    <span>fill mode: {config.animationFillMode}</span>
+                  </Disclosure.Panel>
+                </Disclosure>
               </div>
             );
           })}
