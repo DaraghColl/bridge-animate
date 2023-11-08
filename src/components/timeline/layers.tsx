@@ -56,7 +56,6 @@ const Layers: FC = () => {
                     </div>
                   </div>
                   <Disclosure.Panel className="ml-2 flex flex-col text-slate-500">
-                    <span>name: {config.animationName}</span>
                     <span>duration: {config.animationDuration}</span>
                     <span>delay: {config.animationDelay}</span>
                     <span>iteration: {config.animationInterationCount}</span>
