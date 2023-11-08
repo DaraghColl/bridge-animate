@@ -1,5 +1,4 @@
 import { ChangeEvent, FC, Fragment, useRef } from 'react';
-import { Layers } from './layers';
 import { Keyframe } from './keyframes';
 import { KeyframeTime, useAnimationsContext } from '../../state/animations';
 import { keyframeTimes } from '../../constants/constants';
@@ -82,95 +81,90 @@ const Timeline: FC = () => {
   };
 
   return (
-    <div className=" flex h-1/3 min-h-0 gap-4 rounded-md">
-      <div className="basis-1/4 overflow-scroll bg-dark-secondary p-2">
-        <Layers />
-      </div>
-      <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll bg-dark-secondary p-4">
-        {animations && animations.length <= 0 && (
-          <span className="text-sm tracking-wide">Select Element and add an animation layer</span>
-        )}
-        {animations && animations.length > 0 && (
-          <Fragment>
-            <div className="flex items-center justify-between">
-              {keyframeTimes.map((time) => (
-                <div key={time}>{keyframePercentageMap[time]}</div>
-              ))}
-            </div>
-            <div className="mb-5 flex items-center">
-              <input
-                ref={scrubberRef}
-                id="scrubber"
-                type="range"
-                className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-indigo-600"
-                onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
-                min="0"
-                max="2500"
-                disabled={animationsToPay.length <= 0}
-              ></input>
-            </div>
-            <Keyframe />
+    <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll bg-dark-secondary p-4">
+      {animations && animations.length <= 0 && (
+        <span className="text-sm tracking-wide">Select Element and add an animation layer</span>
+      )}
+      {animations && animations.length > 0 && (
+        <Fragment>
+          <div className="flex items-center justify-between">
+            {keyframeTimes.map((time) => (
+              <div key={time}>{keyframePercentageMap[time]}</div>
+            ))}
+          </div>
+          <div className="mb-5 flex items-center">
+            <input
+              ref={scrubberRef}
+              id="scrubber"
+              type="range"
+              className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-indigo-600"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
+              min="0"
+              max="2500"
+              disabled={animationsToPay.length <= 0}
+            ></input>
+          </div>
+          <Keyframe />
 
-            <div className="absolute bottom-2 flex w-full justify-center">
-              <div className="right-2 flex basis-1/4 items-center gap-4">
-                <button
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={handleStopAnimation}
+          <div className="absolute bottom-2 flex w-full justify-center">
+            <div className="right-2 flex basis-1/4 items-center gap-4">
+              <button
+                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={handleStopAnimation}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-5 w-5"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="h-5 w-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={handlePlayAnimation}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z"
+                  />
+                </svg>
+              </button>
+              <button
+                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={handlePlayAnimation}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-5 w-5"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="h-5 w-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={handlePauseAnimation}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
+                  />
+                </svg>
+              </button>
+              <button
+                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={handlePauseAnimation}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-5 w-5"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="h-5 w-5"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
-                  </svg>
-                </button>
-              </div>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                </svg>
+              </button>
             </div>
-          </Fragment>
-        )}
-      </div>
+          </div>
+        </Fragment>
+      )}
     </div>
   );
 };

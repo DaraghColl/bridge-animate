@@ -3,6 +3,7 @@ import { Timeline } from './components/timeline/timeline';
 import { ElementList } from './components/element-list/element-list';
 import { Canvas } from './components/canvas/canvas';
 import { Controls } from './components/style-controls/style-controls';
+import { Layers } from './components/layers/layers';
 
 function App() {
   return (
@@ -16,7 +17,12 @@ function App() {
           <Controls />
         </div>
       </div>
-      <Timeline />
+      <div className=" flex h-1/3 min-h-0 gap-4 rounded-md">
+        <div className="basis-1/4 overflow-scroll bg-dark-secondary p-2">
+          <Layers />
+        </div>
+        <Timeline />
+      </div>
     </main>
   );
 }
