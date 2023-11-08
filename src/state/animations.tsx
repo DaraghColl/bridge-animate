@@ -82,10 +82,15 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
     const animationsCopy = [...animations];
     animationsCopy.forEach((animation) => {
       if (animation.name === animationName) {
-        if (animation.keyframes && !animation.keyframes.find((keyframe) => keyframe.time === keyframeTime)) {
+        // delete keyframe if already exists
+        // action comes from the same action as create keyframe (double click on keyframe time)
+        if (animation.keyframes && animation.keyframes.find((keyframe) => keyframe.time === keyframeTime)) {
+          const index = animation.keyframes.findIndex((keyframe) => keyframe.time === keyframeTime);
+          animation.keyframes.splice(index, 1);
+        } else {
           animation.keyframes.push(keyframe);
+          setSelectedKeyFrameTime(keyframe.time);
         }
-        setSelectedKeyFrameTime(keyframe.time);
       }
 
       // sort keyframes by time ascending
