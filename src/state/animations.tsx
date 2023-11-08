@@ -28,8 +28,19 @@ interface Keyframe {
   styles: Style;
 }
 
+interface AnimationConfigPoperties {
+  animationName: string;
+  animationDuration: string;
+  animationDelay: string;
+  animationInterationCount: string;
+  animationDirection: PlaybackDirection;
+  animationTimingFunction: string;
+  animationFillMode: FillMode;
+}
+
 export interface AnimationsList {
   name: string;
+  config: AnimationConfigPoperties;
   keyframes: Keyframe[];
 }
 
@@ -60,8 +71,17 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
       return;
     }
 
-    const newAnimation = {
+    const newAnimation: AnimationsList = {
       name: elementId,
+      config: {
+        animationName: elementId,
+        animationDuration: '5',
+        animationDelay: '0',
+        animationInterationCount: '1',
+        animationDirection: 'normal',
+        animationTimingFunction: 'ease-in-out',
+        animationFillMode: 'auto',
+      },
       keyframes: [],
     };
 

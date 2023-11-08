@@ -86,7 +86,7 @@ const useCreateJSAnimations = () => {
         });
 
         const elementAnimation = elementToAnimate?.animate(formatTransform, {
-          duration: 2500,
+          duration: Number(animation.config.animationDuration) * 1000,
           fill: 'auto',
           easing: 'ease-in-out',
           iterations: 1,
