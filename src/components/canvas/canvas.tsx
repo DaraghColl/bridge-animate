@@ -34,13 +34,27 @@ const Canvas: FC = () => {
   return (
     <div className="relative flex basis-3/5 items-center justify-center rounded-md bg-dark-secondary">
       <Zoom onChangeZoom={changeZoom} />
-      <span className="absolute right-2 top-10">{zoom}%</span>
+      <span className="absolute right-4 top-10">{zoom}%</span>
       <div id="canvas">
-        <svg width="200" height="200" viewBox="0 0 98 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g id="circles">
-            <circle id="circle-3" cx="86" cy="12" r="12" fill="#EC4899" />
-            <circle id="circle-2" cx="49" cy="12" r="12" fill="#6366F1" />
-            <circle id="circle-1" cx="12" cy="12" r="12" fill="#3B82F6" />
+        <svg
+          id="heart-svg"
+          width="200"
+          height="200"
+          viewBox="0 0 69 69"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <g id="heart-group">
+            <circle id="heart-background" cx="34.5" cy="34.5" r="34.5" fill="#131315" />
+            <path
+              id="heart"
+              d="M46.25 29.3125C46.25 26.2063 43.6263 23.6875 40.39 23.6875C37.9713 23.6875 35.8937 25.095 35 27.1037C34.1063 25.095 32.0287 23.6875 29.6087 23.6875C26.375 23.6875 23.75 26.2063 23.75 29.3125C23.75 38.3375 35 44.3125 35 44.3125C35 44.3125 46.25 38.3375 46.25 29.3125Z"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </g>
         </svg>
       </div>
