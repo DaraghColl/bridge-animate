@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Disclosure } from '@headlessui/react';
-import { ChevronRightIcon } from '@heroicons/react/20/solid';
+import { ChevronRightIcon } from '@heroicons/react/24/solid';
 import { useAnimationsContext } from '../../state/animations';
 import { useSelectedElementContext } from '../../state/selected-element';
 
@@ -45,7 +45,7 @@ const Layers: FC = () => {
                   <div>
                     <div className="flex w-full cursor-pointer items-center gap-2">
                       <Disclosure.Button>
-                        <ChevronRightIcon className="w-6 text-slate-500 ui-open:rotate-90 ui-open:transform" />
+                        <ChevronRightIcon className="ui-open:rotate-90 ui-open:transform w-4 text-slate-500" />
                       </Disclosure.Button>
                       <span
                         className={`${selectedElementID === name ? 'text-indigo-600' : ''}`}
@@ -55,7 +55,7 @@ const Layers: FC = () => {
                       </span>
                     </div>
                   </div>
-                  <Disclosure.Panel className="ml-2 flex flex-col text-slate-500">
+                  <Disclosure.Panel className="ml-6 flex flex-col pt-2 text-slate-500">
                     <span>duration: {config.animationDuration}</span>
                     <span>delay: {config.animationDelay}</span>
                     <span>iteration: {config.animationInterationCount}</span>
