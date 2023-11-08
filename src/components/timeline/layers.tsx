@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Disclosure } from '@headlessui/react';
+import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { useAnimationsContext } from '../../state/animations';
 import { useSelectedElementContext } from '../../state/selected-element';
 
@@ -19,7 +20,7 @@ const Layers: FC = () => {
 
   return (
     <div className="text-sm font-normal text-gray-50">
-      <div className="flex items-center justify-between">
+      <div className="mb-2 flex items-center justify-between ">
         <span>Layers</span>
         <button aria-label="add layer" onClick={handleCreateNewAnimation}>
           <svg
@@ -35,18 +36,25 @@ const Layers: FC = () => {
         </button>
       </div>
 
-      <div className="flex flex-col items-start gap-4 py-2 font-thin">
+      <div className="flex flex-col items-start gap-4 font-thin">
         {animations &&
           animations.map(({ name, config }, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="w-full">
                 <Disclosure>
-                  <Disclosure.Button
-                    className={`${selectedElementID === name ? 'text-indigo-600' : ''}`}
-                    onClick={() => handleElementSelect(name)}
-                  >
-                    {name}
-                  </Disclosure.Button>
+                  <div>
+                    <div className="flex w-full cursor-pointer items-center gap-2">
+                      <Disclosure.Button>
+                        <ChevronRightIcon className="w-6 text-slate-500 ui-open:rotate-90 ui-open:transform" />
+                      </Disclosure.Button>
+                      <span
+                        className={`${selectedElementID === name ? 'text-indigo-600' : ''}`}
+                        onClick={() => handleElementSelect(name)}
+                      >
+                        {name}
+                      </span>
+                    </div>
+                  </div>
                   <Disclosure.Panel className="ml-2 flex flex-col text-slate-500">
                     <span>name: {config.animationName}</span>
                     <span>duration: {config.animationDuration}</span>

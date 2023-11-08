@@ -82,7 +82,7 @@ const Timeline: FC = () => {
   };
 
   return (
-    <div className=" flex h-1/3 gap-4 rounded-md">
+    <div className=" flex h-1/3 min-h-0 gap-4 rounded-md">
       <div className="basis-1/4 overflow-scroll bg-dark-secondary p-2">
         <Layers />
       </div>
