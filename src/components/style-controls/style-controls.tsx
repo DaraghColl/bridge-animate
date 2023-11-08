@@ -12,31 +12,28 @@ const Controls: FC = () => {
   const { createKeyframeStyles, selectedKeyFrameTime, animations } = useAnimationsContext();
   const previousSelectedElementId = usePrevious(selectedElementID);
   const [currentKeyframeStyles, setCurrentKeyframeStyles] = useState<Style>({});
+  const [currentKeyframe, setCurrentKeyframe] = useState<Style>({});
 
   // set temporary styles so user can have real time feedback of style changes at keyframe point
   const updateSelectedElementTemporaryStyles = useCallback(() => {
-    const currentKeyFrame = animations
-      ?.find((animation) => animation.name === selectedElementID)
-      ?.keyframes.find((keyframe) => keyframe.time === selectedKeyFrameTime)?.styles;
-
     if (selectedElementID) {
       const selectedElement = document.getElementById(selectedElementID);
-      if (selectedElement && currentKeyFrame) {
+      if (selectedElement && currentKeyframe) {
         const transformArray = [
-          `${currentKeyFrame.translateX !== '' ? `translateX(${currentKeyFrame.translateX}px)` : ''}`,
-          `${currentKeyFrame.translateY !== '' ? `translateY(${currentKeyFrame.translateY}px)` : ''}`,
-          `${currentKeyFrame.rotate !== '' ? `rotate(${currentKeyFrame.rotate}deg)` : ''}`,
+          `${currentKeyframe.translateX !== '' ? `translateX(${currentKeyframe.translateX}px)` : ''}`,
+          `${currentKeyframe.translateY !== '' ? `translateY(${currentKeyframe.translateY}px)` : ''}`,
+          `${currentKeyframe.rotate !== '' ? `rotate(${currentKeyframe.rotate}deg)` : ''}`,
         ];
 
-        if (currentKeyFrame.opacity) selectedElement.style.opacity = currentKeyFrame.opacity;
-        if (currentKeyFrame.fill) selectedElement.style.fill = currentKeyFrame.fill;
-        if (currentKeyFrame.stroke) selectedElement.style.stroke = currentKeyFrame.stroke;
-        if (currentKeyFrame.strokeDasharray) selectedElement.style.strokeDasharray = currentKeyFrame.strokeDasharray;
-        if (currentKeyFrame.strokeDashoffset) selectedElement.style.strokeDashoffset = currentKeyFrame.strokeDashoffset;
+        if (currentKeyframe.opacity) selectedElement.style.opacity = currentKeyframe.opacity;
+        if (currentKeyframe.fill) selectedElement.style.fill = currentKeyframe.fill;
+        if (currentKeyframe.stroke) selectedElement.style.stroke = currentKeyframe.stroke;
+        if (currentKeyframe.strokeDasharray) selectedElement.style.strokeDasharray = currentKeyframe.strokeDasharray;
+        if (currentKeyframe.strokeDashoffset) selectedElement.style.strokeDashoffset = currentKeyframe.strokeDashoffset;
         if (transformArray) selectedElement.style.transform = transformArray.join(' ');
       }
     }
-  }, [animations, selectedElementID, selectedKeyFrameTime]);
+  }, [currentKeyframe, selectedElementID]);
 
   const handleInputChange = (style: StyleType, e: ChangeEvent<HTMLInputElement>) => {
     const elementNameAttribute = e.target.getAttribute('name');
@@ -74,6 +71,17 @@ const Controls: FC = () => {
     setCurrentKeyframeStyles({ ...currentKeyframeStyles, [style]: e.target.value });
   };
 
+  // set the current frames object
+  useEffect(() => {
+    const currentKeyframe = animations
+      ?.find((animation) => animation.name === selectedElementID)
+      ?.keyframes.find((keyframe) => keyframe.time === selectedKeyFrameTime)?.styles;
+
+    if (!currentKeyframe) return;
+
+    setCurrentKeyframe(currentKeyframe);
+  }, [animations, selectedElementID, selectedKeyFrameTime]);
+
   // set selected element temporary styles
   // reset previous styles when element changes
   useEffect(() => {
@@ -98,13 +106,13 @@ const Controls: FC = () => {
   useEffect(() => {
     if (animations && animations?.length <= 0) return;
 
-    const currentKeyFrame = animations
+    const currentKeyframe = animations
       ?.find((animation) => animation.name === selectedElementID)
       ?.keyframes.find((keyframe) => keyframe.time === selectedKeyFrameTime)?.styles;
 
-    if (!currentKeyFrame) return;
+    if (!currentKeyframe) return;
 
-    setCurrentKeyframeStyles(currentKeyFrame);
+    setCurrentKeyframeStyles(currentKeyframe);
   }, [selectedElementID, animations, selectedKeyFrameTime]);
 
   return (
