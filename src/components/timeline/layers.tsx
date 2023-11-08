@@ -45,7 +45,7 @@ const Layers: FC = () => {
                   <div>
                     <div className="flex w-full cursor-pointer items-center gap-2">
                       <Disclosure.Button>
-                        <ChevronRightIcon className="ui-open:rotate-90 ui-open:transform w-4 text-slate-500" />
+                        <ChevronRightIcon className="w-4 text-slate-500 ui-open:rotate-90 ui-open:transform" />
                       </Disclosure.Button>
                       <span
                         className={`${selectedElementID === name ? 'text-indigo-600' : ''}`}
