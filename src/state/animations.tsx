@@ -5,6 +5,7 @@ export type StyleType =
   | 'rotate'
   | 'translateX'
   | 'translateY'
+  | 'scale'
   | 'fill'
   | 'stroke'
   | 'strokeDasharray'
@@ -15,6 +16,7 @@ export type Style = {
   rotate?: string;
   translateX?: string;
   translateY?: string;
+  scale?: string;
   fill?: string;
   stroke?: string;
   strokeDasharray?: string;
@@ -75,7 +77,7 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
       name: elementId,
       config: {
         animationName: elementId,
-        animationDuration: '5',
+        animationDuration: '2.5',
         animationDelay: '0',
         animationInterationCount: '1',
         animationDirection: 'normal',

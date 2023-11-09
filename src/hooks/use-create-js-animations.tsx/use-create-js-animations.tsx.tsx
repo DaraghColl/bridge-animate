@@ -10,6 +10,7 @@ interface StyleObject extends StyleObjectKeys {
   rotate?: string | null;
   translateX?: string | null;
   translateY?: string | null;
+  scale?: string;
   offset: number;
   fill?: string | null;
   stroke?: string | null;
@@ -18,9 +19,10 @@ interface StyleObject extends StyleObjectKeys {
 }
 
 interface FormattedStyleObject extends StyleObjectKeys {
+  offset?: number;
   opacity?: string | null;
   transform?: string | null;
-  offset?: number;
+  scale?: string | null;
   fill?: string | null;
   stroke?: string | null;
   strokeDasharray?: string | null;
@@ -49,6 +51,8 @@ const useCreateJSAnimations = () => {
                 animationStyleObject[key] = `${key}(${value}px)`;
               } else if (key === 'rotate') {
                 animationStyleObject[key] = `${key}(${value}deg)`;
+              } else if (key === 'scale') {
+                animationStyleObject[key] = `${key}(${value})`;
               } else {
                 animationStyleObject[key] = value;
               }
@@ -78,6 +82,9 @@ const useCreateJSAnimations = () => {
           }
           if (animation.translateY && animation.translateY !== '') {
             transformProperties.push(animation.translateY.toString());
+          }
+          if (animation.scale && animation.scale !== '') {
+            transformProperties.push(animation.scale);
           }
 
           if (transformProperties.length > 0) formattedAnimationObject.transform = transformProperties.join(' ');

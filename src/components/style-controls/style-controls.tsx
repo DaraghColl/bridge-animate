@@ -23,6 +23,7 @@ const Controls: FC = () => {
           `${currentKeyframe.translateX !== '' ? `translateX(${currentKeyframe.translateX}px)` : ''}`,
           `${currentKeyframe.translateY !== '' ? `translateY(${currentKeyframe.translateY}px)` : ''}`,
           `${currentKeyframe.rotate !== '' ? `rotate(${currentKeyframe.rotate}deg)` : ''}`,
+          `${currentKeyframe.scale !== '' ? `scale(${currentKeyframe.scale})` : ''}`,
         ];
 
         if (currentKeyframe.opacity) selectedElement.style.opacity = currentKeyframe.opacity;
@@ -183,6 +184,24 @@ const Controls: FC = () => {
             </div>
           </div>
 
+          <div className="mb-2 flex flex-col border-b-2 border-slate-100 pb-4">
+            <span>scale</span>
+            <div className="mt-2 flex flex-row gap-2">
+              <div className="basis-1/2">
+                <label htmlFor="xPosition" className="ml-2 text-slate-500">
+                  all
+                </label>
+                <input
+                  name="xPosition"
+                  type="number"
+                  className="w-full rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  onBlur={(e) => handleInputChange('scale', e)}
+                  onChange={(e) => handleInputChange('scale', e)}
+                  value={currentKeyframeStyles.scale}
+                />
+              </div>
+            </div>
+          </div>
           <div className="mb-2 flex flex-col border-b-2 border-slate-100 pb-4">
             <span>color</span>
             <div className="mt-2 flex flex-wrap gap-4">
