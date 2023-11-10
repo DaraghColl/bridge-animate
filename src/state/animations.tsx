@@ -99,6 +99,11 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
         rotate: '',
         translateX: '',
         translateY: '',
+        scale: '',
+        fill: '',
+        stroke: '',
+        strokeDasharray: '',
+        strokeDashoffset: '',
       },
     };
 
