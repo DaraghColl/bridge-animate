@@ -6,7 +6,7 @@ import { CanvasViewOptions } from '../canvas-view-options/canvas-view-options';
 const Canvas: FC = () => {
   const { setSelectedElementId } = useSelectedElementContext();
   const [zoom, setZoom] = useState(100);
-  const [backgroundColor, setBackgroundColor] = useState('#000000');
+  const [backgroundColor, setBackgroundColor] = useState('#131315');
   const canvasRef = useRef(null);
 
   const changeZoom = (zoomType: 'minus' | 'plus') => {
