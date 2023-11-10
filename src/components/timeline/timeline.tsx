@@ -81,7 +81,7 @@ const Timeline: FC = () => {
   };
 
   return (
-    <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll bg-slate-200 p-4 dark:bg-dark-secondary">
+    <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll bg-white p-4 dark:bg-dark-secondary">
       {animations && animations.length <= 0 && (
         <span className="text-sm tracking-wide">Select Element and add an animation layer</span>
       )}
@@ -97,7 +97,7 @@ const Timeline: FC = () => {
               ref={scrubberRef}
               id="scrubber"
               type="range"
-              className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-white accent-indigo-600 dark:bg-gray-200"
+              className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-slate-100 accent-indigo-600 dark:bg-gray-200"
               onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
               min="0"
               max="2500"
