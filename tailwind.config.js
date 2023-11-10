@@ -13,4 +13,5 @@ export default {
     // eslint-disable-next-line no-undef
     require('@headlessui/tailwindcss'),
   ],
+  darkMode: 'class',
 };

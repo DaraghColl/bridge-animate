@@ -19,7 +19,7 @@ const Layers: FC = () => {
   };
 
   return (
-    <div className="text-sm font-normal text-gray-50">
+    <div className="text-sm font-normal">
       <div className="mb-2 flex items-center justify-between ">
         <span>Layers</span>
         <button aria-label="add layer" onClick={handleCreateNewAnimation}>
