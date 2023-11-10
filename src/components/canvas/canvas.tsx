@@ -2,6 +2,7 @@ import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { useSelectedElementContext } from '../../state/selected-element';
 import { Zoom } from './zoom';
 import { CanvasViewOptions } from '../canvas-view-options/canvas-view-options';
+import { TransformTool } from '../transform-tool/transform-tool';
 
 const Canvas: FC = () => {
   const { setSelectedElementId } = useSelectedElementContext();
@@ -46,6 +47,7 @@ const Canvas: FC = () => {
     <div className="relative flex basis-3/5 items-center justify-center rounded-md">
       <CanvasViewOptions />
       <Zoom onChangeZoom={changeZoom} />
+      <TransformTool />
       <span className="absolute right-4 top-10 select-none">{zoom}%</span>
       <div id="canvas" ref={canvasRef} className="flex h-full w-full items-center justify-around rounded-md">
         <svg

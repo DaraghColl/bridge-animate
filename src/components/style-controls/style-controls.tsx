@@ -109,8 +109,19 @@ const Controls: FC = () => {
     setCurrentKeyframe(currentKeyframe);
   }, [selectedElementID, animations, selectedKeyFrameTime]);
 
+  // this effect is specically for the transform tool - to change temp styles on update
+  useEffect(() => {
+    updateSelectedElementTemporaryStyles();
+  }, [
+    currentKeyframe.rotate,
+    currentKeyframe.scale,
+    currentKeyframe.translateX,
+    currentKeyframe.translateY,
+    updateSelectedElementTemporaryStyles,
+  ]);
+
   return (
-    <div className="flex flex-col gap-4 p-4 text-sm font-normal">
+    <div className="flex min-h-0 flex-col gap-4 p-4 text-sm font-normal">
       {(selectedElementID === null || !selectedKeyFrameTime) && (
         <span className="select-none text-sm tracking-wide">
           Select Element, add an animation layer, and select keyframe to see controls
