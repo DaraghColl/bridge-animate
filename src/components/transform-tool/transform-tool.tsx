@@ -10,11 +10,10 @@ const TransformTool: FC = () => {
   const [usingTransformTool, setUsingTransformTool] = useState(false);
   const [transformSelected, setUsingTransformSelected] = useState<TransformType | null>(null);
   const [transformSelectedPosition, setTransformSelectedPosition] = useState<{ x: number; y: number } | null>(null);
-  const heart = document.getElementById('heart-svg');
 
   const handleMouseMovement = useCallback(
     (event: MouseEvent) => {
-      if (!transformSelectedPosition || !heart) return;
+      if (!transformSelectedPosition) return;
 
       if (!selectedElementID || !selectedKeyFrameTime) return;
       if (transformSelected === 'y') {
@@ -22,7 +21,6 @@ const TransformTool: FC = () => {
         if (event.clientY > transformSelectedPosition.y) {
           totalY = event.clientY - transformSelectedPosition.y;
           createKeyframeStyles(selectedElementID, 'translateY', totalY.toString());
-          // heart.style.transform = `translateY(${totalY}px)`;
         }
         if (event.clientY < transformSelectedPosition.y) {
           totalY = transformSelectedPosition.y - event.clientY;
@@ -54,14 +52,7 @@ const TransformTool: FC = () => {
         }
       }
     },
-    [
-      createKeyframeStyles,
-      heart,
-      selectedElementID,
-      selectedKeyFrameTime,
-      transformSelected,
-      transformSelectedPosition,
-    ],
+    [createKeyframeStyles, selectedElementID, selectedKeyFrameTime, transformSelected, transformSelectedPosition],
   );
 
   const mouseDown = (event: ReactMouseEvent<SVGCircleElement | SVGPathElement>, transformType: TransformType) => {
