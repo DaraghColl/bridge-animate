@@ -48,6 +48,7 @@ export interface Animation {
 
 interface AnimationsValue {
   animations: Animation[] | null;
+  setAnimations: Dispatch<SetStateAction<Animation[] | []>>;
   createNewAnimation: (elementId: string) => void;
   createKeyframe: (animationName: string, keyframeTime: KeyframeTime) => void;
   selectedKeyFrameTime: KeyframeTime | null;
@@ -141,6 +142,7 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
     <AnimationsContext.Provider
       value={{
         animations,
+        setAnimations,
         createNewAnimation,
         createKeyframe,
         selectedKeyFrameTime,
