@@ -7,8 +7,6 @@ const ThemeToggle: FC = () => {
   const handleThemeSwitch = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
 
-    console.log(theme);
-
     theme === 'dark'
       ? document.documentElement.classList.remove('dark')
       : document.documentElement.classList.add('dark');

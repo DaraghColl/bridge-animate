@@ -5,8 +5,6 @@ import { usePrevious } from './use-previous';
 const MockUsePreviousComponent = () => {
   const [count, setCount] = useState<number>(1);
   const previousCount = usePrevious(count);
-  console.log(count);
-  console.log(previousCount);
 
   const handleClick = () => {
     setCount((prevCount: number) => prevCount + 1);
