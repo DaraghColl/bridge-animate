@@ -30,9 +30,9 @@ const Canvas: FC = () => {
     const canvas = document.getElementById('canvas')!;
     canvas.addEventListener('click', (event): void => {
       const { target } = event;
-      if (target) {
-        setSelectedElementId((target as HTMLElement).getAttribute('id'));
-      }
+      if (!target || (target as HTMLElement).getAttribute('id') === 'canvas') return;
+
+      setSelectedElementId((target as HTMLElement).getAttribute('id'));
 
       const controlPanel = document.getElementById('controls')!;
       controlPanel.querySelectorAll('input').forEach((element: HTMLInputElement) => {
@@ -69,7 +69,6 @@ const Canvas: FC = () => {
         </svg>
       </div>
       <div className="absolute bottom-2 right-2 flex gap-2">
-        {/* <label htmlFor="canvas-color">background</label> */}
         <input
           aria-label="canvas background color"
           className="canvas-bg-color-picker"
