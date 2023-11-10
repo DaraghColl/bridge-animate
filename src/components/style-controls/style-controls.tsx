@@ -126,13 +126,13 @@ const Controls: FC = () => {
       {selectedElementID && selectedKeyFrameTime && (
         <Fragment>
           <div className="flex flex-col border-b-2 border-gray-100 pb-4">
-            <label htmlFor="opacity" className="mb-2 text-gray-100">
+            <label htmlFor="opacity" className="mb-2">
               opacity
             </label>
             <input
               name="opacity"
               type="number"
-              className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+              className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:dark:text-gray-100"
               onBlur={(e) => handleInputChange('opacity', e)}
               onChange={(e) => handleInputChange('opacity', e)}
               value={currentKeyframeStyles.opacity}
@@ -149,7 +149,7 @@ const Controls: FC = () => {
                 <input
                   name="xPosition"
                   type="number"
-                  className="w-full rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  className="w-full rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('translateX', e)}
                   onChange={(e) => handleInputChange('translateX', e)}
                   value={currentKeyframeStyles.translateX}
@@ -162,7 +162,7 @@ const Controls: FC = () => {
                 <input
                   name="yPosition"
                   type="number"
-                  className="w-full rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  className="w-full rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('translateY', e)}
                   onChange={(e) => handleInputChange('translateY', e)}
                   value={currentKeyframeStyles.translateY}
@@ -176,7 +176,7 @@ const Controls: FC = () => {
               <input
                 name="rotate"
                 type="number"
-                className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                 onBlur={(e) => handleInputChange('rotate', e)}
                 onChange={(e) => handleInputChange('rotate', e)}
                 value={currentKeyframeStyles.rotate}
@@ -194,7 +194,7 @@ const Controls: FC = () => {
                 <input
                   name="xPosition"
                   type="number"
-                  className="w-full rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  className="w-full rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('scale', e)}
                   onChange={(e) => handleInputChange('scale', e)}
                   value={currentKeyframeStyles.scale}
@@ -212,7 +212,7 @@ const Controls: FC = () => {
                 <input
                   name="fill"
                   type="color"
-                  className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('fill', e)}
                   value={currentKeyframeStyles.fill}
                 />
@@ -225,7 +225,7 @@ const Controls: FC = () => {
                 <input
                   name="stroke"
                   type="color"
-                  className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('stroke', e)}
                   value={currentKeyframeStyles.stroke}
                 />
@@ -244,7 +244,7 @@ const Controls: FC = () => {
                 <input
                   name="stroke-dash-start"
                   type="checkbox"
-                  className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('strokeDasharray', e)}
                   value={currentKeyframeStyles.strokeDasharray}
                 />
@@ -257,7 +257,7 @@ const Controls: FC = () => {
                 <input
                   name="stroke-dash-end"
                   type="checkbox"
-                  className="rounded-sm bg-dark-primary px-2 py-1 text-gray-100 outline-none"
+                  className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('strokeDasharray', e)}
                   value={currentKeyframeStyles.strokeDasharray}
                 />
