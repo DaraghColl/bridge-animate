@@ -1,10 +1,12 @@
-import { FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { useSelectedElementContext } from '../../state/selected-element';
 import { Zoom } from './zoom';
 
 const Canvas: FC = () => {
   const { setSelectedElementId } = useSelectedElementContext();
   const [zoom, setZoom] = useState(100);
+  const [backgroundColor, setBackgroundColor] = useState('#000000');
+  const canvasRef = useRef(null);
 
   const changeZoom = (zoomType: 'minus' | 'plus') => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -14,6 +16,14 @@ const Canvas: FC = () => {
     canvas.style.zoom = `${zoomType === 'minus' ? zoom - 10 : zoom + 10}%`;
 
     setZoom(zoomType === 'minus' ? zoom - 10 : zoom + 10);
+  };
+
+  const onBackgroundColorChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const canvas = document.getElementById('canvas')!; // using any as TS does not accept 'zoom' property
+    if (!canvas) return;
+
+    setBackgroundColor(e.target.value);
+    canvas.style.backgroundColor = e.target.value;
   };
 
   useEffect(() => {
@@ -32,10 +42,10 @@ const Canvas: FC = () => {
   }, [setSelectedElementId]);
 
   return (
-    <div className="relative flex basis-3/5 items-center justify-center rounded-md bg-dark-secondary">
+    <div className="relative flex basis-3/5 items-center justify-center rounded-md">
       <Zoom onChangeZoom={changeZoom} />
       <span className="absolute right-4 top-10">{zoom}%</span>
-      <div id="canvas">
+      <div id="canvas" ref={canvasRef} className="flex h-full w-full items-center justify-around rounded-md">
         <svg
           id="heart-svg"
           width="200"
@@ -57,6 +67,17 @@ const Canvas: FC = () => {
             />
           </g>
         </svg>
+      </div>
+      <div className="absolute bottom-2 right-2 flex gap-2">
+        {/* <label htmlFor="canvas-color">background</label> */}
+        <input
+          aria-label="canvas background color"
+          className="canvas-bg-color-picker"
+          value={backgroundColor}
+          onChange={(e) => onBackgroundColorChange(e)}
+          name="canvas-color"
+          type="color"
+        />
       </div>
     </div>
   );
