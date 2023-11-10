@@ -29,7 +29,7 @@ const Controls: FC = () => {
         if (currentKeyframe.rotate && currentKeyframe.rotate !== '') {
           transformArray.push(`rotate(${currentKeyframe.rotate}deg)`);
         }
-        if ((currentKeyframe.scale && currentKeyframe.scale !== '') || currentKeyframe.scale !== undefined) {
+        if (currentKeyframe.scale && currentKeyframe.scale !== '') {
           transformArray.push(`scale(${currentKeyframe.scale})`);
         }
 
@@ -74,6 +74,7 @@ const Controls: FC = () => {
 
     createKeyframeStyles(selectedElementID, style, e.target.value);
     setCurrentKeyframe({ ...currentKeyframe, [style]: e.target.value });
+    updateSelectedElementTemporaryStyles();
   };
 
   // set selected element temporary styles
