@@ -11,7 +11,6 @@ const Controls: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const { createKeyframeStyles, selectedKeyFrameTime, animations } = useAnimationsContext();
   const previousSelectedElementId = usePrevious(selectedElementID);
-  const [currentKeyframeStyles, setCurrentKeyframeStyles] = useState<Style>({});
   const [currentKeyframe, setCurrentKeyframe] = useState<Style>({});
 
   // set temporary styles so user can have real time feedback of style changes at keyframe point
@@ -19,12 +18,20 @@ const Controls: FC = () => {
     if (selectedElementID) {
       const selectedElement = document.getElementById(selectedElementID);
       if (selectedElement && currentKeyframe) {
-        const transformArray = [
-          `${currentKeyframe.translateX !== '' ? `translateX(${currentKeyframe.translateX}px)` : ''}`,
-          `${currentKeyframe.translateY !== '' ? `translateY(${currentKeyframe.translateY}px)` : ''}`,
-          `${currentKeyframe.rotate !== '' ? `rotate(${currentKeyframe.rotate}deg)` : ''}`,
-          `${currentKeyframe.scale !== '' ? `scale(${currentKeyframe.scale})` : ''}`,
-        ];
+        const transformArray = [];
+
+        if (currentKeyframe.translateX && currentKeyframe.translateX !== '') {
+          transformArray.push(`translateX(${currentKeyframe.translateX}px)`);
+        }
+        if (currentKeyframe.translateY && currentKeyframe.translateY !== '') {
+          transformArray.push(`translateY(${currentKeyframe.translateY}px)`);
+        }
+        if (currentKeyframe.rotate && currentKeyframe.rotate !== '') {
+          transformArray.push(`rotate(${currentKeyframe.rotate}deg)`);
+        }
+        if ((currentKeyframe.scale && currentKeyframe.scale !== '') || currentKeyframe.scale !== undefined) {
+          transformArray.push(`scale(${currentKeyframe.scale})`);
+        }
 
         if (currentKeyframe.opacity) selectedElement.style.opacity = currentKeyframe.opacity;
         if (currentKeyframe.fill) selectedElement.style.fill = currentKeyframe.fill;
@@ -59,29 +66,15 @@ const Controls: FC = () => {
 
       updateSelectedElementTemporaryStyles();
 
-      setCurrentKeyframeStyles({ ...currentKeyframeStyles, strokeDasharray: pathLength.toString() });
-      setCurrentKeyframeStyles({ ...currentKeyframeStyles, strokeDashoffset: pathLength.toString() });
+      setCurrentKeyframe({ ...currentKeyframe, strokeDasharray: pathLength.toString() });
+      setCurrentKeyframe({ ...currentKeyframe, strokeDashoffset: pathLength.toString() });
 
       return;
     }
 
     createKeyframeStyles(selectedElementID, style, e.target.value);
-
-    updateSelectedElementTemporaryStyles();
-
-    setCurrentKeyframeStyles({ ...currentKeyframeStyles, [style]: e.target.value });
+    setCurrentKeyframe({ ...currentKeyframe, [style]: e.target.value });
   };
-
-  // set the current frames object
-  useEffect(() => {
-    const currentKeyframe = animations
-      ?.find((animation) => animation.name === selectedElementID)
-      ?.keyframes.find((keyframe) => keyframe.time === selectedKeyFrameTime)?.styles;
-
-    if (!currentKeyframe) return;
-
-    setCurrentKeyframe(currentKeyframe);
-  }, [animations, selectedElementID, selectedKeyFrameTime]);
 
   // set selected element temporary styles
   // reset previous styles when element changes
@@ -103,7 +96,7 @@ const Controls: FC = () => {
     }
   }, [previousSelectedElementId, selectedElementID, updateSelectedElementTemporaryStyles]);
 
-  // set keyframe styles
+  // set current keyframe
   useEffect(() => {
     if (animations && animations?.length <= 0) return;
 
@@ -113,7 +106,7 @@ const Controls: FC = () => {
 
     if (!currentKeyframe) return;
 
-    setCurrentKeyframeStyles(currentKeyframe);
+    setCurrentKeyframe(currentKeyframe);
   }, [selectedElementID, animations, selectedKeyFrameTime]);
 
   return (
@@ -135,7 +128,7 @@ const Controls: FC = () => {
               className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:dark:text-gray-100"
               onBlur={(e) => handleInputChange('opacity', e)}
               onChange={(e) => handleInputChange('opacity', e)}
-              value={currentKeyframeStyles.opacity}
+              value={currentKeyframe.opacity}
             />
           </div>
 
@@ -152,7 +145,7 @@ const Controls: FC = () => {
                   className="w-full rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('translateX', e)}
                   onChange={(e) => handleInputChange('translateX', e)}
-                  value={currentKeyframeStyles.translateX}
+                  value={currentKeyframe.translateX}
                 />
               </div>
               <div className="basis-1/2">
@@ -165,7 +158,7 @@ const Controls: FC = () => {
                   className="w-full rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('translateY', e)}
                   onChange={(e) => handleInputChange('translateY', e)}
-                  value={currentKeyframeStyles.translateY}
+                  value={currentKeyframe.translateY}
                 />
               </div>
             </div>
@@ -179,7 +172,7 @@ const Controls: FC = () => {
                 className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                 onBlur={(e) => handleInputChange('rotate', e)}
                 onChange={(e) => handleInputChange('rotate', e)}
-                value={currentKeyframeStyles.rotate}
+                value={currentKeyframe.rotate}
               />
             </div>
           </div>
@@ -197,7 +190,7 @@ const Controls: FC = () => {
                   className="w-full rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('scale', e)}
                   onChange={(e) => handleInputChange('scale', e)}
-                  value={currentKeyframeStyles.scale}
+                  value={currentKeyframe.scale}
                 />
               </div>
             </div>
@@ -214,7 +207,7 @@ const Controls: FC = () => {
                   type="color"
                   className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('fill', e)}
-                  value={currentKeyframeStyles.fill}
+                  value={currentKeyframe.fill}
                 />
               </div>
               <div className="flex flex-col">
@@ -227,7 +220,7 @@ const Controls: FC = () => {
                   type="color"
                   className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('stroke', e)}
-                  value={currentKeyframeStyles.stroke}
+                  value={currentKeyframe.stroke}
                 />
               </div>
             </div>
@@ -246,7 +239,7 @@ const Controls: FC = () => {
                   type="checkbox"
                   className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('strokeDasharray', e)}
-                  value={currentKeyframeStyles.strokeDasharray}
+                  value={currentKeyframe.strokeDasharray}
                 />
               </div>
               <div className="flex flex-col">
@@ -259,7 +252,7 @@ const Controls: FC = () => {
                   type="checkbox"
                   className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('strokeDasharray', e)}
-                  value={currentKeyframeStyles.strokeDasharray}
+                  value={currentKeyframe.strokeDasharray}
                 />
               </div>
             </div>
