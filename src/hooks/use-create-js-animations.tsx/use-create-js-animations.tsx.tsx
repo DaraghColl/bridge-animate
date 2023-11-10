@@ -92,14 +92,14 @@ const useCreateJSAnimations = () => {
           return formattedAnimationObject;
         });
 
-        const elementAnimation = elementToAnimate?.animate(formatTransform, {
+        const keyframeEffect = new KeyframeEffect(elementToAnimate, formatTransform, {
           duration: Number(animation.config.animationDuration) * 1000,
           fill: 'auto',
           easing: 'ease-in-out',
           iterations: 1,
         });
 
-        elementAnimation?.finish();
+        const elementAnimation = new Animation(keyframeEffect, document.timeline);
 
         setAnimationsToPay((prevAnimations) => [...prevAnimations, elementAnimation]);
       });
