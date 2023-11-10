@@ -45,9 +45,8 @@ const Canvas: FC = () => {
   return (
     <div className="relative flex basis-3/5 items-center justify-center rounded-md">
       <CanvasViewOptions />
-
       <Zoom onChangeZoom={changeZoom} />
-      <span className="absolute right-4 top-10">{zoom}%</span>
+      <span className="absolute right-4 top-10 select-none">{zoom}%</span>
       <div id="canvas" ref={canvasRef} className="flex h-full w-full items-center justify-around rounded-md">
         <svg
           id="heart-svg"

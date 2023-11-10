@@ -119,7 +119,7 @@ const Controls: FC = () => {
   return (
     <div className="flex flex-col gap-4 p-4 text-sm font-normal">
       {(selectedElementID === null || !selectedKeyFrameTime) && (
-        <span className="text-sm tracking-wide">
+        <span className="select-none text-sm tracking-wide">
           Select Element, add an animation layer, and select keyframe to see controls
         </span>
       )}
