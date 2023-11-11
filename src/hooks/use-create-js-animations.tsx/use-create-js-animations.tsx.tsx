@@ -120,10 +120,33 @@ const useCreateJSAnimations = () => {
   };
 
   const generateCSSAnimations = () => {
-    console.log(animationsToPay);
+    if (animations) {
+      // loop through all elements with animations
+      animations.forEach((animation) => {
+        const elementToAnimate = document.getElementById(animation.name);
+
+        // set up object for the actual javascript animation API
+        // need to group all transforms together as one string
+        const animationWithFormattedTransform = formatTransform(formattedJSAnimations);
+
+        const arrayOfCssKeyframes: string[] = [];
+
+        animationWithFormattedTransform.forEach((keyframe) => {
+          arrayOfCssKeyframes.push(JSON.stringify(keyframe));
+        });
+
+        const keyframe = `
+          @keyframes ${elementToAnimate?.getAttribute('id')}-animation {
+            ${arrayOfCssKeyframes.join(' ')}
+          }
+        `;
+
+        setCSSAnimations([...cssAnimations, keyframe]);
+      });
+    }
   };
 
-  const generateJSAnimations = () => {
+  const generateJSAnimations = async () => {
     if (animations) {
       // loop through all elements with animations
       animations.forEach((animation) => {
@@ -134,7 +157,8 @@ const useCreateJSAnimations = () => {
         const animationWithFormattedTransform = formatTransform(formattedJSAnimations);
 
         const keyframe = `
-        const ${elementToAnimate?.getAttribute('id')}Animation = ${elementToAnimate?.getAttribute('id')}.animate(
+        const ${elementToAnimate?.getAttribute('id')}Animation = ${elementToAnimate?.getAttribute('id')}
+        .animate(
           ${JSON.stringify(animationWithFormattedTransform)},
           {
             duration: ${Number(animation.config.animationDuration) * 1000},
