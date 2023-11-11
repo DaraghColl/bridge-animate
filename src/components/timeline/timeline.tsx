@@ -9,7 +9,7 @@ import { usePrevious } from '../../hooks/use-previous/use-previous.tsx';
 const Timeline: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const { animations, isPlaying, setIsPlaying } = useAnimationsContext();
-  const animationsToPay = useCreateJSAnimations();
+  const { animationsToPay } = useCreateJSAnimations();
   const scrubberRef = useRef<HTMLInputElement>(null);
   const previousSelectedElementId = usePrevious(selectedElementID);
 

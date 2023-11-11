@@ -29,9 +29,43 @@ interface FormattedStyleObject extends StyleObjectKeys {
   strokeDashoffset?: string | null;
 }
 
+const formatTransform = (javascriptFormattedAnimations: FormattedStyleObject[]) => {
+  return javascriptFormattedAnimations.map((animation) => {
+    const formattedAnimationObject: FormattedStyleObject = {};
+    formattedAnimationObject.offset = animation.offset;
+    if (animation.opacity) formattedAnimationObject.opacity = animation.opacity;
+    if (animation.fill) formattedAnimationObject.fill = animation.fill;
+    if (animation.stroke) formattedAnimationObject.stroke = animation.stroke;
+    if (animation.strokeDasharray) formattedAnimationObject.strokeDasharray = animation.strokeDasharray;
+    if (animation.strokeDashoffset) formattedAnimationObject.strokeDashoffset = animation.strokeDashoffset;
+
+    const transformProperties: string[] = [];
+
+    if (animation.rotate && animation.rotate !== '') {
+      transformProperties.push(animation.rotate.toString());
+    }
+    if (animation.translateX && animation.translateX !== '') {
+      transformProperties.push(animation.translateX.toString());
+    }
+    if (animation.translateY && animation.translateY !== '') {
+      transformProperties.push(animation.translateY.toString());
+    }
+    if (animation.scale && animation.scale !== '') {
+      transformProperties.push(animation.scale);
+    }
+
+    if (transformProperties.length > 0) formattedAnimationObject.transform = transformProperties.join(' ');
+
+    return formattedAnimationObject;
+  });
+};
+
 const useCreateJSAnimations = () => {
   const { animations } = useAnimationsContext();
+  const [formattedJSAnimations, setFormattedJSAnimations] = useState<FormattedStyleObject[] | []>([]);
   const [animationsToPay, setAnimationsToPay] = useState<(Animation | undefined)[]>([]);
+  const [jsAnimations, setJsAnimations] = useState<string[]>([]);
+  const [cssAnimations, setCSSAnimations] = useState<string[]>([]);
 
   useEffect(() => {
     if (animations) {
@@ -59,40 +93,14 @@ const useCreateJSAnimations = () => {
             }
           }
           javascriptFormattedAnimations.push(animationStyleObject);
+          setFormattedJSAnimations((prev) => [...prev, animationStyleObject]);
         });
 
         // set up object for the actual javascript animation API
         // need to group all transforms together as one string
-        const formatTransform = javascriptFormattedAnimations.map((animation) => {
-          const formattedAnimationObject: FormattedStyleObject = {};
-          formattedAnimationObject.offset = animation.offset;
-          if (animation.opacity) formattedAnimationObject.opacity = animation.opacity;
-          if (animation.fill) formattedAnimationObject.fill = animation.fill;
-          if (animation.stroke) formattedAnimationObject.stroke = animation.stroke;
-          if (animation.strokeDasharray) formattedAnimationObject.strokeDasharray = animation.strokeDasharray;
-          if (animation.strokeDashoffset) formattedAnimationObject.strokeDashoffset = animation.strokeDashoffset;
+        const animationWithFormattedTransform = formatTransform(javascriptFormattedAnimations);
 
-          const transformProperties: string[] = [];
-
-          if (animation.rotate && animation.rotate !== '') {
-            transformProperties.push(animation.rotate.toString());
-          }
-          if (animation.translateX && animation.translateX !== '') {
-            transformProperties.push(animation.translateX.toString());
-          }
-          if (animation.translateY && animation.translateY !== '') {
-            transformProperties.push(animation.translateY.toString());
-          }
-          if (animation.scale && animation.scale !== '') {
-            transformProperties.push(animation.scale);
-          }
-
-          if (transformProperties.length > 0) formattedAnimationObject.transform = transformProperties.join(' ');
-
-          return formattedAnimationObject;
-        });
-
-        const keyframeEffect = new KeyframeEffect(elementToAnimate, formatTransform, {
+        const keyframeEffect = new KeyframeEffect(elementToAnimate, animationWithFormattedTransform, {
           duration: Number(animation.config.animationDuration) * 1000,
           fill: 'auto',
           easing: 'ease-in-out',
@@ -106,7 +114,48 @@ const useCreateJSAnimations = () => {
     }
   }, [animations]);
 
-  return animationsToPay;
+  const clearGeneratedAnimationCode = () => {
+    setJsAnimations([]);
+    setCSSAnimations([]);
+  };
+
+  const generateCSSAnimations = () => {
+    console.log(animationsToPay);
+  };
+
+  const generateJSAnimations = () => {
+    if (animations) {
+      // loop through all elements with animations
+      animations.forEach((animation) => {
+        const elementToAnimate = document.getElementById(animation.name);
+
+        // set up object for the actual javascript animation API
+        // need to group all transforms together as one string
+        const animationWithFormattedTransform = formatTransform(formattedJSAnimations);
+
+        const keyframe = `
+        const ${elementToAnimate?.getAttribute('id')}Animation = ${elementToAnimate?.getAttribute('id')}.animate(
+          ${JSON.stringify(animationWithFormattedTransform)},
+          {
+            duration: ${Number(animation.config.animationDuration) * 1000},
+            fill: 'auto',
+            easing: 'ease-in-out',
+            iterations: 1,
+          });`;
+
+        setJsAnimations([...jsAnimations, keyframe]);
+      });
+    }
+  };
+
+  return {
+    animationsToPay,
+    generateCSSAnimations,
+    generateJSAnimations,
+    jsAnimations,
+    cssAnimations,
+    clearGeneratedAnimationCode,
+  };
 };
 
 export { useCreateJSAnimations };

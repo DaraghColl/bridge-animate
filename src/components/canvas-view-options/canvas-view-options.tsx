@@ -1,5 +1,6 @@
-import { ArrowTopRightOnSquareIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
+import { Squares2X2Icon } from '@heroicons/react/24/outline';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';
+import { ExportAnimation } from '../export-animation/export-animation.tsx';
 
 const CanvasViewOptions = () => {
   return (
@@ -12,7 +13,7 @@ const CanvasViewOptions = () => {
           <ThemeToggle />
         </div>
         <div>
-          <ArrowTopRightOnSquareIcon className="h-4 w-4 cursor-pointer" />
+          <ExportAnimation />
         </div>
       </div>
     </div>
