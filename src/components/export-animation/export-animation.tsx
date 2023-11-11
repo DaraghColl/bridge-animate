@@ -1,10 +1,8 @@
 import { Fragment, useEffect, useState } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import { ClipboardDocumentIcon } from '@heroicons/react/24/outline';
-
+import { Dialog, Tab, Transition } from '@headlessui/react';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import { ClipboardDocumentIcon, CodeBracketIcon } from '@heroicons/react/24/outline';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 
 const copyToClipboard = async (code: string[]) => {
@@ -12,20 +10,21 @@ const copyToClipboard = async (code: string[]) => {
     await navigator.clipboard.writeText(code.toString());
     console.log('Content copied to clipboard');
   } catch (err) {
+    // TODO: replace with modal || tooltip
     console.error('Failed to copy: ', err);
   }
 };
 
 const ExportAnimation = () => {
-  const { generateJSAnimations, jsAnimations, clearGeneratedAnimationCode } = useCreateJSAnimations();
+  const { generateJSAnimations, generateCSSAnimations, jsAnimations, cssAnimations, clearGeneratedAnimationCode } =
+    useCreateJSAnimations();
   const [isOpen, setIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
 
   const generate = () => {
     generateJSAnimations();
-
-    if (jsAnimations) {
-      setIsOpen(true);
-    }
+    generateCSSAnimations();
+    setIsOpen(true);
   };
 
   const closeDialog = () => {
@@ -41,12 +40,12 @@ const ExportAnimation = () => {
       document.querySelectorAll('code').forEach((block) => {
         hljs.highlightElement(block as HTMLElement);
       });
-    }, 10);
-  }, [isOpen]);
+    }, 0.5);
+  }, [isOpen, activeTab]);
 
   return (
     <div>
-      <ArrowTopRightOnSquareIcon className="h-4 w-4 cursor-pointer" onClick={generate} />
+      <CodeBracketIcon className="h-4 w-4 cursor-pointer" onClick={generate} />
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeDialog}>
           <Transition.Child
@@ -72,30 +71,89 @@ const ExportAnimation = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-3xl overflow-hidden rounded-2xl  bg-dark-secondary p-6 text-left align-middle text-white shadow-xl transition-all dark:text-white">
-                  <Dialog.Title
-                    as="div"
-                    className="flex items-center justify-between text-lg font-medium leading-6 dark:text-white"
-                  >
-                    <h3>JavaScript Code Generation</h3>
-                    <div>
-                      <button
-                        type="button"
-                        className="focus-visible:ring-indigp-500 indigo-900 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2
+                <Dialog.Panel className="min-h-[400px] w-full max-w-3xl overflow-hidden  rounded-2xl bg-dark-secondary p-6 text-left align-middle text-white shadow-xl transition-all dark:text-white">
+                  <Tab.Group>
+                    <Tab.List className="flex gap-4">
+                      <Tab onClick={() => setActiveTab(1)}>JavaScript</Tab>
+                      <Tab onClick={() => setActiveTab(2)}>Css</Tab>
+                    </Tab.List>
+                    <Tab.Panels>
+                      <Tab.Panel>
+                        <Dialog.Title
+                          as="div"
+                          className="flex items-center justify-between text-lg font-medium leading-6 dark:text-white"
+                        >
+                          <h3>JavaScript Code Generation</h3>
+                          <div>
+                            <button
+                              type="button"
+                              className="focus-visible:ring-indigp-500 indigo-900 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2
                         text-sm font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                      >
-                        <ClipboardDocumentIcon
-                          className="h-6 w-6 text-white"
-                          onClick={() => copyToClipboard(jsAnimations)}
-                        />
-                      </button>
-                    </div>
-                  </Dialog.Title>
-                  <div className="mt-2">
-                    <pre>
-                      <code className="language-javascript">{jsAnimations}</code>
-                    </pre>
-                  </div>
+                            >
+                              <ClipboardDocumentIcon
+                                className="h-6 w-6 text-white"
+                                onClick={() => copyToClipboard(jsAnimations)}
+                              />
+                            </button>
+                          </div>
+                        </Dialog.Title>
+
+                        <Transition.Child
+                          as={Fragment}
+                          enter="ease-out duration-300"
+                          enterFrom="opacity-0 scale-95"
+                          enterTo="opacity-100 scale-100"
+                          leave="ease-in duration-200"
+                          leaveFrom="opacity-100 scale-100"
+                          leaveTo="opacity-0 scale-95"
+                        >
+                          <div className="mt-2">
+                            {!jsAnimations.length && <h1>There are no animations available</h1>}
+                            <pre>
+                              <code className="language-javascript">{jsAnimations}</code>
+                            </pre>
+                          </div>
+                        </Transition.Child>
+                      </Tab.Panel>
+                      <Tab.Panel>
+                        <Dialog.Title
+                          as="div"
+                          className="flex items-center justify-between text-lg font-medium leading-6 dark:text-white"
+                        >
+                          <h3>CSS Code Generation</h3>
+                          <div>
+                            <button
+                              type="button"
+                              className="focus-visible:ring-indigp-500 indigo-900 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2
+                        text-sm font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                            >
+                              <ClipboardDocumentIcon
+                                className="h-6 w-6 text-white"
+                                onClick={() => copyToClipboard(cssAnimations)}
+                              />
+                            </button>
+                          </div>
+                        </Dialog.Title>
+
+                        <Transition.Child
+                          as={Fragment}
+                          enter="ease-out duration-300"
+                          enterFrom="opacity-0 scale-95"
+                          enterTo="opacity-100 scale-100"
+                          leave="ease-in duration-200"
+                          leaveFrom="opacity-100 scale-100"
+                          leaveTo="opacity-0 scale-95"
+                        >
+                          <div className="mt-2">
+                            {!cssAnimations.length && <h1>There are no animations available</h1>}
+                            <pre>
+                              <code className="language-css">{cssAnimations}</code>
+                            </pre>
+                          </div>
+                        </Transition.Child>
+                      </Tab.Panel>
+                    </Tab.Panels>
+                  </Tab.Group>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
