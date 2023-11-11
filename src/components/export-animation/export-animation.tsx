@@ -1,5 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { ClipboardDocumentIcon } from '@heroicons/react/24/outline';
+
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
@@ -61,19 +63,19 @@ const ExportAnimation = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle text-black shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
+                <Dialog.Panel className="w-full max-w-3xl overflow-hidden rounded-2xl  bg-dark-secondary p-6 text-left align-middle text-white shadow-xl transition-all dark:text-white">
                   <Dialog.Title
                     as="div"
-                    className="flex items-center justify-between text-lg font-medium leading-6 text-black dark:text-white"
+                    className="flex items-center justify-between text-lg font-medium leading-6 dark:text-white"
                   >
                     <h3>JavaScript Code Generation</h3>
                     <div>
                       <button
                         type="button"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium"
                         onClick={closeDialog}
                       >
-                        Copy and close
+                        <ClipboardDocumentIcon className="h-6 w-6 text-white" />
                       </button>
                     </div>
                   </Dialog.Title>
