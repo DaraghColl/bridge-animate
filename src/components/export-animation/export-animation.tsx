@@ -7,6 +7,15 @@ import 'highlight.js/styles/default.css';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 
+const copyToClipboard = async (code: string[]) => {
+  try {
+    await navigator.clipboard.writeText(code.toString());
+    console.log('Content copied to clipboard');
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
+};
+
 const ExportAnimation = () => {
   const { generateJSAnimations, jsAnimations, clearGeneratedAnimationCode } = useCreateJSAnimations();
   const [isOpen, setIsOpen] = useState(false);
@@ -72,10 +81,13 @@ const ExportAnimation = () => {
                     <div>
                       <button
                         type="button"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium"
-                        onClick={closeDialog}
+                        className="focus-visible:ring-indigp-500 indigo-900 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2
+                        text-sm font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                       >
-                        <ClipboardDocumentIcon className="h-6 w-6 text-white" />
+                        <ClipboardDocumentIcon
+                          className="h-6 w-6 text-white"
+                          onClick={() => copyToClipboard(jsAnimations)}
+                        />
                       </button>
                     </div>
                   </Dialog.Title>
