@@ -8,7 +8,7 @@ interface ZoomProps {
 const Zoom: FC<ZoomProps> = (props) => {
   const { onChangeZoom } = props;
   return (
-    <div className="absolute right-2 top-2 flex gap-4">
+    <div className="absolute left-2 top-2 flex gap-4">
       <button aria-label="descrease zoom" onClick={() => onChangeZoom('minus')}>
         <MinusCircleIcon className="h-6  w-6" />
       </button>
