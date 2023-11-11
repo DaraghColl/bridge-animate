@@ -1,5 +1,7 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/default.css';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 
@@ -21,6 +23,15 @@ const ExportAnimation = () => {
       clearGeneratedAnimationCode();
     }, 500);
   };
+
+  useEffect(() => {
+    // TODO: fix & remove timeout for highlight
+    setTimeout(() => {
+      document.querySelectorAll('code').forEach((block) => {
+        hljs.highlightElement(block as HTMLElement);
+      });
+    }, 10);
+  }, [isOpen]);
 
   return (
     <div>
@@ -51,23 +62,25 @@ const ExportAnimation = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle text-black shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
-                  <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-black dark:text-white">
-                    JavaScript Code Generation
+                  <Dialog.Title
+                    as="div"
+                    className="flex items-center justify-between text-lg font-medium leading-6 text-black dark:text-white"
+                  >
+                    <h3>JavaScript Code Generation</h3>
+                    <div>
+                      <button
+                        type="button"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        onClick={closeDialog}
+                      >
+                        Copy and close
+                      </button>
+                    </div>
                   </Dialog.Title>
                   <div className="mt-2">
                     <pre>
-                      <code className="language-html">{jsAnimations}</code>
+                      <code className="language-javascript">{jsAnimations}</code>
                     </pre>
-                  </div>
-
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeDialog}
-                    >
-                      Copy and close
-                    </button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

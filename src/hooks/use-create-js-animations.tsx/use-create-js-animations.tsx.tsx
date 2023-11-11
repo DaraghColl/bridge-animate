@@ -93,7 +93,7 @@ const useCreateJSAnimations = () => {
             }
           }
           javascriptFormattedAnimations.push(animationStyleObject);
-          setFormattedJSAnimations((prev) => [...prev, animationStyleObject]);
+          setFormattedJSAnimations(javascriptFormattedAnimations);
         });
 
         // set up object for the actual javascript animation API
