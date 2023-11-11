@@ -45,7 +45,9 @@ const ElementList: FC = () => {
           return (
             <div
               key={index}
-              className={`px-4 py-2 ${selectedElementID === element.getAttribute('id') ? 'text-indigo-600' : ''}`}
+              className={`cursor-pointer px-4 py-2 ${
+                selectedElementID === element.getAttribute('id') ? 'text-indigo-600' : ''
+              }`}
               onClick={() => handleElementSelect(element)}
             >
               <span className="text-sm font-normal">{element.getAttribute('id') ?? element.tagName}</span>
