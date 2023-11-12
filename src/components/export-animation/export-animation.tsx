@@ -15,11 +15,15 @@ const copyToClipboard = async (code: string[]) => {
   }
 };
 
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
 const ExportAnimation = () => {
   const { generateJSAnimations, generateCSSAnimations, jsAnimations, cssAnimations, clearGeneratedAnimationCode } =
     useCreateJSAnimations();
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState<'js' | 'css'>('js');
 
   const generate = () => {
     generateJSAnimations();
@@ -74,30 +78,46 @@ const ExportAnimation = () => {
                 <Dialog.Panel className="min-h-[400px] w-full max-w-3xl overflow-hidden  rounded-2xl bg-dark-secondary p-6 text-left align-middle text-white shadow-xl transition-all dark:text-white">
                   <Tab.Group>
                     <Tab.List className="flex gap-4">
-                      <Tab onClick={() => setActiveTab(1)}>JavaScript</Tab>
-                      <Tab onClick={() => setActiveTab(2)}>Css</Tab>
+                      <div className="flex w-full justify-between">
+                        <div>
+                          <Tab
+                            onClick={() => setActiveTab('js')}
+                            className={({ selected }) =>
+                              classNames(
+                                'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
+                                selected ? 'bg-indigo-800' : '',
+                              )
+                            }
+                          >
+                            JavaScript
+                          </Tab>
+                          <Tab
+                            onClick={() => setActiveTab('css')}
+                            className={({ selected }) =>
+                              classNames(
+                                'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
+                                selected ? 'bg-indigo-800' : '',
+                              )
+                            }
+                          >
+                            Css
+                          </Tab>
+                        </div>
+
+                        <button
+                          type="button"
+                          className="focus-visible:ring-indigp-500 indigo-900 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2
+                        text-sm font-medium hover:bg-indigo-700 focus:scale-90 focus:outline-none focus-visible:ring-2                        "
+                        >
+                          <ClipboardDocumentIcon
+                            className="h-6 w-6 text-white"
+                            onClick={() => copyToClipboard(activeTab === 'js' ? jsAnimations : cssAnimations)}
+                          />
+                        </button>
+                      </div>
                     </Tab.List>
                     <Tab.Panels>
                       <Tab.Panel>
-                        <Dialog.Title
-                          as="div"
-                          className="flex items-center justify-between text-lg font-medium leading-6 dark:text-white"
-                        >
-                          <h3>JavaScript Code Generation</h3>
-                          <div>
-                            <button
-                              type="button"
-                              className="focus-visible:ring-indigp-500 indigo-900 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2
-                        text-sm font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                            >
-                              <ClipboardDocumentIcon
-                                className="h-6 w-6 text-white"
-                                onClick={() => copyToClipboard(jsAnimations)}
-                              />
-                            </button>
-                          </div>
-                        </Dialog.Title>
-
                         <Transition.Child
                           as={Fragment}
                           enter="ease-out duration-300"
@@ -116,25 +136,6 @@ const ExportAnimation = () => {
                         </Transition.Child>
                       </Tab.Panel>
                       <Tab.Panel>
-                        <Dialog.Title
-                          as="div"
-                          className="flex items-center justify-between text-lg font-medium leading-6 dark:text-white"
-                        >
-                          <h3>CSS Code Generation</h3>
-                          <div>
-                            <button
-                              type="button"
-                              className="focus-visible:ring-indigp-500 indigo-900 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2
-                        text-sm font-medium hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                            >
-                              <ClipboardDocumentIcon
-                                className="h-6 w-6 text-white"
-                                onClick={() => copyToClipboard(cssAnimations)}
-                              />
-                            </button>
-                          </div>
-                        </Dialog.Title>
-
                         <Transition.Child
                           as={Fragment}
                           enter="ease-out duration-300"

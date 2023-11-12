@@ -63,7 +63,7 @@ const formatTransform = (javascriptFormattedAnimations: FormattedStyleObject[]) 
 const useCreateJSAnimations = () => {
   const { animations } = useAnimationsContext();
   const [formattedJSAnimations, setFormattedJSAnimations] = useState<FormattedStyleObject[] | []>([]);
-  const [animationsToPay, setAnimationsToPay] = useState<(Animation | undefined)[]>([]);
+  const [animationsToPay, setAnimationsToPay] = useState<Animation[] | []>([]);
   const [jsAnimations, setJsAnimations] = useState<string[]>([]);
   const [cssAnimations, setCSSAnimations] = useState<string[]>([]);
 
