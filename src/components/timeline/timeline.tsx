@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, Fragment, useRef } from 'react';
+import { ChangeEvent, FC, Fragment, useRef, useState } from 'react';
 import { Keyframe } from './keyframes';
 import { KeyframeTime, useAnimationsContext } from '../../state/animations';
 import { keyframeTimes } from '../../constants/constants';
@@ -12,16 +12,17 @@ const Timeline: FC = () => {
   const { animationsToPay } = useCreateJSAnimations();
   const scrubberRef = useRef<HTMLInputElement>(null);
   const previousSelectedElementId = usePrevious(selectedElementID);
+  const [scrubberValue, setScrubberValue] = useState<number>(0);
+  let requestAnimation: number;
 
-  const handlePauseAnimation = () => {
-    setIsPlaying(false);
-    if (isPlaying) {
-      animationsToPay.forEach((animation) => {
-        if (animation) {
-          animation.pause();
-        }
-      });
-    }
+  // use this function to make the timeline move using requestAnimationFrame
+  const getAnimationTime = () => {
+    setScrubberValue(Number(animationsToPay[0].currentTime));
+    requestAnimation = requestAnimationFrame(getAnimationTime);
+  };
+
+  const cancelGetAnimationTime = () => {
+    cancelAnimationFrame(requestAnimation);
   };
 
   const handlePlayAnimation = () => {
@@ -38,19 +39,45 @@ const Timeline: FC = () => {
       if (!previousSelectedElement) return;
       previousSelectedElement.removeAttribute('style');
     }
+
     setIsPlaying(true);
+    getAnimationTime();
     animationsToPay.forEach((animation) => {
       if (animation) {
         animation.play();
       }
+      animation.addEventListener('finish', () => {
+        cancelGetAnimationTime();
+      });
     });
   };
 
-  const handleStopAnimation = () => {
+  const handlePauseAnimation = () => {
+    // have to create a finish event to trigger stop animation frame being called
+    const fakePauseEvent = new Event('finish');
+
     setIsPlaying(false);
-    if (scrubberRef?.current) {
-      scrubberRef.current.value = '0';
+    cancelGetAnimationTime();
+
+    if (isPlaying) {
+      animationsToPay.forEach((animation) => {
+        if (animation) {
+          animation.pause();
+          animation.dispatchEvent(fakePauseEvent);
+        }
+      });
     }
+
+    // manually set scrub value because finish event above will set to zero
+    if (scrubberRef?.current) {
+      setScrubberValue(Number(scrubberRef.current.value));
+    }
+  };
+
+  const handleStopAnimation = () => {
+    cancelGetAnimationTime();
+    setIsPlaying(false);
+    cancelGetAnimationTime();
 
     animationsToPay.forEach((animation) => {
       if (animation) {
@@ -63,12 +90,12 @@ const Timeline: FC = () => {
     if (!animations?.length) return;
 
     const time = e.currentTarget.value;
+    setScrubberValue(Number(time));
     animationsToPay.forEach((animation) => {
       if (animation) {
         animation.currentTime = Number(time);
+        animation.pause();
       }
-
-      handlePauseAnimation();
     });
   };
 
@@ -95,6 +122,7 @@ const Timeline: FC = () => {
           <div className="mb-5 flex items-center">
             <input
               ref={scrubberRef}
+              value={scrubberValue}
               id="scrubber"
               type="range"
               className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-slate-100 accent-indigo-600 dark:bg-gray-200"
