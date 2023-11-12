@@ -40,7 +40,7 @@ const ExportAnimation = () => {
       document.querySelectorAll('code').forEach((block) => {
         hljs.highlightElement(block as HTMLElement);
       });
-    }, 0.5);
+    }, 10);
   }, [isOpen, activeTab]);
 
   return (

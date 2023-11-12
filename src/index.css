@@ -40,6 +40,11 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 /** highlight js style theme **/
+
+code {
+  margin-left: -4.5rem;
+}
+
 .hljs {
   color: #abb2bf;
   background: transparent;
