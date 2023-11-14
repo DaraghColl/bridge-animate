@@ -1,10 +1,12 @@
-import { FC, Fragment } from 'react';
+import { FC, Fragment, useEffect } from 'react';
 import { useSelectedElementContext } from '../../state/selected-element';
 import { KeyframeTime, useAnimationsContext } from '../../state/animations';
 import { keyframeTimes } from '../../constants/constants';
+import { usePrevious } from '../../hooks/use-previous/use-previous';
 
 const Keyframe: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
+  const previousSelectedElementId = usePrevious(selectedElementID);
   const { animations, createKeyframe, selectedKeyFrameTime, setSelectedKeyFrameTime } = useAnimationsContext();
   const checkIfKeyframeExists = (keyframeTime: KeyframeTime) => {
     if (!animations) return;
@@ -14,6 +16,12 @@ const Keyframe: FC = () => {
 
     return !!hasKeyframe;
   };
+
+  useEffect(() => {
+    if (selectedElementID !== previousSelectedElementId) {
+      setSelectedKeyFrameTime(null);
+    }
+  }, [previousSelectedElementId, selectedElementID, setSelectedKeyFrameTime]);
 
   return (
     <div className="flex flex-col items-center justify-around">

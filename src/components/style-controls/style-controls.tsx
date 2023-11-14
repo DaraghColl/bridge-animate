@@ -15,7 +15,7 @@ const Controls: FC = () => {
 
   // set temporary styles so user can have real time feedback of style changes at keyframe point
   const updateSelectedElementTemporaryStyles = useCallback(() => {
-    if (selectedElementID) {
+    if (selectedElementID && selectedKeyFrameTime) {
       const selectedElement = document.getElementById(selectedElementID);
       if (selectedElement && currentKeyframe) {
         const transformArray = [];
@@ -41,7 +41,7 @@ const Controls: FC = () => {
         if (transformArray) selectedElement.style.transform = transformArray.join(' ');
       }
     }
-  }, [currentKeyframe, selectedElementID]);
+  }, [currentKeyframe, selectedElementID, selectedKeyFrameTime]);
 
   const handleInputChange = (style: StyleType, e: ChangeEvent<HTMLInputElement>) => {
     const elementNameAttribute = e.target.getAttribute('name');
