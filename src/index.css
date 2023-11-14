@@ -8,8 +8,10 @@ body {
   font-family: 'Spline Sans', sans-serif;
 }
 
-* {
+/* TODO: make input for transform origin */
+#canvas * {
   transform-origin: center;
+  transform-box: fill-box;
 }
 
 svg {
