@@ -6,38 +6,33 @@ interface StyleObjectKeys {
 }
 
 interface StyleObject extends StyleObjectKeys {
+  offset: number;
   opacity?: string | null;
   rotate?: string | null;
   translateX?: string | null;
   translateY?: string | null;
   scale?: string;
-  offset: number;
   fill?: string | null;
   stroke?: string | null;
   strokeDasharray?: string | null;
   strokeDashoffset?: string | null;
 }
 
-interface FormattedStyleObject extends StyleObjectKeys {
-  offset?: number;
-  opacity?: string | null;
+interface FormattedStyleObject extends StyleObject {
   transform?: string | null;
-  scale?: string | null;
-  fill?: string | null;
-  stroke?: string | null;
-  strokeDasharray?: string | null;
-  strokeDashoffset?: string | null;
 }
 
-const formatTransform = (javascriptFormattedAnimations: FormattedStyleObject[]) => {
+const formatTransform = (javascriptFormattedAnimations: StyleObject[]) => {
   return javascriptFormattedAnimations.map((animation) => {
-    const formattedAnimationObject: FormattedStyleObject = {};
-    formattedAnimationObject.offset = animation.offset;
+    const formattedAnimationObject: FormattedStyleObject = {
+      offset: animation.offset,
+    };
     if (animation.opacity) formattedAnimationObject.opacity = animation.opacity;
     if (animation.fill) formattedAnimationObject.fill = animation.fill;
     if (animation.stroke) formattedAnimationObject.stroke = animation.stroke;
     if (animation.strokeDasharray) formattedAnimationObject.strokeDasharray = animation.strokeDasharray;
     if (animation.strokeDashoffset) formattedAnimationObject.strokeDashoffset = animation.strokeDashoffset;
+    if (animation.rotate) formattedAnimationObject.rotate = animation.rotate;
 
     const transformProperties: string[] = [];
 
@@ -62,7 +57,7 @@ const formatTransform = (javascriptFormattedAnimations: FormattedStyleObject[]) 
 
 const useCreateJSAnimations = () => {
   const { animations } = useAnimationsContext();
-  const [formattedJSAnimations, setFormattedJSAnimations] = useState<FormattedStyleObject[] | []>([]);
+  const [formattedJSAnimations, setFormattedJSAnimations] = useState<StyleObject[] | []>([]);
   const [animationsToPay, setAnimationsToPay] = useState<Animation[] | []>([]);
   const [jsAnimations, setJsAnimations] = useState<string[]>([]);
   const [cssAnimations, setCSSAnimations] = useState<string[]>([]);
@@ -72,7 +67,7 @@ const useCreateJSAnimations = () => {
       // loop through all elements with animations
       animations.forEach((animation) => {
         const elementToAnimate = document.getElementById(animation.name);
-        const javascriptFormattedAnimations: FormattedStyleObject[] = [];
+        const javascriptFormattedAnimations: StyleObject[] = [];
 
         animation.keyframes.forEach(({ styles, time }) => {
           const animationStyleObject: StyleObject = {
