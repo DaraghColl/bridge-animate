@@ -18,27 +18,26 @@ const Controls: FC = () => {
     if (selectedElementID && selectedKeyFrameTime) {
       const selectedElement = document.getElementById(selectedElementID);
       if (selectedElement && currentKeyframe) {
-        const transformArray = [];
-
-        if (currentKeyframe.translateX && currentKeyframe.translateX !== '') {
-          transformArray.push(`translateX(${currentKeyframe.translateX}px)`);
-        }
-        if (currentKeyframe.translateY && currentKeyframe.translateY !== '') {
-          transformArray.push(`translateY(${currentKeyframe.translateY}px)`);
-        }
-        if (currentKeyframe.rotate && currentKeyframe.rotate !== '') {
-          transformArray.push(`rotate(${currentKeyframe.rotate}deg)`);
-        }
-        if (currentKeyframe.scale && currentKeyframe.scale !== '') {
-          transformArray.push(`scale(${currentKeyframe.scale})`);
-        }
-
         if (currentKeyframe.opacity) selectedElement.style.opacity = currentKeyframe.opacity;
+        if (currentKeyframe.rotate) selectedElement.style.rotate = `${currentKeyframe.rotate}deg`;
+        if (currentKeyframe.scale) selectedElement.style.scale = currentKeyframe.scale;
         if (currentKeyframe.fill) selectedElement.style.fill = currentKeyframe.fill;
         if (currentKeyframe.stroke) selectedElement.style.stroke = currentKeyframe.stroke;
         if (currentKeyframe.strokeDasharray) selectedElement.style.strokeDasharray = currentKeyframe.strokeDasharray;
         if (currentKeyframe.strokeDashoffset) selectedElement.style.strokeDashoffset = currentKeyframe.strokeDashoffset;
-        if (transformArray) selectedElement.style.transform = transformArray.join(' ');
+
+        const transformProperties: string[] = [];
+        if (currentKeyframe.translateX && currentKeyframe.translateX !== '') {
+          transformProperties.push(`${currentKeyframe.translateX.toString()}px`);
+        }
+        if (currentKeyframe.translateY && currentKeyframe.translateY !== '') {
+          if (!currentKeyframe.translateX || currentKeyframe.translateX === '') {
+            transformProperties.push('0px');
+          }
+          transformProperties.push(`${currentKeyframe.translateY.toString()}px`);
+        }
+
+        if (transformProperties.length > 0) selectedElement.style.translate = transformProperties.join(' ');
       }
     }
   }, [currentKeyframe, selectedElementID, selectedKeyFrameTime]);

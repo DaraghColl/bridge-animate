@@ -24,29 +24,16 @@ interface FormattedStyleObject extends StyleObject {
 
 const formatTransform = (javascriptFormattedAnimations: StyleObject[]) => {
   return javascriptFormattedAnimations.map((animation) => {
-    const formattedAnimationObject: FormattedStyleObject = {
-      offset: animation.offset,
-    };
-    if (animation.opacity) formattedAnimationObject.opacity = animation.opacity;
-    if (animation.fill) formattedAnimationObject.fill = animation.fill;
-    if (animation.stroke) formattedAnimationObject.stroke = animation.stroke;
-    if (animation.strokeDasharray) formattedAnimationObject.strokeDasharray = animation.strokeDasharray;
-    if (animation.strokeDashoffset) formattedAnimationObject.strokeDashoffset = animation.strokeDashoffset;
-    if (animation.rotate) formattedAnimationObject.rotate = animation.rotate;
+    const { translateX, translateY, ...restOfAnimation } = animation;
+    const formattedAnimationObject: FormattedStyleObject = { ...restOfAnimation };
 
     const transformProperties: string[] = [];
 
-    if (animation.rotate && animation.rotate !== '') {
-      transformProperties.push(animation.rotate.toString());
+    if (translateX && translateX !== '') {
+      transformProperties.push(translateX.toString());
     }
-    if (animation.translateX && animation.translateX !== '') {
-      transformProperties.push(animation.translateX.toString());
-    }
-    if (animation.translateY && animation.translateY !== '') {
-      transformProperties.push(animation.translateY.toString());
-    }
-    if (animation.scale && animation.scale !== '') {
-      transformProperties.push(animation.scale);
+    if (translateY && translateY !== '') {
+      transformProperties.push(translateY.toString());
     }
 
     if (transformProperties.length > 0) formattedAnimationObject.transform = transformProperties.join(' ');
@@ -79,9 +66,9 @@ const useCreateJSAnimations = () => {
               if (key === 'translateX' || key === 'translateY') {
                 animationStyleObject[key] = `${key}(${value}px)`;
               } else if (key === 'rotate') {
-                animationStyleObject[key] = `${key}(${value}deg)`;
+                animationStyleObject[key] = `${value}deg`;
               } else if (key === 'scale') {
-                animationStyleObject[key] = `${key}(${value})`;
+                animationStyleObject[key] = value;
               } else {
                 animationStyleObject[key] = value;
               }
@@ -136,7 +123,7 @@ const useCreateJSAnimations = () => {
           }
         `;
 
-        setCSSAnimations([...cssAnimations, keyframe]);
+        setCSSAnimations((prev) => [...prev, keyframe]);
       });
     }
   };
@@ -147,12 +134,14 @@ const useCreateJSAnimations = () => {
       animations.forEach((animation) => {
         const elementToAnimate = document.getElementById(animation.name);
 
+        console.warn(animation);
+
         // set up object for the actual javascript animation API
         // need to group all transforms together as one string
         const animationWithFormattedTransform = formatTransform(formattedJSAnimations);
 
         const keyframe = `
-        const ${elementToAnimate?.getAttribute('id')}Animation = ${elementToAnimate?.getAttribute('id')}
+        const ${elementToAnimate?.getAttribute('id')}-animation = ${elementToAnimate?.getAttribute('id')}
         .animate(
           ${JSON.stringify(animationWithFormattedTransform)},
           {
@@ -162,7 +151,7 @@ const useCreateJSAnimations = () => {
             iterations: 1,
           });`;
 
-        setJsAnimations([...jsAnimations, keyframe]);
+        setJsAnimations((prev) => [...prev, keyframe]);
       });
     }
   };
