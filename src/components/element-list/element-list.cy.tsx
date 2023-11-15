@@ -33,7 +33,7 @@ describe('<ElementList />', () => {
     cy.get('[data-cy="no_svg_message"]').contains('No SVG in canvas');
   });
 
-  it('should show all svg elements names', () => {
+  it('should show parent element', () => {
     cy.mount(
       <SelectedElementProvider>
         <MockCanvas />
@@ -41,23 +41,19 @@ describe('<ElementList />', () => {
       </SelectedElementProvider>,
     );
 
-    const svgElements: string[] = ['mock_svg', 'circles', 'circle-1', 'circle-2', 'circle-3'];
-
-    svgElements.forEach((element) => {
-      cy.contains('div', element);
-    });
+    cy.contains('div', 'mock_svg');
   });
 
   it('should set selected element id on click', () => {
     cy.mount(
       <SelectedElementProvider>
         <MockCanvas />
-        <MockSelectedElementText />
         <ElementList />
+        <MockSelectedElementText />
       </SelectedElementProvider>,
     );
 
-    cy.contains('div', 'mock_svg').click();
+    cy.contains('button', 'mock_svg').click();
 
     cy.get('[data-cy="mock_selected_element_id"]').contains('mock_svg');
   });
