@@ -129,9 +129,16 @@ const ExportAnimation = () => {
                         >
                           <div className="mt-2">
                             {!jsAnimations.length && <h1>There are no animations available</h1>}
-                            <pre>
-                              <code className="language-javascript">{jsAnimations}</code>
-                            </pre>
+                            <div className="mb-5">
+                              {jsAnimations.length &&
+                                jsAnimations.map((animation) => {
+                                  return (
+                                    <pre>
+                                      <code className="language-javascript">{animation}</code>
+                                    </pre>
+                                  );
+                                })}
+                            </div>
                           </div>
                         </Transition.Child>
                       </Tab.Panel>
@@ -147,9 +154,16 @@ const ExportAnimation = () => {
                         >
                           <div className="mt-2">
                             {!cssAnimations.length && <h1>There are no animations available</h1>}
-                            <pre>
-                              <code className="language-css">{cssAnimations}</code>
-                            </pre>
+                            <div className="mb-5">
+                              {cssAnimations.length &&
+                                cssAnimations.map((animation) => {
+                                  return (
+                                    <pre>
+                                      <code className="language-css">{animation}</code>
+                                    </pre>
+                                  );
+                                })}
+                            </div>
                           </div>
                         </Transition.Child>
                       </Tab.Panel>
