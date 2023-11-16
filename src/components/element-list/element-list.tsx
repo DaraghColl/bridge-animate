@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { Disclosure } from '@headlessui/react';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
 import { useSelectedElementContext } from '../../state/selected-element';
+import { useCanvasContext } from '../../state/canvas';
+import { ImportSvg } from '../import-svg/import-svg';
 
 const setElementIds = (elements: Element[]): Element[] => {
   const elementsWithIds = elements.map((element) => {
@@ -20,6 +22,7 @@ const setElementIds = (elements: Element[]): Element[] => {
 const ElementList: FC = () => {
   const [elements, setElements] = useState<Element[] | null>(null);
   const { selectedElementID, setSelectedElementId } = useSelectedElementContext();
+  const { userSvg } = useCanvasContext();
 
   const mapElementsChildNodes = (element: Element) => {
     const handleElementSelect = (element: Element) => {
@@ -89,16 +92,23 @@ const ElementList: FC = () => {
       const allElements = canvas.getElementsByTagName('*');
       const allElementsArray = [...allElements];
 
+      // remove svg container from selected elements
+      allElementsArray.splice(0, 1);
+
       const elementsWithIds = setElementIds(allElementsArray);
+
+      if (elementsWithIds.length <= 0) return;
 
       setElements(elementsWithIds);
     }
-  }, []);
+  }, [userSvg]);
 
   return (
     <div>
-      {!elements && <h1 data-cy="no_svg_message">No SVG in canvas</h1>}
-      {elements && <div className="p-2">{mapElementsChildNodes(elements[0])}</div>}
+      <div>
+        <ImportSvg />
+      </div>
+      {elements && userSvg && <div className="p-2">{mapElementsChildNodes(elements[0])}</div>}
     </div>
   );
 };
