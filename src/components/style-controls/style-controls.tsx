@@ -7,7 +7,7 @@ const getElementPathLength = (path: SVGPathElement) => {
   return path.getTotalLength();
 };
 
-const Controls: FC = () => {
+const StyleControls: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const { createKeyframeStyles, selectedKeyFrameTime, animations } = useAnimationsContext();
   const previousSelectedElementId = usePrevious(selectedElementID);
@@ -274,4 +274,4 @@ const Controls: FC = () => {
   );
 };
 
-export { Controls };
+export { StyleControls };

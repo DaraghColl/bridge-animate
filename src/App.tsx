@@ -2,7 +2,7 @@ import './App.css';
 import { Timeline } from './components/timeline/timeline';
 import { ElementList } from './components/element-list/element-list';
 import { Canvas } from './components/canvas/canvas';
-import { Controls } from './components/style-controls/style-controls';
+import { StyleControls } from './components/style-controls/style-controls';
 import { Layers } from './components/layers/layers';
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
           id="controls"
           className="w-[240px] min-w-[240px] basis-1/5 overflow-scroll rounded-md bg-white dark:bg-dark-secondary"
         >
-          <Controls />
+          <StyleControls />
         </div>
       </div>
       <div className="flex h-1/3 gap-4 rounded-md">
