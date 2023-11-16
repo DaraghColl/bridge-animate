@@ -84,6 +84,10 @@ const Timeline: FC = () => {
         animation.finish();
       }
     });
+
+    if (scrubberRef?.current) {
+      setScrubberValue(Number(0));
+    }
   };
 
   const onScrubChange = (e: ChangeEvent<HTMLInputElement>) => {

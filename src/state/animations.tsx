@@ -83,7 +83,7 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
         animationInterationCount: '1',
         animationDirection: 'normal',
         animationTimingFunction: 'ease-in-out',
-        animationFillMode: 'auto',
+        animationFillMode: 'forwards',
       },
       keyframes: [],
     };
