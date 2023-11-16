@@ -139,7 +139,7 @@ const StyleControls: FC = () => {
               className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:dark:text-gray-100"
               onBlur={(e) => handleInputChange('opacity', e)}
               onChange={(e) => handleInputChange('opacity', e)}
-              value={currentKeyframe.opacity}
+              value={currentKeyframe.opacity ? currentKeyframe.opacity : ''}
             />
           </div>
 
@@ -156,7 +156,7 @@ const StyleControls: FC = () => {
                   className="w-full rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('translateX', e)}
                   onChange={(e) => handleInputChange('translateX', e)}
-                  value={currentKeyframe.translateX}
+                  value={currentKeyframe.translateX ? currentKeyframe.translateX : ''}
                 />
               </div>
               <div className="basis-1/2">
@@ -169,7 +169,7 @@ const StyleControls: FC = () => {
                   className="w-full rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('translateY', e)}
                   onChange={(e) => handleInputChange('translateY', e)}
-                  value={currentKeyframe.translateY}
+                  value={currentKeyframe.translateY ? currentKeyframe.translateY : ''}
                 />
               </div>
             </div>
@@ -183,7 +183,7 @@ const StyleControls: FC = () => {
                 className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                 onBlur={(e) => handleInputChange('rotate', e)}
                 onChange={(e) => handleInputChange('rotate', e)}
-                value={currentKeyframe.rotate}
+                value={currentKeyframe.rotate ? currentKeyframe.rotate : ''}
               />
             </div>
           </div>
@@ -201,7 +201,7 @@ const StyleControls: FC = () => {
                   className="w-full rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('scale', e)}
                   onChange={(e) => handleInputChange('scale', e)}
-                  value={currentKeyframe.scale}
+                  value={currentKeyframe.scale ? currentKeyframe.scale : ''}
                 />
               </div>
             </div>
@@ -218,7 +218,7 @@ const StyleControls: FC = () => {
                   type="color"
                   className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('fill', e)}
-                  value={currentKeyframe.fill}
+                  value={currentKeyframe.fill ? currentKeyframe.fill : '#000000'}
                 />
               </div>
               <div className="flex flex-col">
@@ -231,7 +231,7 @@ const StyleControls: FC = () => {
                   type="color"
                   className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('stroke', e)}
-                  value={currentKeyframe.stroke}
+                  value={currentKeyframe.stroke ? currentKeyframe.stroke : '#000000'}
                 />
               </div>
             </div>
@@ -250,7 +250,7 @@ const StyleControls: FC = () => {
                   type="checkbox"
                   className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('strokeDasharray', e)}
-                  value={currentKeyframe.strokeDasharray}
+                  value={currentKeyframe.strokeDasharray ? currentKeyframe.strokeDasharray : ''}
                 />
               </div>
               <div className="flex flex-col">
@@ -263,7 +263,7 @@ const StyleControls: FC = () => {
                   type="checkbox"
                   className="rounded-sm bg-slate-50 px-2  py-1 text-black outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('strokeDasharray', e)}
-                  value={currentKeyframe.strokeDasharray}
+                  value={currentKeyframe.strokeDasharray ? currentKeyframe.strokeDasharray : ''}
                 />
               </div>
             </div>
