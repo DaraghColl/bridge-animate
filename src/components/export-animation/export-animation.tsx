@@ -75,7 +75,7 @@ const ExportAnimation = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="min-h-[400px] w-full max-w-3xl overflow-hidden  rounded-2xl bg-dark-secondary p-6 text-left align-middle text-white shadow-xl transition-all dark:text-white">
+                <Dialog.Panel className="flex min-h-[400px] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-slate-50 p-6 text-left align-middle text-dark-primary text-white shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
                   <Tab.Group>
                     <Tab.List className="flex gap-4">
                       <div className="flex w-full justify-between">
@@ -85,7 +85,7 @@ const ExportAnimation = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-800' : '',
+                                selected ? 'bg-indigo-800 text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >
@@ -96,7 +96,7 @@ const ExportAnimation = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-800' : '',
+                                selected ? 'bg-indigo-800 text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >
