@@ -114,7 +114,13 @@ const useCreateJSAnimations = () => {
         const arrayOfCssKeyframes: string[] = [];
 
         animationWithFormattedTransform.forEach((keyframe) => {
-          arrayOfCssKeyframes.push(JSON.stringify(keyframe));
+          const { offset, ...restOfKeyframe } = keyframe;
+          const keyframesString = `
+            ${offset}%
+              ${JSON.stringify(restOfKeyframe)}
+          `.replace(/["]/g, '');
+
+          arrayOfCssKeyframes.push(keyframesString);
         });
 
         const keyframe = `
