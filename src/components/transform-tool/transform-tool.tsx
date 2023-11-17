@@ -172,7 +172,7 @@ const TransformTool: FC = () => {
             className={
               transformSelected === 'rotate'
                 ? 'cursor-pointer stroke-black dark:stroke-white'
-                : 'stroke-accent cursor-pointer'
+                : 'cursor-pointer stroke-accent'
             }
             onMouseDown={(e) => mouseDown(e, 'rotate')}
           />

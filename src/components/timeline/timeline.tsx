@@ -129,7 +129,7 @@ const Timeline: FC = () => {
               value={scrubberValue}
               id="scrubber"
               type="range"
-              className="bg-light-secondary accent-accent h-1 w-full cursor-pointer appearance-none rounded-lg"
+              className="h-1 w-full cursor-pointer appearance-none rounded-lg bg-light-secondary accent-accent"
               onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
               min="0"
               max="2500"
@@ -141,7 +141,7 @@ const Timeline: FC = () => {
           <div className="absolute bottom-2 flex w-full justify-center">
             <div className="right-2 flex basis-1/4 items-center gap-4">
               <button
-                className="bg-accent hover:bg-accent focus-visible:outline-accent rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="rounded-md bg-accent px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 onClick={handleStopAnimation}
               >
                 <svg
@@ -160,7 +160,7 @@ const Timeline: FC = () => {
                 </svg>
               </button>
               <button
-                className="bg-accent hover:bg-accent focus-visible:outline-accent rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="rounded-md bg-accent px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 onClick={handlePlayAnimation}
               >
                 <svg
@@ -179,7 +179,7 @@ const Timeline: FC = () => {
                 </svg>
               </button>
               <button
-                className="bg-accent hover:bg-accent focus-visible:outline-accent rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="rounded-md bg-accent px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 onClick={handlePauseAnimation}
               >
                 <svg
