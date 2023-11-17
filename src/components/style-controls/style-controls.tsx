@@ -123,9 +123,7 @@ const StyleControls: FC = () => {
   return (
     <div className="flex min-h-0 flex-col gap-4 p-4 text-sm font-normal">
       {(selectedElementID === null || !selectedKeyFrameTime) && (
-        <span className="select-none text-sm tracking-wide">
-          Select Element, add an animation layer, and select keyframe to see controls
-        </span>
+        <span className="select-none text-sm tracking-wide">Select keyframe to see controls</span>
       )}
       {selectedElementID && selectedKeyFrameTime && (
         <Fragment>
