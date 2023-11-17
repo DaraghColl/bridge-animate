@@ -54,9 +54,9 @@ const SVGFileUpload: FC<SVGFileUploadProps> = (props) => {
         className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-slate-50 hover:bg-slate-200 dark:border-gray-600 dark:bg-dark-secondary dark:hover:border-gray-500 dark:hover:bg-dark-primary"
       >
         <div className="flex flex-col items-center justify-center pb-6 pt-5">
-          <CloudArrowUpIcon className="mb-4 h-14 w-14 text-dark-secondary dark:text-white" />
+          <CloudArrowUpIcon className="mb-4 h-14 w-14 text-dark-primary dark:text-white" />
 
-          <p className="mb-2 text-sm text-dark-secondary dark:text-white">
+          <p className="mb-2 text-sm text-dark-primary dark:text-white">
             <span className="font-semibold">Click to upload SVG</span> or drag and drop
           </p>
         </div>
