@@ -3,6 +3,7 @@ import { Dialog, Tab, Transition } from '@headlessui/react';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
 import { ClipboardDocumentIcon, CodeBracketIcon } from '@heroicons/react/24/outline';
+import { useAnimationsContext } from '../../state/animations';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 
 const copyToClipboard = async (code: string[]) => {
@@ -22,10 +23,12 @@ function classNames(...classes: string[]) {
 const ExportAnimation = () => {
   const { generateJSAnimations, generateCSSAnimations, jsAnimations, cssAnimations, clearGeneratedAnimationCode } =
     useCreateJSAnimations();
+  const { animations } = useAnimationsContext();
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'js' | 'css'>('js');
 
   const generate = () => {
+    if (!animations || animations.length <= 0) return;
     generateJSAnimations();
     generateCSSAnimations();
     setIsOpen(true);
@@ -75,7 +78,7 @@ const ExportAnimation = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="flex min-h-[400px] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-slate-50 p-6 text-left align-middle text-dark-primary text-white shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
+                <Dialog.Panel className="flex min-h-[400px] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-slate-50 p-6 text-left align-middle text-dark-primary shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
                   <Tab.Group>
                     <Tab.List className="flex gap-4">
                       <div className="flex w-full justify-between">
