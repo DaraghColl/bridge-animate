@@ -41,6 +41,14 @@ input[type='number']::-webkit-outer-spin-button {
   border: 1px solid white;
 }
 
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #6366f1;
+  height: 1.25rem;
+  width: 0.5rem;
+}
+
 /** highlight js style theme **/
 
 code {
