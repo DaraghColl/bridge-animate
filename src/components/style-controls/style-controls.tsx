@@ -134,14 +134,14 @@ const StyleControls: FC = () => {
             <input
               name="opacity"
               type="number"
-              className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
+              className="rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
               onBlur={(e) => handleInputChange('opacity', e)}
               onChange={(e) => handleInputChange('opacity', e)}
               value={currentKeyframe.opacity ? currentKeyframe.opacity : ''}
             />
           </div>
 
-          <div className="border-light-secondary mb-2 flex flex-col border-b-2 pb-4">
+          <div className="mb-2 flex flex-col border-b-2 border-light-secondary pb-4">
             <span>position</span>
             <div className="mt-2 flex flex-row gap-2">
               <div className="basis-1/2">
@@ -151,7 +151,7 @@ const StyleControls: FC = () => {
                 <input
                   name="xPosition"
                   type="number"
-                  className="bg-light-secondary w-full rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="w-full rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('translateX', e)}
                   onChange={(e) => handleInputChange('translateX', e)}
                   value={currentKeyframe.translateX ? currentKeyframe.translateX : ''}
@@ -164,7 +164,7 @@ const StyleControls: FC = () => {
                 <input
                   name="yPosition"
                   type="number"
-                  className="bg-light-secondary w-full rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="w-full rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('translateY', e)}
                   onChange={(e) => handleInputChange('translateY', e)}
                   value={currentKeyframe.translateY ? currentKeyframe.translateY : ''}
@@ -178,7 +178,7 @@ const StyleControls: FC = () => {
               <input
                 name="rotate"
                 type="number"
-                className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                className="rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                 onBlur={(e) => handleInputChange('rotate', e)}
                 onChange={(e) => handleInputChange('rotate', e)}
                 value={currentKeyframe.rotate ? currentKeyframe.rotate : ''}
@@ -186,7 +186,7 @@ const StyleControls: FC = () => {
             </div>
           </div>
 
-          <div className="border-light-secondary mb-2 flex flex-col border-b-2 pb-4">
+          <div className="mb-2 flex flex-col border-b-2 border-light-secondary pb-4">
             <span>scale</span>
             <div className="mt-2 flex flex-row gap-2">
               <div className="basis-1/2">
@@ -196,7 +196,7 @@ const StyleControls: FC = () => {
                 <input
                   name="xPosition"
                   type="number"
-                  className="bg-light-secondary w-full rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="w-full rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('scale', e)}
                   onChange={(e) => handleInputChange('scale', e)}
                   value={currentKeyframe.scale ? currentKeyframe.scale : ''}
@@ -204,7 +204,7 @@ const StyleControls: FC = () => {
               </div>
             </div>
           </div>
-          <div className="border-light-secondary mb-2 flex flex-col border-b-2 pb-4">
+          <div className="mb-2 flex flex-col border-b-2 border-light-secondary pb-4">
             <span>color</span>
             <div className="mt-2 flex flex-wrap gap-4">
               <div className="flex flex-col">
@@ -214,7 +214,7 @@ const StyleControls: FC = () => {
                 <input
                   name="fill"
                   type="color"
-                  className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('fill', e)}
                   value={currentKeyframe.fill ? currentKeyframe.fill : '#000000'}
                 />
@@ -227,7 +227,7 @@ const StyleControls: FC = () => {
                 <input
                   name="stroke"
                   type="color"
-                  className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('stroke', e)}
                   value={currentKeyframe.stroke ? currentKeyframe.stroke : '#000000'}
                 />
@@ -235,7 +235,7 @@ const StyleControls: FC = () => {
             </div>
           </div>
 
-          <div className="border-light-secondary mb-2 flex flex-col border-b-2 pb-4">
+          <div className="mb-2 flex flex-col border-b-2 border-light-secondary pb-4">
             <span>stroke path</span>
             <div className="mt-2 flex gap-8">
               <div className="flex flex-col">
@@ -246,7 +246,7 @@ const StyleControls: FC = () => {
                 <input
                   name="stroke-dash-start"
                   type="checkbox"
-                  className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('strokeDasharray', e)}
                   value={currentKeyframe.strokeDasharray ? currentKeyframe.strokeDasharray : ''}
                 />
@@ -259,7 +259,7 @@ const StyleControls: FC = () => {
                 <input
                   name="stroke-dash-end"
                   type="checkbox"
-                  className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('strokeDasharray', e)}
                   value={currentKeyframe.strokeDasharray ? currentKeyframe.strokeDasharray : ''}
                 />

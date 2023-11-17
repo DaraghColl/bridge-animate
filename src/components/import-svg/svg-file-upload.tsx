@@ -51,7 +51,7 @@ const SVGFileUpload: FC<SVGFileUploadProps> = (props) => {
       <label
         id="drop_container"
         htmlFor="dropzone-file"
-        className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-slate-50 hover:bg-slate-200 dark:border-gray-600 dark:bg-dark-secondary dark:hover:border-gray-500 dark:hover:bg-dark-primary"
+        className="bg-light-secondary hover:bg-slate-light flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 dark:bg-dark-secondary dark:hover:border-gray-500 dark:hover:bg-dark-primary"
       >
         <div className="flex flex-col items-center justify-center pb-6 pt-5">
           <CloudArrowUpIcon className="mb-4 h-14 w-14 text-dark-primary dark:text-white" />

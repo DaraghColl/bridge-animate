@@ -129,7 +129,7 @@ const Timeline: FC = () => {
               value={scrubberValue}
               id="scrubber"
               type="range"
-              className="h-1 w-full cursor-pointer appearance-none rounded-lg bg-slate-100 accent-indigo-600 dark:bg-gray-200"
+              className="bg-light-secondary h-1 w-full cursor-pointer appearance-none rounded-lg accent-indigo-600"
               onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
               min="0"
               max="2500"

@@ -26,7 +26,7 @@ const Keyframe: FC = () => {
   return (
     <div className="flex flex-col items-center justify-around">
       {selectedElementID && animations && animations?.length > 0 && animations !== null && (
-        <div className="relative flex h-1 w-full items-center justify-between rounded-sm bg-slate-200 dark:bg-white">
+        <div className="bg-light-secondary relative flex h-1 w-full items-center justify-between rounded-sm dark:bg-white">
           {keyframeTimes.map((keyframeTime, index) => {
             return (
               <Fragment key={index}>

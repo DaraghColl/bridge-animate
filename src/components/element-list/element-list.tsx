@@ -39,7 +39,7 @@ const ElementList: FC = () => {
                   <div className="flex w-full cursor-pointer items-center gap-2">
                     <Disclosure.Button>
                       <ChevronRightIcon
-                        className={open ? ' text-slate-medium w-4 rotate-90 transform' : 'text-slate-medium w-4'}
+                        className={open ? ' w-4 rotate-90 transform text-slate-medium' : 'w-4 text-slate-medium'}
                       />
                     </Disclosure.Button>
                     <button aria-label="set selected element" onClick={() => handleElementSelect(element)}>
