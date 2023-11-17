@@ -6,6 +6,9 @@ export default {
       colors: {
         'dark-primary': '#131315',
         'dark-secondary': '#181A1D',
+        'light-primary': '#fffff',
+        'light-secondary': '#f1f5f9',
+        'slate-medium': '#64748b',
       },
     },
   },

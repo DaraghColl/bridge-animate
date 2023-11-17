@@ -134,37 +134,37 @@ const StyleControls: FC = () => {
             <input
               name="opacity"
               type="number"
-              className="rounded-sm bg-slate-50 px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
+              className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
               onBlur={(e) => handleInputChange('opacity', e)}
               onChange={(e) => handleInputChange('opacity', e)}
               value={currentKeyframe.opacity ? currentKeyframe.opacity : ''}
             />
           </div>
 
-          <div className="mb-2 flex flex-col border-b-2 border-slate-100 pb-4">
+          <div className="border-light-secondary mb-2 flex flex-col border-b-2 pb-4">
             <span>position</span>
             <div className="mt-2 flex flex-row gap-2">
               <div className="basis-1/2">
-                <label htmlFor="xPosition" className="ml-2 text-slate-500">
+                <label htmlFor="xPosition" className="text-slate-medium">
                   x
                 </label>
                 <input
                   name="xPosition"
                   type="number"
-                  className="w-full rounded-sm bg-slate-50 px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="bg-light-secondary w-full rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('translateX', e)}
                   onChange={(e) => handleInputChange('translateX', e)}
                   value={currentKeyframe.translateX ? currentKeyframe.translateX : ''}
                 />
               </div>
               <div className="basis-1/2">
-                <label htmlFor="yPosition" className="ml-2 text-slate-500">
+                <label htmlFor="yPosition" className="text-slate-medium">
                   y
                 </label>
                 <input
                   name="yPosition"
                   type="number"
-                  className="w-full rounded-sm bg-slate-50 px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="bg-light-secondary w-full rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('translateY', e)}
                   onChange={(e) => handleInputChange('translateY', e)}
                   value={currentKeyframe.translateY ? currentKeyframe.translateY : ''}
@@ -172,13 +172,13 @@ const StyleControls: FC = () => {
               </div>
             </div>
             <div className="mt-2 flex flex-col">
-              <label htmlFor="rotate" className="ml-2 text-slate-500">
+              <label htmlFor="rotate" className="text-slate-medium">
                 rotate
               </label>
               <input
                 name="rotate"
                 type="number"
-                className="rounded-sm bg-slate-50 px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                 onBlur={(e) => handleInputChange('rotate', e)}
                 onChange={(e) => handleInputChange('rotate', e)}
                 value={currentKeyframe.rotate ? currentKeyframe.rotate : ''}
@@ -186,17 +186,17 @@ const StyleControls: FC = () => {
             </div>
           </div>
 
-          <div className="mb-2 flex flex-col border-b-2 border-slate-100 pb-4">
+          <div className="border-light-secondary mb-2 flex flex-col border-b-2 pb-4">
             <span>scale</span>
             <div className="mt-2 flex flex-row gap-2">
               <div className="basis-1/2">
-                <label htmlFor="xPosition" className="ml-2 text-slate-500">
+                <label htmlFor="xPosition" className="text-slate-medium">
                   all
                 </label>
                 <input
                   name="xPosition"
                   type="number"
-                  className="w-full rounded-sm bg-slate-50 px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="bg-light-secondary w-full rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('scale', e)}
                   onChange={(e) => handleInputChange('scale', e)}
                   value={currentKeyframe.scale ? currentKeyframe.scale : ''}
@@ -204,30 +204,30 @@ const StyleControls: FC = () => {
               </div>
             </div>
           </div>
-          <div className="mb-2 flex flex-col border-b-2 border-slate-100 pb-4">
+          <div className="border-light-secondary mb-2 flex flex-col border-b-2 pb-4">
             <span>color</span>
             <div className="mt-2 flex flex-wrap gap-4">
               <div className="flex flex-col">
-                <label htmlFor="rotate" className="ml-2 text-slate-500">
+                <label htmlFor="rotate" className="text-slate-medium">
                   fill
                 </label>
                 <input
                   name="fill"
                   type="color"
-                  className="rounded-sm bg-slate-50 px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('fill', e)}
                   value={currentKeyframe.fill ? currentKeyframe.fill : '#000000'}
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="rotate" className="ml-2 text-slate-500">
+                <label htmlFor="rotate" className="text-slate-medium">
                   stroke
                 </label>
 
                 <input
                   name="stroke"
                   type="color"
-                  className="rounded-sm bg-slate-50 px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('stroke', e)}
                   value={currentKeyframe.stroke ? currentKeyframe.stroke : '#000000'}
                 />
@@ -235,31 +235,31 @@ const StyleControls: FC = () => {
             </div>
           </div>
 
-          <div className="mb-2 flex flex-col border-b-2 border-slate-100 pb-4">
+          <div className="border-light-secondary mb-2 flex flex-col border-b-2 pb-4">
             <span>stroke path</span>
             <div className="mt-2 flex gap-8">
               <div className="flex flex-col">
-                <label htmlFor="stroke-dash" className="ml-2 text-slate-500">
+                <label htmlFor="stroke-dash" className="text-slate-medium">
                   start
                 </label>
 
                 <input
                   name="stroke-dash-start"
                   type="checkbox"
-                  className="rounded-sm bg-slate-50 px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('strokeDasharray', e)}
                   value={currentKeyframe.strokeDasharray ? currentKeyframe.strokeDasharray : ''}
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="stroke-dash" className="ml-2 text-slate-500">
+                <label htmlFor="stroke-dash" className="text-slate-medium">
                   end
                 </label>
 
                 <input
                   name="stroke-dash-end"
                   type="checkbox"
-                  className="rounded-sm bg-slate-50 px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  className="bg-light-secondary rounded-sm px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onChange={(e) => handleInputChange('strokeDasharray', e)}
                   value={currentKeyframe.strokeDasharray ? currentKeyframe.strokeDasharray : ''}
                 />
