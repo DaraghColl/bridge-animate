@@ -84,7 +84,7 @@ const ImportSvg: FC = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-700 text-white' : 'text-dark-primary dark:text-white',
+                                selected ? 'bg-indigo-600 text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >
@@ -94,7 +94,7 @@ const ImportSvg: FC = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-700 text-white' : 'text-dark-primary dark:text-white',
+                                selected ? 'bg-indigo-600 text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >

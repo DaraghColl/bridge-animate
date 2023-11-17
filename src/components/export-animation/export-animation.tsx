@@ -88,7 +88,7 @@ const ExportAnimation = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-800 text-white' : 'text-dark-primary dark:text-white',
+                                selected ? 'bg-indigo-600 text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >
@@ -99,7 +99,7 @@ const ExportAnimation = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-800 text-white' : 'text-dark-primary dark:text-white',
+                                selected ? 'bg-indigo-600 text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >
@@ -110,7 +110,7 @@ const ExportAnimation = () => {
                         <button
                           type="button"
                           className="focus-visible:ring-indigp-500 indigo-900 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2
-                        text-sm font-medium hover:bg-indigo-700 focus:scale-90 focus:outline-none focus-visible:ring-2                        "
+                        text-sm font-medium hover:bg-indigo-600 focus:scale-90 focus:outline-none focus-visible:ring-2                        "
                         >
                           <ClipboardDocumentIcon
                             className="h-6 w-6 text-white"
