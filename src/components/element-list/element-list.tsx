@@ -35,25 +35,23 @@ const ElementList: FC = () => {
           <Disclosure>
             {({ open }) => (
               <Fragment>
-                <div>
-                  <div className="flex w-full cursor-pointer items-center gap-2">
-                    <Disclosure.Button>
-                      <ChevronRightIcon
-                        className={open ? ' w-4 rotate-90 transform text-slate-medium' : 'w-4 text-slate-medium'}
-                      />
-                    </Disclosure.Button>
-                    <button aria-label="set selected element" onClick={() => handleElementSelect(element)}>
-                      <span
-                        className={
-                          selectedElementID === element.getAttribute('id')
-                            ? 'whitespace-nowrap text-accent'
-                            : 'whitespace-nowrap'
-                        }
-                      >
-                        {element.getAttribute('id') ?? element.tagName}
-                      </span>
-                    </button>
-                  </div>
+                <div className="flex w-full cursor-pointer items-center gap-2 text-sm font-normal">
+                  <Disclosure.Button>
+                    <ChevronRightIcon
+                      className={open ? ' w-4 rotate-90 transform text-slate-medium' : 'w-4 text-slate-medium'}
+                    />
+                  </Disclosure.Button>
+                  <button aria-label="set selected element" onClick={() => handleElementSelect(element)}>
+                    <span
+                      className={
+                        selectedElementID === element.getAttribute('id')
+                          ? 'whitespace-nowrap text-accent'
+                          : 'whitespace-nowrap'
+                      }
+                    >
+                      {element.getAttribute('id') ?? element.tagName}
+                    </span>
+                  </button>
                 </div>
                 <Disclosure.Panel className="ml-2 pt-2">
                   {[...element.children].map((childNode) => {
