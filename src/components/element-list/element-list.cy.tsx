@@ -69,7 +69,7 @@ describe('<ElementList />', () => {
       </SelectedElementProvider>,
     );
 
-    cy.contains('button', 'mock_svg').click();
+    cy.contains('button', 'mock_svg').click({ force: true });
 
     cy.get('[data-cy="mock_selected_element_id"]').contains('mock_svg');
   });

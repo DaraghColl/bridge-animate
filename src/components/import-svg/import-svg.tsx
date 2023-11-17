@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, Fragment, useEffect, useRef, useState } from 'react';
 import { Dialog, Tab, Transition } from '@headlessui/react';
 import { DocumentIcon } from '@heroicons/react/24/outline';
 import { useCanvasContext } from '../../state/canvas';
@@ -9,16 +9,16 @@ function classNames(...classes: string[]) {
 }
 
 const ImportSvg: FC = () => {
-  const { setUserSvg } = useCanvasContext();
+  const { userSvg, setUserSvg } = useCanvasContext();
   const [file, setFile] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const svgUploadAreaRef = useRef(null);
 
   const closeDialog = () => {
     setIsOpen(false);
   };
 
   useEffect(() => {
-    console.log(file);
     if (file) {
       closeDialog();
 
@@ -29,6 +29,13 @@ const ImportSvg: FC = () => {
       });
     }
   }, [file, setUserSvg]);
+
+  useEffect(() => {
+    if (!userSvg) {
+      setIsOpen(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Fragment>
@@ -44,7 +51,7 @@ const ImportSvg: FC = () => {
         </button>
       </div>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeDialog}>
+        <Dialog as="div" className="relative z-10" onClose={closeDialog} initialFocus={svgUploadAreaRef}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -68,7 +75,7 @@ const ImportSvg: FC = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="flex min-h-[400px] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-slate-50 p-6 text-left align-middle text-dark-primary text-white shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
+                <Dialog.Panel className="flex min-h-[400px] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-slate-50 p-6 text-left align-middle text-dark-primary shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
                   <Tab.Group>
                     <Tab.List className="flex gap-4">
                       <div className="flex w-full justify-between">
@@ -77,7 +84,7 @@ const ImportSvg: FC = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-800 text-white' : 'text-dark-primary dark:text-white',
+                                selected ? 'bg-indigo-700 text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >
@@ -87,7 +94,7 @@ const ImportSvg: FC = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-800 text-white' : 'text-dark-primary dark:text-white',
+                                selected ? 'bg-indigo-700 text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >
@@ -107,7 +114,7 @@ const ImportSvg: FC = () => {
                           leaveFrom="opacity-100 scale-100"
                           leaveTo="opacity-0 scale-95"
                         >
-                          <div className="mt-2">
+                          <div className="mt-2" ref={svgUploadAreaRef}>
                             <SVGFileUpload setFile={setFile} />
                           </div>
                         </Transition.Child>
