@@ -45,17 +45,17 @@ const Layers: FC = () => {
                   <div>
                     <div className="flex w-full cursor-pointer items-center gap-2">
                       <Disclosure.Button>
-                        <ChevronRightIcon className="w-4 text-slate-medium ui-open:rotate-90 ui-open:transform" />
+                        <ChevronRightIcon className="text-slate-medium w-4 ui-open:rotate-90 ui-open:transform" />
                       </Disclosure.Button>
                       <span
-                        className={`${selectedElementID === name ? 'text-indigo-600' : ''}`}
+                        className={`${selectedElementID === name ? 'text-accent' : ''}`}
                         onClick={() => handleElementSelect(name)}
                       >
                         {name}
                       </span>
                     </div>
                   </div>
-                  <Disclosure.Panel className="ml-6 flex flex-col pt-2 text-slate-medium">
+                  <Disclosure.Panel className="text-slate-medium ml-6 flex flex-col pt-2">
                     <span>duration: {config.animationDuration}</span>
                     <span>delay: {config.animationDelay}</span>
                     <span>iteration: {config.animationInterationCount}</span>

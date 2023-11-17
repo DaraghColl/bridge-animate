@@ -26,7 +26,7 @@ const Keyframe: FC = () => {
   return (
     <div className="flex flex-col items-center justify-around">
       {selectedElementID && animations && animations?.length > 0 && animations !== null && (
-        <div className="relative flex h-1 w-full items-center justify-between rounded-sm bg-light-secondary dark:bg-white">
+        <div className="bg-light-secondary relative flex h-1 w-full items-center justify-between rounded-sm dark:bg-white">
           {keyframeTimes.map((keyframeTime, index) => {
             return (
               <Fragment key={index}>
@@ -34,7 +34,7 @@ const Keyframe: FC = () => {
                   className={`h-5 w-5 rotate-45 cursor-pointer rounded-sm ${
                     selectedKeyFrameTime === keyframeTime ? 'border-white-500 border-2' : ''
                   }
-                  ${checkIfKeyframeExists(keyframeTime) ? 'bg-indigo-600' : 'bg-slate-400'}
+                  ${checkIfKeyframeExists(keyframeTime) ? 'bg-accent' : 'bg-slate-400'}
                   `}
                   onClick={() => {
                     if (checkIfKeyframeExists(keyframeTime)) {

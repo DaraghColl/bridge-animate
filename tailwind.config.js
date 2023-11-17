@@ -11,6 +11,7 @@ export default {
         'slate-light': '#f8fafc',
         'slate-medium': '#64748b',
         'slate-dark': '#334155',
+        accent: '#4f46e5',
       },
     },
   },

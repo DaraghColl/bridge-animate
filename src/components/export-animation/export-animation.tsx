@@ -78,7 +78,7 @@ const ExportAnimation = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="flex min-h-[400px] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-light-secondary p-6 text-left align-middle text-dark-primary shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
+                <Dialog.Panel className="bg-light-secondary flex min-h-[400px] w-full max-w-3xl flex-col overflow-hidden rounded-2xl p-6 text-left align-middle text-dark-primary shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
                   <Tab.Group>
                     <Tab.List className="flex gap-4">
                       <div className="flex w-full justify-between">
@@ -88,7 +88,7 @@ const ExportAnimation = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-600 text-white' : 'text-dark-primary dark:text-white',
+                                selected ? 'bg-accent text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >
@@ -99,7 +99,7 @@ const ExportAnimation = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-600 text-white' : 'text-dark-primary dark:text-white',
+                                selected ? 'bg-accent text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >
@@ -109,8 +109,8 @@ const ExportAnimation = () => {
 
                         <button
                           type="button"
-                          className="focus-visible:ring-indigp-500 indigo-900 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2
-                        text-sm font-medium hover:bg-indigo-600 focus:scale-90 focus:outline-none focus-visible:ring-2                        "
+                          className="focus-visible:ring-indigp-500 indigo-900 bg-accent hover:bg-accent inline-flex justify-center rounded-md border border-transparent px-4
+                        py-2 text-sm font-medium focus:scale-90 focus:outline-none focus-visible:ring-2                        "
                         >
                           <ClipboardDocumentIcon
                             className="h-6 w-6 text-white"

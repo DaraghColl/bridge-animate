@@ -42,7 +42,7 @@ const ImportSvg: FC = () => {
       <div className="flex justify-around">
         <button
           aria-label="import svg"
-          className="flex items-center justify-around gap-2 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="bg-accent hover:bg-accent focus-visible:outline-accent flex items-center justify-around gap-2 rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
           data-cy="import_svg"
           onClick={() => setIsOpen(true)}
         >
@@ -75,7 +75,7 @@ const ImportSvg: FC = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="flex min-h-[400px] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-light-secondary p-6 text-left align-middle text-dark-primary shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
+                <Dialog.Panel className="bg-light-secondary flex min-h-[400px] w-full max-w-3xl flex-col overflow-hidden rounded-2xl p-6 text-left align-middle text-dark-primary shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
                   <Tab.Group>
                     <Tab.List className="flex gap-4">
                       <div className="flex w-full justify-between">
@@ -84,7 +84,7 @@ const ImportSvg: FC = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-600 text-white' : 'text-dark-primary dark:text-white',
+                                selected ? 'bg-accent text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >
@@ -94,7 +94,7 @@ const ImportSvg: FC = () => {
                             className={({ selected }) =>
                               classNames(
                                 'w-32 rounded-lg p-2.5 text-sm font-medium leading-5',
-                                selected ? 'bg-indigo-600 text-white' : 'text-dark-primary dark:text-white',
+                                selected ? 'bg-accent text-white' : 'text-dark-primary dark:text-white',
                               )
                             }
                           >
