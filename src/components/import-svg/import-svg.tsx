@@ -75,7 +75,7 @@ const ImportSvg: FC = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="bg-light-secondary flex min-h-[400px] w-full max-w-3xl flex-col overflow-hidden rounded-2xl p-6 text-left align-middle text-dark-primary shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
+                <Dialog.Panel className="flex min-h-[400px] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-light-secondary p-6 text-left align-middle text-dark-primary shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
                   <Tab.Group>
                     <Tab.List className="flex gap-4">
                       <div className="flex w-full justify-between">
