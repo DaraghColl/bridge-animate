@@ -1,3 +1,5 @@
+import { slate, indigo } from 'tailwindcss/colors';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -7,11 +9,11 @@ export default {
         'dark-primary': '#131315',
         'dark-secondary': '#181A1D',
         'light-primary': '#fffff',
-        'light-secondary': '#f1f5f9',
-        'slate-light': '#f8fafc',
-        'slate-medium': '#64748b',
-        'slate-dark': '#334155',
-        accent: '#4f46e5',
+        'light-secondary': slate[100],
+        'slate-light': slate[50],
+        'slate-medium': slate[500],
+        'slate-dark': slate[700],
+        accent: indigo[600],
       },
     },
   },
