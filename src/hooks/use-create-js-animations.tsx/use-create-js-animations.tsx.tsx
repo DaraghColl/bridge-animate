@@ -140,8 +140,6 @@ const useCreateJSAnimations = () => {
       animations.forEach((animation) => {
         const elementToAnimate = document.getElementById(animation.name);
 
-        console.warn(animation);
-
         // set up object for the actual javascript animation API
         // need to group all transforms together as one string
         const animationWithFormattedTransform = formatTransform(formattedJSAnimations);
