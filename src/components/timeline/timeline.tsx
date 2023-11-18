@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, Fragment, useRef, useState } from 'react';
+import { ChangeEvent, FC, Fragment, useEffect, useRef, useState } from 'react';
 import { Keyframe } from './keyframes';
 import { KeyframeTime, useAnimationsContext } from '../../state/animations';
 import { keyframeTimes } from '../../constants/constants';
@@ -47,6 +47,7 @@ const Timeline: FC = () => {
         animation.play();
       }
       animation.addEventListener('finish', () => {
+        setIsPlaying(false);
         cancelGetAnimationTime();
       });
     });
@@ -102,6 +103,17 @@ const Timeline: FC = () => {
       }
     });
   };
+
+  useEffect(() => {
+    if (!selectedElementID) return;
+
+    if (isPlaying) {
+      console.log('trigge');
+      document.getElementById(selectedElementID)?.classList.remove('outline', 'outline-accent');
+    } else if (!isPlaying) {
+      document.getElementById(selectedElementID)?.classList.add('outline', 'outline-accent');
+    }
+  }, [isPlaying, selectedElementID]);
 
   const keyframePercentageMap: Record<KeyframeTime, string> = {
     '0': '0%',
