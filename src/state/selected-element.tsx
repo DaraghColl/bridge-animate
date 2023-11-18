@@ -16,11 +16,10 @@ const SelectedElementProvider: FC<SelectedElementProviderProps> = ({ children })
   const [previousSelectedElementID, setPreviousSelectedElementId] = useState<string>('');
 
   useEffect(() => {
-    if (selectedElementID !== null) {
-      document.getElementById(previousSelectedElementID)?.classList.remove('outline', 'outline-blue-500');
-      document.getElementById(selectedElementID)?.classList.add('outline', 'outline-blue-500');
-      setPreviousSelectedElementId(selectedElementID);
-    }
+    if (!selectedElementID) return;
+    document.getElementById(previousSelectedElementID)?.classList.remove('outline', 'outline-accent');
+    document.getElementById(selectedElementID)?.classList.add('outline', 'outline-accent');
+    setPreviousSelectedElementId(selectedElementID);
   }, [selectedElementID, previousSelectedElementID]);
 
   return (
