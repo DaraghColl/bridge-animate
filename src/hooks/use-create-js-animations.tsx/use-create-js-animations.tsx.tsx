@@ -116,7 +116,7 @@ const useCreateJSAnimations = () => {
         animationWithFormattedTransform.forEach((keyframe) => {
           const { offset, ...restOfKeyframe } = keyframe;
           const keyframesString = `
-            ${offset}%
+            ${offset * 100}%
               ${JSON.stringify(restOfKeyframe)}
           `.replace(/["]/g, '');
 
