@@ -1,9 +1,10 @@
 import './App.css';
-import { Timeline } from './components/timeline/timeline';
-import { ElementList } from './components/element-list/element-list';
-import { Canvas } from './components/canvas/canvas';
-import { StyleControls } from './components/style-controls/style-controls';
-import { Layers } from './components/layers/layers';
+// import { Timeline } from './components/timeline/timeline';
+import { Timeline } from '@components/timeline/timeline';
+import { ElementList } from '@components/element-list/element-list';
+import { Canvas } from '@components/canvas/canvas';
+import { StyleControls } from '@components/style-controls/style-controls';
+import { Layers } from '@components/layers/layers';
 
 function App() {
   return (

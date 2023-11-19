@@ -2,8 +2,8 @@ import { FC, Fragment, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Disclosure } from '@headlessui/react';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
-import { useSelectedElementContext } from '../../state/selected-element';
-import { useCanvasContext } from '../../state/canvas';
+import { useSelectedElementContext } from '@state/selected-element';
+import { useCanvasContext } from '@state/canvas';
 import { ImportSvg } from '../import-svg/import-svg';
 
 const setElementIds = (elements: Element[]): Element[] => {

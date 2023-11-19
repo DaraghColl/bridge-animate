@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { ElementList } from './element-list';
-import { SelectedElementProvider, useSelectedElementContext } from '../../state/selected-element';
-import { CanvasProvider, useCanvasContext } from '../../state/canvas';
+import { SelectedElementProvider, useSelectedElementContext } from '@state/selected-element';
+import { CanvasProvider, useCanvasContext } from '@state/canvas';
 import { useEffect } from 'react';
 
 const MockCanvas = () => {

@@ -3,8 +3,8 @@ import { Dialog, Tab, Transition } from '@headlessui/react';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
 import { ClipboardDocumentIcon, CodeBracketIcon } from '@heroicons/react/24/outline';
-import { useAnimationsContext } from '../../state/animations';
-import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
+import { useAnimationsContext } from '@state/animations';
+import { useCreateJSAnimations } from '@hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 
 const copyToClipboard = async (code: string[]) => {
   try {

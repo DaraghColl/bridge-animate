@@ -1,7 +1,7 @@
 import { FC, ChangeEvent, Fragment, useEffect, useState, useCallback } from 'react';
-import { Style, StyleType, useAnimationsContext } from '../../state/animations';
-import { useSelectedElementContext } from '../../state/selected-element';
-import { usePrevious } from '../../hooks/use-previous/use-previous';
+import { Style, StyleType, useAnimationsContext } from '@state/animations';
+import { useSelectedElementContext } from '@state/selected-element';
+import { usePrevious } from '@hooks/use-previous/use-previous';
 
 const getElementPathLength = (path: SVGPathElement) => {
   return path.getTotalLength();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAnimationsContext } from '../../state/animations';
+import { useAnimationsContext } from '@state/animations';
 
 interface StyleObjectKeys {
   [key: string]: string | number | null | undefined;

@@ -1,7 +1,7 @@
 import { FC, Fragment, useEffect, useRef, useState } from 'react';
 import { Dialog, Tab, Transition } from '@headlessui/react';
 import { DocumentIcon } from '@heroicons/react/24/outline';
-import { useCanvasContext } from '../../state/canvas';
+import { useCanvasContext } from '@state/canvas';
 import { SVGFileUpload } from './svg-file-upload';
 
 function classNames(...classes: string[]) {

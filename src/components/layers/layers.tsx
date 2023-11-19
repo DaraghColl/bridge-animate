@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
-import { useAnimationsContext } from '../../state/animations';
-import { useSelectedElementContext } from '../../state/selected-element';
+import { useAnimationsContext } from '@state/animations';
+import { useSelectedElementContext } from '@state/selected-element';
 
 const Layers: FC = () => {
   const { selectedElementID, setSelectedElementId } = useSelectedElementContext();
