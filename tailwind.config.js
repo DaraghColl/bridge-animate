@@ -6,8 +6,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'dark-primary': '#131315',
-        'dark-secondary': '#181A1D',
+        'dark-primary': '#181A1D',
+        'dark-secondary': '#131315',
         'light-primary': '#fffff',
         'light-secondary': slate[100],
         'slate-light': slate[50],
