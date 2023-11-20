@@ -21,8 +21,8 @@ function App() {
           <StyleControls />
         </div>
       </div>
-      <div className="flex h-1/3 min-h-0 gap-4 rounded-md">
-        <div className="basis-1/4 overflow-scroll bg-white p-2 text-dark-primary dark:bg-dark-secondary dark:text-white">
+      <div className="flex h-1/3 min-h-0 gap-4">
+        <div className="basis-1/4 overflow-scroll rounded-md bg-white p-2 text-dark-primary dark:bg-dark-secondary dark:text-white">
           <Layers />
         </div>
         <Timeline />

@@ -123,7 +123,7 @@ const Timeline: FC = () => {
   };
 
   return (
-    <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll bg-white p-4 dark:bg-dark-secondary">
+    <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll rounded-md bg-white p-4 dark:bg-dark-secondary">
       {animations && animations.length <= 0 && (
         <span className="text-sm tracking-wide">Select Element and add an animation layer</span>
       )}
