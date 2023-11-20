@@ -8,7 +8,6 @@ import { ImportSvg } from '../import-svg/import-svg';
 
 const setElementIds = (elements: Element[]): Element[] => {
   const elementsWithIds = elements.map((element) => {
-    console.log(element.tagName);
     if (!element.getAttribute('id')) {
       element.setAttribute('id', `animate-${uuidv4()}`);
       element.setAttribute('data-generated-animate-id', 'true');
