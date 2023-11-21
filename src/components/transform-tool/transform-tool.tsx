@@ -93,8 +93,8 @@ const TransformTool: FC = () => {
           totalRotate = event.clientY - transformSelectedPosition.y + currentRotate;
         }
 
-        if (totalRotate < 0) {
-          totalRotate = 0;
+        if (totalRotate < -360) {
+          totalRotate = -360;
         }
         if (totalRotate > 360) {
           totalRotate = 360;
