@@ -11,8 +11,13 @@ const Layers: FC = () => {
   const [showDeleteAnimationLayer, setShowDeleteAnimationLayer] = useState(false);
 
   const handleCreateNewAnimation = () => {
-    if (selectedElementID) {
+    if (!selectedElementID) return;
+    try {
       createNewAnimation(selectedElementID);
+    } catch (err) {
+      console.error(err);
+      // TODO: show error message in toast
+      setShowDeleteAnimationLayer(false);
     }
   };
 

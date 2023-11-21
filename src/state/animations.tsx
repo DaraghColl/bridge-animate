@@ -74,7 +74,7 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
 
   const createNewAnimation = (elementId: string) => {
     if (animations.some((animation) => animation.name === elementId)) {
-      return;
+      throw new Error('could not find aninmation for this element');
     }
 
     const newAnimation: Animation = {
