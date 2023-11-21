@@ -16,7 +16,7 @@ const Layers: FC = () => {
     }
   };
 
-  const handleElementSelect = (name: string) => {
+  const elementSelect = (name: string) => {
     setSelectedElementId(name);
   };
 
@@ -62,7 +62,7 @@ const Layers: FC = () => {
                       </Disclosure.Button>
                       <span
                         className={`${selectedElementID === name ? 'text-accent' : ''}`}
-                        onClick={() => handleElementSelect(name)}
+                        onClick={() => elementSelect(name)}
                       >
                         {name}
                       </span>
