@@ -1,4 +1,5 @@
 import { Dispatch, FC, ReactNode, SetStateAction, createContext, useContext, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export type StyleType =
   | 'opacity'
@@ -41,6 +42,7 @@ interface AnimationConfigPoperties {
 }
 
 export interface Animation {
+  id: string;
   name: string;
   config: AnimationConfigPoperties;
   keyframes: Keyframe[];
@@ -50,6 +52,7 @@ interface AnimationsValue {
   animations: Animation[] | null;
   setAnimations: Dispatch<SetStateAction<Animation[] | []>>;
   createNewAnimation: (elementId: string) => void;
+  deleteAnimation: (animationID: string) => void;
   createKeyframe: (animationName: string, keyframeTime: KeyframeTime) => void;
   selectedKeyFrameTime: KeyframeTime | null;
   setSelectedKeyFrameTime: Dispatch<SetStateAction<KeyframeTime | null>>;
@@ -75,6 +78,7 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
     }
 
     const newAnimation: Animation = {
+      id: uuidv4(),
       name: elementId,
       config: {
         animationName: elementId,
@@ -89,6 +93,15 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
     };
 
     setAnimations([...animations, newAnimation]);
+  };
+
+  const deleteAnimation = (animationID: string) => {
+    const animationsCopy = [...animations];
+
+    const index = animationsCopy.findIndex((animation) => animation.id === animationID);
+    animationsCopy.splice(index, 1);
+
+    setAnimations(animationsCopy);
   };
 
   const createKeyframe = (animationName: string, keyframeTime: KeyframeTime) => {
@@ -149,6 +162,7 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
         animations,
         setAnimations,
         createNewAnimation,
+        deleteAnimation,
         createKeyframe,
         selectedKeyFrameTime,
         setSelectedKeyFrameTime,

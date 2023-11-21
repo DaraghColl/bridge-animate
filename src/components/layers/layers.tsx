@@ -1,12 +1,14 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
-import { ChevronRightIcon } from '@heroicons/react/24/solid';
+import { ChevronRightIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { useAnimationsContext } from '@state/animations';
 import { useSelectedElementContext } from '@state/selected-element';
+import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
 
 const Layers: FC = () => {
   const { selectedElementID, setSelectedElementId } = useSelectedElementContext();
-  const { animations, createNewAnimation } = useAnimationsContext();
+  const { animations, createNewAnimation, deleteAnimation } = useAnimationsContext();
+  const [showDeleteAnimationLayer, setShowDeleteAnimationLayer] = useState(false);
 
   const handleCreateNewAnimation = () => {
     if (selectedElementID) {
@@ -16,6 +18,11 @@ const Layers: FC = () => {
 
   const handleElementSelect = (name: string) => {
     setSelectedElementId(name);
+  };
+
+  const deleteAnimationLayer = (id: string) => {
+    deleteAnimation(id);
+    setShowDeleteAnimationLayer(false);
   };
 
   return (
@@ -38,7 +45,7 @@ const Layers: FC = () => {
 
       <div className="flex flex-col items-start gap-4 font-thin">
         {animations &&
-          animations.map(({ name, config }, index) => {
+          animations.map(({ id, name, config }, index) => {
             return (
               <div key={index} className="w-full">
                 <Disclosure>
@@ -52,6 +59,19 @@ const Layers: FC = () => {
                         onClick={() => handleElementSelect(name)}
                       >
                         {name}
+                      </span>
+                      <span>
+                        <TrashIcon
+                          className="w-4 text-dark-primary transition ease-in-out hover:-translate-y-[2px] dark:text-white"
+                          onClick={() => setShowDeleteAnimationLayer(true)}
+                        />
+                        <ConfirmDialog
+                          openDialog={showDeleteAnimationLayer}
+                          onDialogClose={setShowDeleteAnimationLayer}
+                          title="Delete Animation Layer"
+                          message="Are you sure you want to delete this animation layer?"
+                          confirmCallback={() => deleteAnimationLayer(id)}
+                        />
                       </span>
                     </div>
                   </div>
