@@ -21,8 +21,14 @@ const Layers: FC = () => {
   };
 
   const deleteAnimationLayer = (id: string) => {
-    deleteAnimation(id);
-    setShowDeleteAnimationLayer(false);
+    try {
+      deleteAnimation(id);
+      setShowDeleteAnimationLayer(false);
+    } catch (err) {
+      console.error(err);
+      // TODO: show error message in toast
+      setShowDeleteAnimationLayer(false);
+    }
   };
 
   return (

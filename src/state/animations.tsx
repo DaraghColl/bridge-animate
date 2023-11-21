@@ -99,6 +99,11 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
     const animationsCopy = [...animations];
 
     const index = animationsCopy.findIndex((animation) => animation.id === animationID);
+
+    if (index === -1) {
+      throw new Error('Animation Index not found');
+    }
+
     animationsCopy.splice(index, 1);
 
     setAnimations(animationsCopy);
