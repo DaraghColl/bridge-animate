@@ -127,9 +127,6 @@ const StyleControls: FC = () => {
         <SwatchIcon className="h-4 w-4" />
         <span>Styles</span>
       </div>
-      {(selectedElementID === null || !selectedKeyFrameTime) && (
-        <span className="select-none text-sm tracking-wide">Select keyframe to see controls</span>
-      )}
       {selectedElementID && selectedKeyFrameTime && (
         <Fragment>
           <div className="flex flex-col border-b-2 border-gray-100 pb-4">
