@@ -20,6 +20,7 @@ interface StyleObject extends StyleObjectKeys {
 
 interface FormattedStyleObject extends StyleObject {
   transform?: string | null;
+  translate?: string | null;
 }
 
 const formatTransform = (javascriptFormattedAnimations: StyleObject[]) => {
@@ -28,15 +29,16 @@ const formatTransform = (javascriptFormattedAnimations: StyleObject[]) => {
     const formattedAnimationObject: FormattedStyleObject = { ...restOfAnimation };
 
     const transformProperties: string[] = [];
-
     if (translateX && translateX !== '') {
-      transformProperties.push(translateX.toString());
+      transformProperties.push(`${translateX.toString()}px`);
     }
     if (translateY && translateY !== '') {
-      transformProperties.push(translateY.toString());
+      if (!translateX || translateX === '') {
+        transformProperties.push('0px');
+      }
+      transformProperties.push(`${translateY.toString()}px`);
     }
-
-    if (transformProperties.length > 0) formattedAnimationObject.transform = transformProperties.join(' ');
+    if (transformProperties.length > 0) formattedAnimationObject.translate = transformProperties.join(' ');
 
     return formattedAnimationObject;
   });
@@ -64,7 +66,7 @@ const useCreateJSAnimations = () => {
           for (const [key, value] of Object.entries(styles)) {
             if (value !== null && value !== '') {
               if (key === 'translateX' || key === 'translateY') {
-                animationStyleObject[key] = `${key}(${value}px)`;
+                animationStyleObject[key] = value;
               } else if (key === 'rotate') {
                 animationStyleObject[key] = `${value}deg`;
               } else if (key === 'scale') {
