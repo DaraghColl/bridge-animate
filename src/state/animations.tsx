@@ -31,7 +31,7 @@ interface Keyframe {
   styles: Style;
 }
 
-interface AnimationConfigPoperties {
+export interface AnimationConfigPoperties {
   animationName: string;
   animationDuration: string;
   animationDelay: string;
