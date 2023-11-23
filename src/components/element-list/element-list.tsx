@@ -6,6 +6,34 @@ import { useSelectedElementContext } from '@state/selected-element';
 import { useCanvasContext } from '@state/canvas';
 import { ImportSvg } from '../import-svg/import-svg';
 
+const listOfElementstoAllowAnimation = [
+  'circle',
+  'clipPath',
+  'ellipse',
+  'g',
+  'image',
+  'line',
+  'linearGradient',
+  'marker',
+  'mask',
+  'mpath',
+  'path',
+  'pattern',
+  'polygon',
+  'polyline',
+  'radialGradient',
+  'rect',
+  'svg',
+  'switch',
+  'symbol',
+  'text',
+  'textPath',
+  'title',
+  'tspan',
+  'use',
+  'view',
+];
+
 const setElementIds = (elements: Element[]): Element[] => {
   const elementsWithIds = elements.map((element) => {
     if (!element.getAttribute('id')) {
@@ -144,7 +172,9 @@ const ElementList: FC = () => {
                 </div>
                 <Disclosure.Panel className="ml-2 pt-2 text-sm font-normal">
                   {[...element.children].map((childNode) => {
-                    return <Fragment key={childNode.id}>{mapElementsChildNodes(childNode)}</Fragment>;
+                    return listOfElementstoAllowAnimation.includes(childNode.tagName) ? (
+                      <Fragment key={childNode.id}>{mapElementsChildNodes(childNode)}</Fragment>
+                    ) : null;
                   })}
                 </Disclosure.Panel>
               </Fragment>
@@ -176,12 +206,14 @@ const ElementList: FC = () => {
 
     if (canvas) {
       const allElements = canvas.getElementsByTagName('*');
-      const allElementsArray = [...allElements];
 
-      // remove svg container from selected elements
-      allElementsArray.splice(0, 1);
+      const allElementsfFiltered = [...allElements].filter((element) => {
+        if (listOfElementstoAllowAnimation.includes(element.tagName)) {
+          return element;
+        }
+      });
 
-      const elementsWithIds = setElementIds(allElementsArray);
+      const elementsWithIds = setElementIds(allElementsfFiltered);
 
       if (elementsWithIds.length <= 0) return;
 
