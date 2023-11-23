@@ -66,7 +66,14 @@ const getElementIcon = (elementTagName: string) => {
     ),
     rect: (
       <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="4.5" y="4.5" width="15" height="15" stroke="black" />
+        <rect
+          className="h-4 w-4 stroke-dark-secondary dark:stroke-white"
+          x="4.5"
+          y="4.5"
+          width="15"
+          height="15"
+          stroke="black"
+        />
       </svg>
     ),
     path: (
