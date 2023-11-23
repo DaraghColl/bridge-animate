@@ -1,4 +1,5 @@
 import { FC, ChangeEvent, Fragment, useEffect, useState, useCallback } from 'react';
+import { SwatchIcon } from '@heroicons/react/24/outline';
 import { Style, StyleType, useAnimationsContext } from '@state/animations';
 import { useSelectedElementContext } from '@state/selected-element';
 import { usePrevious } from '@hooks/use-previous/use-previous';
@@ -122,6 +123,10 @@ const StyleControls: FC = () => {
 
   return (
     <div className="flex min-h-0 flex-col gap-4 p-4 text-sm font-normal">
+      <div className="flex items-center gap-2">
+        <SwatchIcon className="h-4 w-4" />
+        <span>Styles</span>
+      </div>
       {(selectedElementID === null || !selectedKeyFrameTime) && (
         <span className="select-none text-sm tracking-wide">Select keyframe to see controls</span>
       )}

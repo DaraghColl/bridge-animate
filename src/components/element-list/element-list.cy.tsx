@@ -42,7 +42,7 @@ describe('<ElementList />', () => {
       </SelectedElementProvider>,
     );
 
-    cy.get('[data-cy="import_svg"]').contains('import svg');
+    cy.get('[data-cy="import_svg"]').should('be.visible');
   });
 
   it('should show parent element', () => {

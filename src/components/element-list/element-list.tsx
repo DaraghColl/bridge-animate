@@ -1,7 +1,7 @@
 import { FC, Fragment, ReactNode, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Disclosure } from '@headlessui/react';
-import { ChevronRightIcon } from '@heroicons/react/24/solid';
+import { ChevronRightIcon, CubeTransparentIcon } from '@heroicons/react/24/solid';
 import { useSelectedElementContext } from '@state/selected-element';
 import { useCanvasContext } from '@state/canvas';
 import { ImportSvg } from '../import-svg/import-svg';
@@ -190,11 +190,18 @@ const ElementList: FC = () => {
   }, [userSvg]);
 
   return (
-    <div>
-      <div>
-        <ImportSvg />
+    <div className="p-2">
+      <div className="mb-4 flex justify-between text-sm font-normal">
+        <div className="flex items-center gap-2">
+          <CubeTransparentIcon className="h-4 w-4" />
+          <span>Elements</span>
+        </div>
+        <div>
+          <ImportSvg />
+        </div>
       </div>
-      {elements && userSvg && <div className="p-2">{mapElementsChildNodes(elements[0])}</div>}
+
+      {elements && userSvg && <div>{mapElementsChildNodes(elements[0])}</div>}
     </div>
   );
 };

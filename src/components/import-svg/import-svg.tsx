@@ -46,7 +46,6 @@ const ImportSvg: FC = () => {
           data-cy="import_svg"
           onClick={() => setIsOpen(true)}
         >
-          import svg
           <DocumentIcon className="h-4 w-4 text-white" />
         </button>
       </div>
