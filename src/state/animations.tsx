@@ -31,7 +31,19 @@ interface Keyframe {
   styles: Style;
 }
 
-export interface AnimationConfigPoperties {
+export type AnimationConfigProperties =
+  | 'animationName'
+  | 'animationDuration'
+  | 'animationDelay'
+  | 'animationInterationCount'
+  | 'animationDirection'
+  | 'animationTimingFunction'
+  | 'animationFillMode';
+
+interface StyleObjectKeys {
+  [key: string]: string | number | null | undefined;
+}
+export interface AnimationConfig extends StyleObjectKeys {
   animationName: string;
   animationDuration: string;
   animationDelay: string;
@@ -44,7 +56,7 @@ export interface AnimationConfigPoperties {
 export interface Animation {
   id: string;
   name: string;
-  config: AnimationConfigPoperties;
+  config: AnimationConfig;
   keyframes: Keyframe[];
 }
 
@@ -59,6 +71,7 @@ interface AnimationsValue {
   createKeyframeStyles: (selectedElementID: string, style: StyleType, value: string) => void;
   isPlaying: boolean;
   setIsPlaying: Dispatch<SetStateAction<boolean>>;
+  updateAnimationConfig: (selectedElementID: string, configProperty: AnimationConfigProperties, value: string) => void;
 }
 
 const AnimationsContext = createContext<AnimationsValue | undefined>(undefined);
@@ -161,6 +174,20 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
     setAnimations(animationsCopy);
   };
 
+  const updateAnimationConfig = (
+    selectedElementID: string,
+    configProperty: AnimationConfigProperties,
+    value: string,
+  ) => {
+    const selected = animations.findIndex((animation) => animation.name === selectedElementID);
+    if (selected === -1) return;
+
+    const animationsCopy = [...animations];
+    animationsCopy[selected].config[configProperty.toString()] = value;
+
+    setAnimations(animationsCopy);
+  };
+
   return (
     <AnimationsContext.Provider
       value={{
@@ -174,6 +201,7 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
         createKeyframeStyles,
         isPlaying,
         setIsPlaying,
+        updateAnimationConfig,
       }}
     >
       {children}

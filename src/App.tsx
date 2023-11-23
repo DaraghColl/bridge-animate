@@ -1,10 +1,10 @@
 import './App.css';
-// import { Timeline } from './components/timeline/timeline';
 import { Timeline } from '@components/timeline/timeline';
 import { ElementList } from '@components/element-list/element-list';
 import { Canvas } from '@components/canvas/canvas';
 import { StyleControls } from '@components/style-controls/style-controls';
 import { Layers } from '@components/layers/layers';
+import { AnimationConfig } from '@components/animation-config/animation-config';
 
 function App() {
   return (
@@ -22,10 +22,13 @@ function App() {
         </div>
       </div>
       <div className="flex h-1/3 min-h-0 gap-4">
-        <div className="basis-1/4 overflow-scroll rounded-md bg-white p-2 text-dark-primary dark:bg-dark-secondary dark:text-white">
+        <div className="basis-1/4 overflow-x-hidden overflow-y-scroll rounded-md bg-white p-2 text-dark-primary dark:bg-dark-secondary dark:text-white">
           <Layers />
         </div>
         <Timeline />
+        <div className="basis-1/4 overflow-scroll rounded-md bg-white p-2 text-dark-primary dark:bg-dark-secondary dark:text-white">
+          <AnimationConfig />
+        </div>
       </div>
     </main>
   );
