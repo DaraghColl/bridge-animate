@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAnimationsContext } from '@state/animations';
+import { formatTransformAndScale } from '@/utils/format-animation/format-animaton';
 
 interface StyleObjectKeys {
   [key: string]: string | number | null | undefined;
@@ -25,41 +26,23 @@ interface FormattedStyleObject extends StyleObject {
   translate?: string | null;
 }
 
-const formatTransformAndScale = (javascriptFormattedAnimations: StyleObject[]) => {
+const formatAnimationStyles = (javascriptFormattedAnimations: StyleObject[]) => {
   return javascriptFormattedAnimations.map((animation) => {
-    const { translateX, translateY, scale, scaleX, scaleY, ...restOfAnimation } = animation;
-    const formattedAnimationObject: FormattedStyleObject = { ...restOfAnimation };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { scaleX, scaleY, translateX, translateY, ...rest } = animation;
 
-    const transformProperties: string[] = [];
-    if (translateX && translateX !== '') {
-      transformProperties.push(`${translateX.toString()}px`);
-    }
-    if (translateY && translateY !== '') {
-      if (!translateX || translateX === '') {
-        transformProperties.push('0px');
-      }
-      transformProperties.push(`${translateY.toString()}px`);
-    }
-    if (transformProperties.length > 0) formattedAnimationObject.translate = transformProperties.join(' ');
+    const formattedAnimationObject: FormattedStyleObject = rest;
 
-    if (!scale && scale !== '') {
-      const scaleProperties: string[] = [];
-      if (scaleX && scaleX !== '') {
-        scaleProperties.push(scaleX.toString());
+    const { translate, scale } = formatTransformAndScale(
+      animation.translateX,
+      animation.translateY,
+      animation.scale,
+      animation.scaleX,
+      animation.scaleY,
+    );
 
-        if (!scaleY || scaleX === '') {
-          scaleProperties.push('1');
-        }
-      }
-      if (scaleY && scaleY !== '') {
-        if (!scaleX || scaleX === '') {
-          scaleProperties.push('1');
-        }
-        scaleProperties.push(`${scaleY.toString()}`);
-      }
-
-      if (scaleProperties.length > 0) formattedAnimationObject.scale = scaleProperties.join(' ');
-    }
+    if (translate) formattedAnimationObject.translate = translate;
+    if (scale) formattedAnimationObject.scale = scale;
 
     return formattedAnimationObject;
   });
@@ -103,7 +86,7 @@ const useCreateJSAnimations = () => {
 
         // set up object for the actual javascript animation API
         // need to group all transforms together as one string
-        const animationWithFormattedTransform = formatTransformAndScale(javascriptFormattedAnimations);
+        const animationWithFormattedTransform = formatAnimationStyles(javascriptFormattedAnimations);
 
         const keyframeEffect = new KeyframeEffect(elementToAnimate, animationWithFormattedTransform, {
           duration: Number(animation.config.animationDuration) * 1000,
@@ -132,7 +115,7 @@ const useCreateJSAnimations = () => {
 
         // set up object for the actual javascript animation API
         // need to group all transforms together as one string
-        const animationWithFormattedTransform = formatTransformAndScale(formattedJSAnimations);
+        const animationWithFormattedTransform = formatAnimationStyles(formattedJSAnimations);
 
         const arrayOfCssKeyframes: string[] = [];
 
@@ -165,7 +148,7 @@ const useCreateJSAnimations = () => {
 
         // set up object for the actual javascript animation API
         // need to group all transforms together as one string
-        const animationWithFormattedTransform = formatTransformAndScale(formattedJSAnimations);
+        const animationWithFormattedTransform = formatAnimationStyles(formattedJSAnimations);
 
         const keyframe = `
         const ${elementToAnimate?.getAttribute('id')}-animation = ${elementToAnimate?.getAttribute('id')}

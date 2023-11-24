@@ -12,6 +12,7 @@ export default defineConfig({
       '@constants': path.resolve(__dirname, './src/constants'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@state': path.resolve(__dirname, './src/state'),
+      '@utils': path.resolve(__dirname, './src/utils'),
     },
   },
   plugins: [react()],

@@ -14,7 +14,7 @@
       "@constants/*": ["src/constants/*"],
       "@hooks/*": ["src/hooks/*"],
       "@state/*": ["src/state/*"],
-
+      "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"]
     },
 

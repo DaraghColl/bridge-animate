@@ -3,6 +3,7 @@ import { SwatchIcon } from '@heroicons/react/24/outline';
 import { Style, StyleType, useAnimationsContext } from '@state/animations';
 import { useSelectedElementContext } from '@state/selected-element';
 import { usePrevious } from '@hooks/use-previous/use-previous';
+import { formatTransformAndScale } from '@/utils/format-animation/format-animaton';
 
 const getElementPathLength = (path: SVGPathElement) => {
   return path.getTotalLength();
@@ -27,35 +28,16 @@ const StyleControls: FC = () => {
         if (currentKeyframe.strokeDasharray) selectedElement.style.strokeDasharray = currentKeyframe.strokeDasharray;
         if (currentKeyframe.strokeDashoffset) selectedElement.style.strokeDashoffset = currentKeyframe.strokeDashoffset;
 
-        const transformProperties: string[] = [];
-        if (currentKeyframe.translateX && currentKeyframe.translateX !== '') {
-          transformProperties.push(`${currentKeyframe.translateX.toString()}px`);
-        }
-        if (currentKeyframe.translateY && currentKeyframe.translateY !== '') {
-          if (!currentKeyframe.translateX || currentKeyframe.translateX === '') {
-            transformProperties.push('0px');
-          }
-          transformProperties.push(`${currentKeyframe.translateY.toString()}px`);
-        }
+        const { translate, scale } = formatTransformAndScale(
+          currentKeyframe.translateX,
+          currentKeyframe.translateY,
+          currentKeyframe.scale,
+          currentKeyframe.scaleX,
+          currentKeyframe.scaleY,
+        );
 
-        if (transformProperties.length > 0) selectedElement.style.translate = transformProperties.join(' ');
-
-        const scaleProperties: string[] = [];
-        if (currentKeyframe.scaleX && currentKeyframe.scaleX !== '') {
-          scaleProperties.push(currentKeyframe.scaleX.toString());
-
-          if (!currentKeyframe.scaleY || currentKeyframe.scaleX === '') {
-            scaleProperties.push('1');
-          }
-        }
-        if (currentKeyframe.scaleY && currentKeyframe.scaleY !== '') {
-          if (!currentKeyframe.scaleX || currentKeyframe.scaleX === '') {
-            scaleProperties.push('1');
-          }
-          scaleProperties.push(`${currentKeyframe.scaleY.toString()}`);
-        }
-
-        if (scaleProperties.length > 0) selectedElement.style.scale = scaleProperties.join(' ');
+        if (translate && translate.length > 0) selectedElement.style.translate = translate;
+        if (scale && scale.length > 0) selectedElement.style.scale = scale;
       }
     }
   }, [currentKeyframe, selectedElementID, selectedKeyFrameTime]);
