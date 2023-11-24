@@ -239,9 +239,9 @@ const StyleControls: FC = () => {
           </div>
 
           <div className="mb-2 flex flex-col border-b-2 border-light-secondary pb-4">
-            <span>stroke path</span>
-            <div className="mt-2 flex gap-8">
-              <div className="flex flex-col">
+            <span>stroke</span>
+            <div className="mt-2 flex gap-2">
+              <div className="flex basis-1/2 flex-col">
                 <label htmlFor="stroke-dash" className="text-slate-medium">
                   dash
                 </label>
@@ -254,7 +254,7 @@ const StyleControls: FC = () => {
                   value={currentKeyframe.strokeDasharray ? currentKeyframe.strokeDasharray : ''}
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex basis-1/2 flex-col">
                 <label htmlFor="stroke-offset" className="text-slate-medium">
                   offset
                 </label>
