@@ -5,10 +5,6 @@ import { useSelectedElementContext } from '@state/selected-element';
 import { usePrevious } from '@hooks/use-previous/use-previous';
 import { formatTransformAndScale } from '@/utils/format-animation/format-animaton';
 
-const getElementPathLength = (path: SVGPathElement) => {
-  return path.getTotalLength();
-};
-
 const StyleControls: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const { createKeyframeStyles, selectedKeyFrameTime, animations } = useAnimationsContext();
@@ -43,33 +39,7 @@ const StyleControls: FC = () => {
   }, [currentKeyframe, selectedElementID, selectedKeyFrameTime]);
 
   const handleInputChange = (style: StyleType, e: ChangeEvent<HTMLInputElement>) => {
-    const elementNameAttribute = e.target.getAttribute('name');
     if (!selectedElementID) return;
-
-    let styleValue = e.target.value;
-
-    if (style === 'strokeDasharray') {
-      const pathElement = document.getElementById(selectedElementID)!;
-      if (pathElement.nodeName !== 'path') return;
-      const pathLength = getElementPathLength(pathElement as unknown as SVGPathElement);
-
-      styleValue = pathLength.toString();
-
-      createKeyframeStyles(selectedElementID, style, styleValue);
-      createKeyframeStyles(
-        selectedElementID,
-        'strokeDashoffset',
-
-        elementNameAttribute === 'stroke-dash-start' ? styleValue : '0',
-      );
-
-      updateSelectedElementTemporaryStyles();
-
-      setCurrentKeyframe({ ...currentKeyframe, strokeDasharray: pathLength.toString() });
-      setCurrentKeyframe({ ...currentKeyframe, strokeDashoffset: pathLength.toString() });
-
-      return;
-    }
 
     createKeyframeStyles(selectedElementID, style, e.target.value);
     setCurrentKeyframe({ ...currentKeyframe, [style]: e.target.value });
@@ -273,28 +243,29 @@ const StyleControls: FC = () => {
             <div className="mt-2 flex gap-8">
               <div className="flex flex-col">
                 <label htmlFor="stroke-dash" className="text-slate-medium">
-                  start
+                  dash
                 </label>
-
                 <input
-                  name="stroke-dash-start"
-                  type="checkbox"
-                  className="rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  name="stroke-dash"
+                  type="number"
+                  className="w-full rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  onBlur={(e) => handleInputChange('strokeDasharray', e)}
                   onChange={(e) => handleInputChange('strokeDasharray', e)}
                   value={currentKeyframe.strokeDasharray ? currentKeyframe.strokeDasharray : ''}
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="stroke-dash" className="text-slate-medium">
-                  end
+                <label htmlFor="stroke-offset" className="text-slate-medium">
+                  offset
                 </label>
 
                 <input
-                  name="stroke-dash-end"
-                  type="checkbox"
-                  className="rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
-                  onChange={(e) => handleInputChange('strokeDasharray', e)}
-                  value={currentKeyframe.strokeDasharray ? currentKeyframe.strokeDasharray : ''}
+                  name="stroke-offset"
+                  type="number"
+                  className="w-full rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  onBlur={(e) => handleInputChange('strokeDashoffset', e)}
+                  onChange={(e) => handleInputChange('strokeDashoffset', e)}
+                  value={currentKeyframe.strokeDashoffset ? currentKeyframe.strokeDashoffset : ''}
                 />
               </div>
             </div>
