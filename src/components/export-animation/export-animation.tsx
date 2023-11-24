@@ -161,7 +161,7 @@ const ExportAnimation = () => {
                               {cssAnimations.length &&
                                 cssAnimations.map((animation) => {
                                   return (
-                                    <pre>
+                                    <pre key={animation}>
                                       <code className="language-css">{animation}</code>
                                     </pre>
                                   );
