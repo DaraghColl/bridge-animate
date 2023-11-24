@@ -39,6 +39,23 @@ const StyleControls: FC = () => {
         }
 
         if (transformProperties.length > 0) selectedElement.style.translate = transformProperties.join(' ');
+
+        const scaleProperties: string[] = [];
+        if (currentKeyframe.scaleX && currentKeyframe.scaleX !== '') {
+          scaleProperties.push(currentKeyframe.scaleX.toString());
+
+          if (!currentKeyframe.scaleY || currentKeyframe.scaleX === '') {
+            scaleProperties.push('1');
+          }
+        }
+        if (currentKeyframe.scaleY && currentKeyframe.scaleY !== '') {
+          if (!currentKeyframe.scaleX || currentKeyframe.scaleX === '') {
+            scaleProperties.push('1');
+          }
+          scaleProperties.push(`${currentKeyframe.scaleY.toString()}`);
+        }
+
+        if (scaleProperties.length > 0) selectedElement.style.scale = scaleProperties.join(' ');
       }
     }
   }, [currentKeyframe, selectedElementID, selectedKeyFrameTime]);
@@ -191,17 +208,49 @@ const StyleControls: FC = () => {
           <div className="mb-2 flex flex-col border-b-2 border-light-secondary pb-4">
             <span>scale</span>
             <div className="mt-2 flex flex-row gap-2">
-              <div className="basis-1/2">
-                <label htmlFor="xPosition" className="text-slate-medium">
+              <div className="basis-1/3">
+                <label htmlFor="scale" className="text-slate-medium">
                   all
                 </label>
                 <input
-                  name="xPosition"
+                  name="scale"
                   type="number"
                   className="w-full rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
                   onBlur={(e) => handleInputChange('scale', e)}
                   onChange={(e) => handleInputChange('scale', e)}
                   value={currentKeyframe.scale ? currentKeyframe.scale : ''}
+                  disabled={
+                    !!(currentKeyframe.scaleX || currentKeyframe.scaleX !== '') ||
+                    !!(currentKeyframe.scaleY || currentKeyframe.scaleY !== '')
+                  }
+                />
+              </div>
+              <div className="basis-1/3">
+                <label htmlFor="scaleX" className="text-slate-medium">
+                  x
+                </label>
+                <input
+                  name="scaleX"
+                  type="number"
+                  className="w-full rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  onBlur={(e) => handleInputChange('scaleX', e)}
+                  onChange={(e) => handleInputChange('scaleX', e)}
+                  value={currentKeyframe.scaleX ? currentKeyframe.scaleX : ''}
+                  disabled={!!(currentKeyframe.scale || currentKeyframe.scale !== '')}
+                />
+              </div>
+              <div className="basis-1/3">
+                <label htmlFor="scaleY" className="text-slate-medium">
+                  y
+                </label>
+                <input
+                  name="scaleY"
+                  type="number"
+                  className="w-full rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:text-gray-100"
+                  onBlur={(e) => handleInputChange('scaleY', e)}
+                  onChange={(e) => handleInputChange('scaleY', e)}
+                  value={currentKeyframe.scaleY ? currentKeyframe.scaleY : ''}
+                  disabled={!!(currentKeyframe.scale || currentKeyframe.scale !== '')}
                 />
               </div>
             </div>

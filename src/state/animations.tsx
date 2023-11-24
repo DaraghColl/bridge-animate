@@ -7,6 +7,8 @@ export type StyleType =
   | 'translateX'
   | 'translateY'
   | 'scale'
+  | 'scaleX'
+  | 'scaleY'
   | 'fill'
   | 'stroke'
   | 'strokeDasharray'
@@ -18,6 +20,8 @@ export type Style = {
   translateX?: string;
   translateY?: string;
   scale?: string;
+  scaleX?: string;
+  scaleY?: string;
   fill?: string;
   stroke?: string;
   strokeDasharray?: string;
@@ -131,6 +135,8 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
         translateX: '',
         translateY: '',
         scale: '',
+        scaleX: '',
+        scaleY: '',
         fill: '',
         stroke: '',
         strokeDasharray: '',

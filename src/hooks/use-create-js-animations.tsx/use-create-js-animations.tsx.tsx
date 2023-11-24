@@ -12,6 +12,8 @@ interface StyleObject extends StyleObjectKeys {
   translateX?: string | null;
   translateY?: string | null;
   scale?: string;
+  scaleX?: string;
+  scaleY?: string;
   fill?: string | null;
   stroke?: string | null;
   strokeDasharray?: string | null;
@@ -23,9 +25,9 @@ interface FormattedStyleObject extends StyleObject {
   translate?: string | null;
 }
 
-const formatTransform = (javascriptFormattedAnimations: StyleObject[]) => {
+const formatTransformAndScale = (javascriptFormattedAnimations: StyleObject[]) => {
   return javascriptFormattedAnimations.map((animation) => {
-    const { translateX, translateY, ...restOfAnimation } = animation;
+    const { translateX, translateY, scale, scaleX, scaleY, ...restOfAnimation } = animation;
     const formattedAnimationObject: FormattedStyleObject = { ...restOfAnimation };
 
     const transformProperties: string[] = [];
@@ -39,6 +41,25 @@ const formatTransform = (javascriptFormattedAnimations: StyleObject[]) => {
       transformProperties.push(`${translateY.toString()}px`);
     }
     if (transformProperties.length > 0) formattedAnimationObject.translate = transformProperties.join(' ');
+
+    if (!scale && scale !== '') {
+      const scaleProperties: string[] = [];
+      if (scaleX && scaleX !== '') {
+        scaleProperties.push(scaleX.toString());
+
+        if (!scaleY || scaleX === '') {
+          scaleProperties.push('1');
+        }
+      }
+      if (scaleY && scaleY !== '') {
+        if (!scaleX || scaleX === '') {
+          scaleProperties.push('1');
+        }
+        scaleProperties.push(`${scaleY.toString()}`);
+      }
+
+      if (scaleProperties.length > 0) formattedAnimationObject.scale = scaleProperties.join(' ');
+    }
 
     return formattedAnimationObject;
   });
@@ -82,7 +103,7 @@ const useCreateJSAnimations = () => {
 
         // set up object for the actual javascript animation API
         // need to group all transforms together as one string
-        const animationWithFormattedTransform = formatTransform(javascriptFormattedAnimations);
+        const animationWithFormattedTransform = formatTransformAndScale(javascriptFormattedAnimations);
 
         const keyframeEffect = new KeyframeEffect(elementToAnimate, animationWithFormattedTransform, {
           duration: Number(animation.config.animationDuration) * 1000,
@@ -111,7 +132,7 @@ const useCreateJSAnimations = () => {
 
         // set up object for the actual javascript animation API
         // need to group all transforms together as one string
-        const animationWithFormattedTransform = formatTransform(formattedJSAnimations);
+        const animationWithFormattedTransform = formatTransformAndScale(formattedJSAnimations);
 
         const arrayOfCssKeyframes: string[] = [];
 
@@ -144,7 +165,7 @@ const useCreateJSAnimations = () => {
 
         // set up object for the actual javascript animation API
         // need to group all transforms together as one string
-        const animationWithFormattedTransform = formatTransform(formattedJSAnimations);
+        const animationWithFormattedTransform = formatTransformAndScale(formattedJSAnimations);
 
         const keyframe = `
         const ${elementToAnimate?.getAttribute('id')}-animation = ${elementToAnimate?.getAttribute('id')}
