@@ -128,7 +128,7 @@ const ImportSvg: FC = () => {
                           leaveFrom="opacity-100 scale-100"
                           leaveTo="opacity-0 scale-95"
                         >
-                          <div className="mt-2">Second tab content</div>
+                          <div className="mt-2">Paste SVG coming soon</div>
                         </Transition.Child>
                       </Tab.Panel>
                     </Tab.Panels>
