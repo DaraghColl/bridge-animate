@@ -7,7 +7,8 @@ import { usePrevious } from '@hooks/use-previous/use-previous';
 const Keyframe: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const previousSelectedElementId = usePrevious(selectedElementID);
-  const { animations, createKeyframe, selectedKeyFrameTime, setSelectedKeyFrameTime } = useAnimationsContext();
+  const { animations, createKeyframe, deleteKeyframe, selectedKeyFrameTime, setSelectedKeyFrameTime } =
+    useAnimationsContext();
   const checkIfKeyframeExists = (keyframeTime: KeyframeTime) => {
     if (!animations) return;
 
@@ -15,6 +16,22 @@ const Keyframe: FC = () => {
     const hasKeyframe = selectedAnimation?.keyframes.find((keyframe) => keyframe.time === keyframeTime);
 
     return !!hasKeyframe;
+  };
+
+  const deleteSelectedKeyframe = (keyframeTime: KeyframeTime) => {
+    if (!selectedElementID) return;
+
+    try {
+      deleteKeyframe(selectedElementID, keyframeTime as KeyframeTime);
+      setSelectedKeyFrameTime(null);
+      const selectedElement = document.getElementById(selectedElementID);
+
+      if (selectedElement) {
+        selectedElement.removeAttribute('style');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -42,7 +59,9 @@ const Keyframe: FC = () => {
                     }
                   }}
                   onDoubleClick={() => {
-                    createKeyframe(selectedElementID, keyframeTime as KeyframeTime);
+                    checkIfKeyframeExists(keyframeTime)
+                      ? deleteSelectedKeyframe(keyframeTime as KeyframeTime)
+                      : createKeyframe(selectedElementID, keyframeTime as KeyframeTime);
                   }}
                 />
               </Fragment>

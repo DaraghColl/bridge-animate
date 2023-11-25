@@ -70,6 +70,7 @@ interface AnimationsValue {
   createNewAnimation: (elementId: string) => void;
   deleteAnimation: (animationID: string) => void;
   createKeyframe: (animationName: string, keyframeTime: KeyframeTime) => void;
+  deleteKeyframe: (animationName: string, keyframeTime: KeyframeTime) => void;
   selectedKeyFrameTime: KeyframeTime | null;
   setSelectedKeyFrameTime: Dispatch<SetStateAction<KeyframeTime | null>>;
   createKeyframeStyles: (selectedElementID: string, style: StyleType, value: string) => void;
@@ -147,21 +148,32 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
     const animationsCopy = [...animations];
     animationsCopy.forEach((animation) => {
       if (animation.name === animationName) {
-        // delete keyframe if already exists
-        // action comes from the same action as create keyframe (double click on keyframe time)
-        if (animation.keyframes && animation.keyframes.find((keyframe) => keyframe.time === keyframeTime)) {
-          const index = animation.keyframes.findIndex((keyframe) => keyframe.time === keyframeTime);
-          animation.keyframes.splice(index, 1);
-        } else {
-          animation.keyframes.push(keyframe);
-          setSelectedKeyFrameTime(keyframe.time);
-        }
+        animation.keyframes.push(keyframe);
+        setSelectedKeyFrameTime(keyframe.time);
       }
 
       // sort keyframes by time ascending
       // animate() will give error if keyframes not in correct order
       animation.keyframes.sort((a, b) => Number(a.time) - Number(b.time));
     });
+
+    setAnimations(animationsCopy);
+  };
+
+  const deleteKeyframe = (animationName: string, keyframeTime: KeyframeTime) => {
+    const animationsCopy = [...animations];
+    const animationIndex = animations.findIndex((animation) => (animation.name = animationName));
+
+    if (animationIndex === -1) {
+      throw new Error('Keyframe Index not found');
+    }
+
+    const keyframeIndex = animationsCopy[animationIndex].keyframes.findIndex(
+      (keyframe) => keyframe.time === keyframeTime,
+    );
+
+    animations[animationIndex].keyframes.splice(keyframeIndex, 1);
+    animations[animationIndex].keyframes.sort((a, b) => Number(a.time) - Number(b.time));
 
     setAnimations(animationsCopy);
   };
@@ -202,6 +214,7 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
         createNewAnimation,
         deleteAnimation,
         createKeyframe,
+        deleteKeyframe,
         selectedKeyFrameTime,
         setSelectedKeyFrameTime,
         createKeyframeStyles,
