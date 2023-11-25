@@ -4,6 +4,7 @@ import { Disclosure } from '@headlessui/react';
 import { ChevronRightIcon, CubeTransparentIcon } from '@heroicons/react/24/solid';
 import { useSelectedElementContext } from '@state/selected-element';
 import { useCanvasContext } from '@state/canvas';
+import { formatRandomIdOnLabel } from '@/utils/format-animation/format-animaton';
 import { ImportSvg } from '../import-svg/import-svg';
 
 const listOfElementstoAllowAnimation = [
@@ -37,8 +38,15 @@ const listOfElementstoAllowAnimation = [
 const setElementIds = (elements: Element[]): Element[] => {
   const elementsWithIds = elements.map((element) => {
     if (!element.getAttribute('id')) {
-      element.setAttribute('id', `animate-${uuidv4()}`);
+      element.setAttribute('id', `${element.tagName}-${uuidv4()}`);
       element.setAttribute('data-generated-animate-id', 'true');
+    }
+
+    const duplicateIds = elements.filter((el) => el.getAttribute('id') === element.getAttribute('id'));
+
+    if (duplicateIds.length > 1) {
+      const currentId = element.getAttribute('id');
+      element.setAttribute('id', `${currentId}-animate-${uuidv4()}`);
     }
 
     return element;
@@ -173,7 +181,7 @@ const ElementList: FC = () => {
                           : 'whitespace-nowrap'
                       }
                     >
-                      {element.getAttribute('id') ?? element.tagName}
+                      {formatRandomIdOnLabel(element.getAttribute('id')!)}
                     </span>
                   </button>
                 </div>
@@ -200,7 +208,7 @@ const ElementList: FC = () => {
                 selectedElementID === element.getAttribute('id') ? 'whitespace-nowrap text-accent' : 'whitespace-nowrap'
               }
             >
-              {element.getAttribute('id') ?? element.tagName}
+              {formatRandomIdOnLabel(element.getAttribute('id')!)}
             </span>
           </button>
         )}

@@ -1,4 +1,4 @@
-import { formatTransformAndScale } from './format-animaton';
+import { formatRandomIdOnLabel, formatTransformAndScale } from './format-animaton';
 
 const params = {
   translateX: '1',
@@ -40,5 +40,19 @@ describe('formatTransformAndScale util', () => {
 
     expect(translate).to.equal(null);
     expect(scale).to.equal(null);
+  });
+});
+
+describe('formatRandomIdOnLabel util', () => {
+  it(`should slice '-animate-{randomId}' from label`, () => {
+    const formattedLabel = formatRandomIdOnLabel('testId-animate-4e0f923f-2157-402c-8f7f-92722fe6975d');
+
+    expect(formattedLabel).to.equal('testId');
+  });
+
+  it(`should return label without random id un changed`, () => {
+    const formattedLabel = formatRandomIdOnLabel('testId');
+
+    expect(formattedLabel).to.equal('testId');
   });
 });

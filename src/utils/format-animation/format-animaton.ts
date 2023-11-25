@@ -45,4 +45,11 @@ const formatTransformAndScale = (
   };
 };
 
-export { formatTransformAndScale };
+const formatRandomIdOnLabel = (label: string): string => {
+  if (!label.includes('-animate-')) return label;
+
+  const labelSliced = label.slice(0, -45);
+  return labelSliced;
+};
+
+export { formatTransformAndScale, formatRandomIdOnLabel };
