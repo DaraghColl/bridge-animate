@@ -110,12 +110,10 @@ const ExportAnimation = () => {
                         <button
                           type="button"
                           className="focus-visible:ring-indigp-500 indigo-900 inline-flex justify-center rounded-md border border-transparent bg-accent px-4 py-2
-                        text-sm font-medium hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2                        "
+                        text-sm font-medium hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2"
+                          onClick={() => copyToClipboard(activeTab === 'js' ? jsAnimations : cssAnimations)}
                         >
-                          <ClipboardDocumentIcon
-                            className="h-6 w-6 text-white"
-                            onClick={() => copyToClipboard(activeTab === 'js' ? jsAnimations : cssAnimations)}
-                          />
+                          <ClipboardDocumentIcon className="h-6 w-6 text-white" />
                         </button>
                       </div>
                     </Tab.List>
