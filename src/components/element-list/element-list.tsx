@@ -149,7 +149,7 @@ const getElementIcon = (elementTagName: string) => {
 const ElementList: FC = () => {
   const [elements, setElements] = useState<Element[] | null>(null);
   const { selectedElementID, setSelectedElementId } = useSelectedElementContext();
-  const { userSvg } = useCanvasContext();
+  const { userSvg, setFormattedSVGForDownload } = useCanvasContext();
 
   const mapElementsChildNodes = (element: Element) => {
     const handleElementSelect = (element: Element) => {
@@ -233,8 +233,12 @@ const ElementList: FC = () => {
       if (elementsWithIds.length <= 0) return;
 
       setElements(elementsWithIds);
+
+      // need to set an svg for export as it has new id's for animating
+      const svgString = canvas.getElementsByTagName('svg')[0].outerHTML;
+      setFormattedSVGForDownload(svgString);
     }
-  }, [userSvg]);
+  }, [userSvg, setFormattedSVGForDownload]);
 
   return (
     <div className="p-2">

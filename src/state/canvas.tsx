@@ -3,6 +3,8 @@ import { Dispatch, FC, ReactNode, SetStateAction, createContext, useContext, use
 interface CanvasValue {
   userSvg: string | null;
   setUserSvg: Dispatch<SetStateAction<string | null>>;
+  formattedSVGForDownload: string | null;
+  setFormattedSVGForDownload: Dispatch<SetStateAction<string | null>>;
 }
 
 const CanvasContext = createContext<CanvasValue | undefined>(undefined);
@@ -13,9 +15,13 @@ interface CanvasProviderProps {
 
 const CanvasProvider: FC<CanvasProviderProps> = ({ children }) => {
   const [userSvg, setUserSvg] = useState<string | null>(null);
-  // const [previousCanvasID, setPreviousCanvasId] = useState<string>('');
+  const [formattedSVGForDownload, setFormattedSVGForDownload] = useState<string | null>(null);
 
-  return <CanvasContext.Provider value={{ userSvg, setUserSvg }}>{children}</CanvasContext.Provider>;
+  return (
+    <CanvasContext.Provider value={{ userSvg, setUserSvg, formattedSVGForDownload, setFormattedSVGForDownload }}>
+      {children}
+    </CanvasContext.Provider>
+  );
 };
 
 const useCanvasContext = () => {

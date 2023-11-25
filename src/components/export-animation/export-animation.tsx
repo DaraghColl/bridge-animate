@@ -2,9 +2,10 @@ import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Tab, Transition } from '@headlessui/react';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
-import { ClipboardDocumentIcon, CodeBracketIcon } from '@heroicons/react/24/outline';
+import { ClipboardDocumentIcon, CodeBracketIcon, ArrowDownOnSquareIcon } from '@heroicons/react/24/outline';
 import { useAnimationsContext } from '@state/animations';
 import { useCreateJSAnimations } from '@hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
+import { useCanvasContext } from '@/state/canvas';
 
 const copyToClipboard = async (code: string[]) => {
   try {
@@ -24,8 +25,10 @@ const ExportAnimation = () => {
   const { generateJSAnimations, generateCSSAnimations, jsAnimations, cssAnimations, clearGeneratedAnimationCode } =
     useCreateJSAnimations();
   const { animations } = useAnimationsContext();
+  const { userSvg, formattedSVGForDownload } = useCanvasContext();
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'js' | 'css'>('js');
+  const [downloadSvgLink, setDownloadSvgLink] = useState('');
 
   const generate = () => {
     if (!animations || animations.length <= 0) return;
@@ -49,6 +52,13 @@ const ExportAnimation = () => {
       });
     }, 10);
   }, [isOpen, activeTab]);
+
+  useEffect(() => {
+    if (!formattedSVGForDownload) return;
+    const formBlob = new Blob([formattedSVGForDownload], { type: 'text/svg' });
+    const blobUrl = URL.createObjectURL(formBlob);
+    setDownloadSvgLink(blobUrl);
+  }, [formattedSVGForDownload, userSvg]);
 
   return (
     <div>
@@ -78,7 +88,7 @@ const ExportAnimation = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="h-[30rem] w-full max-w-3xl flex-col overflow-scroll rounded-2xl bg-light-secondary p-6 text-left align-middle text-dark-primary shadow-xl transition-all dark:bg-dark-secondary dark:text-white">
+                <Dialog.Panel className="h-[30rem] w-full max-w-3xl flex-col overflow-scroll rounded-2xl bg-light-secondary p-6 text-left align-middle text-dark-primary shadow-xl transition-all dark:bg-dark-primary dark:text-white">
                   <Tab.Group>
                     <Tab.List className="flex gap-4">
                       <div className="flex w-full justify-between">
@@ -106,15 +116,29 @@ const ExportAnimation = () => {
                             Css
                           </Tab>
                         </div>
-
-                        <button
-                          type="button"
-                          className="focus-visible:ring-indigp-500 indigo-900 inline-flex justify-center rounded-md border border-transparent bg-accent px-4 py-2
-                        text-sm font-medium hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2"
-                          onClick={() => copyToClipboard(activeTab === 'js' ? jsAnimations : cssAnimations)}
-                        >
-                          <ClipboardDocumentIcon className="h-6 w-6 text-white" />
-                        </button>
+                        <div className="flex items-center gap-4">
+                          <a
+                            href={downloadSvgLink}
+                            download="formatted-svg.svg"
+                            type="button"
+                            aria-label="Download Formatted Svg"
+                            className="focus-visible:ring-indigp-500 indigo-900 flex items-center justify-center gap-2 rounded-md border border-transparent
+                        bg-accent px-4 py-2 text-sm font-medium hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2"
+                          >
+                            <ArrowDownOnSquareIcon className="h-6 w-6 text-white" />
+                            download svg
+                          </a>
+                          <button
+                            type="button"
+                            aria-label="Copy code to clipboard"
+                            className="focus-visible:ring-indigp-500 indigo-900 flex items-center justify-center gap-2 rounded-md border border-transparent
+                        bg-accent px-4 py-2 text-sm font-medium hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2"
+                            onClick={() => copyToClipboard(activeTab === 'js' ? jsAnimations : cssAnimations)}
+                          >
+                            <ClipboardDocumentIcon className="h-6 w-6 text-white" />
+                            copy code
+                          </button>
+                        </div>
                       </div>
                     </Tab.List>
                     <Tab.Panels>
