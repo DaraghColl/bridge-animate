@@ -3,6 +3,7 @@ import { TrashIcon, Square3Stack3DIcon } from '@heroicons/react/24/solid';
 import { useAnimationsContext } from '@state/animations';
 import { useSelectedElementContext } from '@state/selected-element';
 import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
+import { Tooltip } from '../tooltip/tooltip';
 
 const Layers: FC = () => {
   const { selectedElementID, setSelectedElementId } = useSelectedElementContext();
@@ -42,18 +43,20 @@ const Layers: FC = () => {
           <Square3Stack3DIcon className="h-4 w-4" />
           <span>Layers</span>
         </div>
-        <button aria-label="add layer" onClick={handleCreateNewAnimation}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="h-6 w-6 cursor-pointer"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </button>
+        <Tooltip message="add layer" position="left">
+          <button aria-label="add layer" onClick={handleCreateNewAnimation}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="h-6 w-6 cursor-pointer"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
+        </Tooltip>
       </div>
 
       <div className="flex flex-col items-start gap-4 font-thin">

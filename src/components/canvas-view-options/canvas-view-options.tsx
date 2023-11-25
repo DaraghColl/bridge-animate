@@ -1,20 +1,21 @@
 import { Squares2X2Icon } from '@heroicons/react/24/outline';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';
 import { ExportAnimation } from '../export-animation/export-animation.tsx';
+import { Tooltip } from '../tooltip/tooltip.tsx';
 
 const CanvasViewOptions = () => {
   return (
     <div className="absolute top-0 flex w-full justify-around rounded-md bg-transparent">
       <div className="flex items-center gap-2 rounded-lg bg-white p-4 text-sm dark:bg-dark-secondary">
-        <div>
+        <Tooltip message="back to projects" position="bottom">
           <Squares2X2Icon className="h-4 w-4 cursor-pointer" />
-        </div>
-        <div className="flex">
+        </Tooltip>
+        <Tooltip message="toggle theme" position="bottom">
           <ThemeToggle />
-        </div>
-        <div>
+        </Tooltip>
+        <Tooltip message="export code" position="bottom">
           <ExportAnimation />
-        </div>
+        </Tooltip>
       </div>
     </div>
   );
