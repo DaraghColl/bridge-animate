@@ -38,7 +38,7 @@ const listOfElementstoAllowAnimation = [
 const setElementIds = (elements: Element[]): Element[] => {
   const elementsWithIds = elements.map((element) => {
     if (!element.getAttribute('id')) {
-      element.setAttribute('id', `${element.tagName}-${uuidv4()}`);
+      element.setAttribute('id', `${element.tagName}-animate-${uuidv4()}`);
       element.setAttribute('data-generated-animate-id', 'true');
     }
 
@@ -47,6 +47,7 @@ const setElementIds = (elements: Element[]): Element[] => {
     if (duplicateIds.length > 1) {
       const currentId = element.getAttribute('id');
       element.setAttribute('id', `${currentId}-animate-${uuidv4()}`);
+      element.setAttribute('data-generated-animate-id', 'true');
     }
 
     return element;
