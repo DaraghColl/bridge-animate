@@ -94,10 +94,10 @@ const AnimationConfig: FC = () => {
         <div className="flex flex-col pt-2">
           {/* duration */}
           <div className="flex items-center gap-2 pb-4">
-            <label className="basis-1/3" htmlFor="duration">
+            <label className="w-1/3" htmlFor="duration">
               duration
             </label>
-            <div className="basis-2/3">
+            <div className="w-2/3">
               <input
                 name="duration"
                 type="number"
@@ -110,10 +110,10 @@ const AnimationConfig: FC = () => {
           </div>
           {/* delay */}
           <div className="flex items-center gap-2 pb-4">
-            <label className="basis-1/3" htmlFor="delay">
+            <label className="w-1/3" htmlFor="delay">
               delay
             </label>
-            <div className="basis-2/3">
+            <div className="w-2/3">
               <input
                 name="delay"
                 type="number"
@@ -126,10 +126,10 @@ const AnimationConfig: FC = () => {
           </div>
           {/* iteration */}
           <div className="flex items-center gap-2 pb-4">
-            <label className="basis-1/3" htmlFor="iteration">
+            <label className="w-1/3" htmlFor="iteration">
               iteration
             </label>
-            <div className="basis-2/3">
+            <div className="w-2/3">
               <input
                 name="iteration"
                 type="text"
@@ -146,12 +146,12 @@ const AnimationConfig: FC = () => {
           </div>
           {/* direction */}
           <div className="flex items-center gap-2 pb-4">
-            <label className="basis-1/3" htmlFor="direction">
+            <label className="w-1/3" htmlFor="direction">
               direction
             </label>
             <select
               name="direction"
-              className="basis-2/3 rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
+              className="w-2/3 rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
               onBlur={(e) => handleInputChange('animationDirection', e.target.value)}
               onChange={(e) => handleInputChange('animationDirection', e.target.value)}
             >
@@ -166,12 +166,12 @@ const AnimationConfig: FC = () => {
           </div>
           {/* timing */}
           <div className="flex items-center gap-2 pb-4">
-            <label className="basis-1/3" htmlFor="timing">
+            <label className="w-1/3" htmlFor="timing">
               timing
             </label>
             <select
               name="timing"
-              className="basis-2/3 rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
+              className="w-2/3 rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
               onBlur={(e) => handleInputChange('animationTimingFunction', e.target.value)}
               onChange={(e) => handleInputChange('animationTimingFunction', e.target.value)}
             >
@@ -186,12 +186,12 @@ const AnimationConfig: FC = () => {
           </div>
           {/* fill mode */}
           <div className="flex items-center gap-2 pb-4">
-            <label className="basis-1/3" htmlFor="fill">
+            <label className="w-1/3" htmlFor="fill">
               fill mode
             </label>
             <select
               name="fill"
-              className="basis-2/3 rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
+              className="w-2/3 rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
               onBlur={(e) => handleInputChange('animationFillMode', e.target.value)}
               onChange={(e) => handleInputChange('animationFillMode', e.target.value)}
             >
