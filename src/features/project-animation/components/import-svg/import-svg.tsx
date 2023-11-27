@@ -3,7 +3,7 @@ import { Dialog, Tab, Transition } from '@headlessui/react';
 import { DocumentIcon } from '@heroicons/react/24/outline';
 import { useCanvasContext } from '@/features/project-animation/state/canvas';
 import { SVGFileUpload } from './svg-file-upload';
-import { Tooltip } from '../tooltip/tooltip';
+import { Tooltip } from '../../../../shared/components/tooltip/tooltip';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');

@@ -11,11 +11,11 @@
     "paths": {
       "@/*": ["src/*"],
       "@features/*": ["src/features/*"],
-      "@components/*": ["src/features/project-animation/components/*"],
-      "@constants/*": ["src/features/project-animation/constants/*"],
-      "@hooks/*": ["src/features/project-animation/hooks/*"],
-      "@state/*": ["src/features/project-animation/state/*"],
-      "@utils/*": ["src/features/project-animation/utils/*"],
+      "@components/*": ["src/shared/components/*"],
+      "@constants/*": ["src/shared/constants/*"],
+      "@hooks/*": ["src/shared/hooks/*"],
+      "@state/*": ["src/shared/state/*"],
+      "@utils/*": ["src/shared/utils/*"],
       "@assets/*": ["src/assets/*"]
     },
 
