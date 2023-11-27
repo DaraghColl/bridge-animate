@@ -1,7 +1,7 @@
 import { Squares2X2Icon } from '@heroicons/react/24/outline';
+import { ExportAnimation } from '../export-animation/export-animation.tsx';
 import { ThemeToggle } from '@components/theme-toggle/theme-toggle.tsx';
 import { Tooltip } from '@components/tooltip/tooltip.tsx';
-import { ExportAnimation } from '../export-animation/export-animation.tsx';
 
 const CanvasViewOptions = () => {
   return (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useAnimationsContext } from '@/features/project-animation/state/animations';
-import { formatTransformAndScale } from '@/features/project-animation/utils/format-animation/format-animaton';
+import { useAnimationsContext } from '../../state/animations';
+import { formatTransformAndScale } from '../../utils/format-animation/format-animaton';
 
 interface StyleObjectKeys {
   [key: string]: string | number | null | undefined;

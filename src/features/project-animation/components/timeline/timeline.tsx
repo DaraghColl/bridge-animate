@@ -1,10 +1,10 @@
 import { ChangeEvent, FC, Fragment, useEffect, useRef, useState } from 'react';
 import { Keyframe } from './keyframes';
-import { KeyframeTime, useAnimationsContext } from '@/features/project-animation/state/animations';
-import { keyframeTimes } from '@/features/project-animation/constants/constants';
-import { useCreateJSAnimations } from '@/features/project-animation/hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
-import { useSelectedElementContext } from '@/features/project-animation/state/selected-element';
-import { usePrevious } from '@/features/project-animation/hooks/use-previous/use-previous';
+import { KeyframeTime, useAnimationsContext } from '../../state/animations';
+import { keyframeTimes } from '../../constants/constants';
+import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
+import { useSelectedElementContext } from '../../state/selected-element';
+import { usePrevious } from '@hooks/use-previous/use-previous.tsx';
 
 const Timeline: FC = () => {
   const { selectedElementID } = useSelectedElementContext();

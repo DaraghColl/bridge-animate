@@ -1,9 +1,9 @@
-import { Timeline } from '@/features/project-animation/components/timeline/timeline';
-import { ElementList } from '@/features/project-animation/components/element-list/element-list';
-import { Canvas } from '@/features/project-animation/components/canvas/canvas';
-import { StyleControls } from '@/features/project-animation/components/style-controls/style-controls';
-import { Layers } from '@/features/project-animation/components/layers/layers';
-import { AnimationConfig } from '@/features/project-animation/components/animation-config/animation-config';
+import { Timeline } from '../components/timeline/timeline';
+import { ElementList } from '../components/element-list/element-list';
+import { Canvas } from '../components/canvas/canvas';
+import { StyleControls } from '../components/style-controls/style-controls';
+import { Layers } from '../components/layers/layers';
+import { AnimationConfig } from '../components/animation-config/animation-config';
 
 function ProjectAnimation() {
   return (
