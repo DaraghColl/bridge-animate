@@ -1,6 +1,6 @@
 import { FC, useEffect, useState, useCallback, MouseEvent as ReactMouseEvent } from 'react';
-import { useSelectedElementContext } from '@state/selected-element';
-import { useAnimationsContext } from '@state/animations';
+import { useSelectedElementContext } from '@/features/project-animation/state/selected-element';
+import { useAnimationsContext } from '@/features/project-animation/state/animations';
 
 export type TransformType = 'y' | 'x' | 'rotate';
 interface KeyframeTransforms {

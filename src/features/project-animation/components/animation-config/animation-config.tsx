@@ -1,7 +1,11 @@
 import { Cog6ToothIcon } from '@heroicons/react/24/outline';
 import { FC, useEffect, useState } from 'react';
-import { useAnimationsContext, AnimationConfig, AnimationConfigProperties } from '@/state/animations';
-import { useSelectedElementContext } from '@/state/selected-element';
+import {
+  useAnimationsContext,
+  AnimationConfig,
+  AnimationConfigProperties,
+} from '@/features/project-animation/state/animations';
+import { useSelectedElementContext } from '@/features/project-animation/state/selected-element';
 
 const timingFunctinOptions: { value: string; title: string }[] = [
   {

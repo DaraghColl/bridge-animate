@@ -2,9 +2,9 @@ import { FC, Fragment, ReactNode, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Disclosure } from '@headlessui/react';
 import { ChevronRightIcon, CubeTransparentIcon } from '@heroicons/react/24/solid';
-import { useSelectedElementContext } from '@state/selected-element';
-import { useCanvasContext } from '@state/canvas';
-import { formatRandomIdOnLabel } from '@/utils/format-animation/format-animaton';
+import { useSelectedElementContext } from '@/features/project-animation/state/selected-element';
+import { useCanvasContext } from '@/features/project-animation/state/canvas';
+import { formatRandomIdOnLabel } from '@/features/project-animation/utils/format-animation/format-animaton';
 import { ImportSvg } from '../import-svg/import-svg';
 
 const listOfElementstoAllowAnimation = [

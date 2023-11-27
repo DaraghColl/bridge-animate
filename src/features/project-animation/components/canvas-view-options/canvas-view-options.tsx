@@ -1,5 +1,5 @@
 import { Squares2X2Icon } from '@heroicons/react/24/outline';
-import { ThemeToggle } from '../theme-toggle/theme-toggle';
+import { ThemeToggle } from '../theme-toggle/theme-toggle.tsx';
 import { ExportAnimation } from '../export-animation/export-animation.tsx';
 import { Tooltip } from '../tooltip/tooltip.tsx';
 

@@ -51,10 +51,6 @@ input[type='range']::-webkit-slider-thumb {
 
 /** highlight js style theme **/
 
-code {
-  margin-left: -4.5rem;
-}
-
 .hljs {
   color: #abb2bf;
   background: transparent;

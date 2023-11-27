@@ -10,11 +10,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@constants/*": ["src/constants/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@state/*": ["src/state/*"],
-      "@utils/*": ["src/utils/*"],
+      "@features/*": ["src/features/*"],
+      "@components/*": ["src/features/project-animation/components/*"],
+      "@constants/*": ["src/features/project-animation/constants/*"],
+      "@hooks/*": ["src/features/project-animation/hooks/*"],
+      "@state/*": ["src/features/project-animation/state/*"],
+      "@utils/*": ["src/features/project-animation/utils/*"],
       "@assets/*": ["src/assets/*"]
     },
 

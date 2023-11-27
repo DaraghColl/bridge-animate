@@ -1,11 +1,10 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Tab, Transition } from '@headlessui/react';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/default.css';
 import { ClipboardDocumentIcon, CodeBracketIcon, ArrowDownOnSquareIcon } from '@heroicons/react/24/outline';
-import { useAnimationsContext } from '@state/animations';
-import { useCreateJSAnimations } from '@hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
-import { useCanvasContext } from '@/state/canvas';
+import { useAnimationsContext } from '@/features/project-animation/state/animations';
+import { useCreateJSAnimations } from '@/features/project-animation/hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
+import { useCanvasContext } from '@/features/project-animation/state/canvas';
 
 const copyToClipboard = async (code: string[]) => {
   try {
@@ -123,7 +122,7 @@ const ExportAnimation = () => {
                             type="button"
                             aria-label="Download Formatted Svg"
                             className="focus-visible:ring-indigp-500 indigo-900 flex items-center justify-center gap-2 rounded-md border border-transparent
-                        bg-accent px-4 py-2 text-sm font-medium hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2"
+                        bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2"
                           >
                             <ArrowDownOnSquareIcon className="h-6 w-6 text-white" />
                             download svg
@@ -132,7 +131,7 @@ const ExportAnimation = () => {
                             type="button"
                             aria-label="Copy code to clipboard"
                             className="focus-visible:ring-indigp-500 indigo-900 flex items-center justify-center gap-2 rounded-md border border-transparent
-                        bg-accent px-4 py-2 text-sm font-medium hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2"
+                        bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2"
                             onClick={() => copyToClipboard(activeTab === 'js' ? jsAnimations : cssAnimations)}
                           >
                             <ClipboardDocumentIcon className="h-6 w-6 text-white" />

@@ -1,9 +1,9 @@
 import { FC, ChangeEvent, Fragment, useEffect, useState, useCallback } from 'react';
 import { SwatchIcon } from '@heroicons/react/24/outline';
-import { Style, StyleType, useAnimationsContext } from '@state/animations';
-import { useSelectedElementContext } from '@state/selected-element';
-import { usePrevious } from '@hooks/use-previous/use-previous';
-import { formatTransformAndScale } from '@/utils/format-animation/format-animaton';
+import { Style, StyleType, useAnimationsContext } from '@/features/project-animation/state/animations';
+import { useSelectedElementContext } from '@/features/project-animation/state/selected-element';
+import { usePrevious } from '@/features/project-animation/hooks/use-previous/use-previous';
+import { formatTransformAndScale } from '@/features/project-animation/utils/format-animation/format-animaton';
 
 const StyleControls: FC = () => {
   const { selectedElementID } = useSelectedElementContext();

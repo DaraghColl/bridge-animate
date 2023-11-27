@@ -1,8 +1,8 @@
 import { FC, Fragment, useEffect } from 'react';
-import { useSelectedElementContext } from '@state/selected-element';
-import { KeyframeTime, useAnimationsContext } from '@state/animations';
-import { keyframeTimes } from '@constants/constants';
-import { usePrevious } from '@hooks/use-previous/use-previous';
+import { useSelectedElementContext } from '@/features/project-animation/state/selected-element';
+import { KeyframeTime, useAnimationsContext } from '@/features/project-animation/state/animations';
+import { keyframeTimes } from '@/features/project-animation/constants/constants';
+import { usePrevious } from '@/features/project-animation/hooks/use-previous/use-previous';
 
 const Keyframe: FC = () => {
   const { selectedElementID } = useSelectedElementContext();

@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
-import { useSelectedElementContext } from '@state/selected-element';
-import { useCanvasContext } from '@state/canvas';
+import { useSelectedElementContext } from '@/features/project-animation/state/selected-element';
+import { useCanvasContext } from '@/features/project-animation/state/canvas';
 import { Zoom } from './zoom';
 import { CanvasViewOptions } from '../canvas-view-options/canvas-view-options';
 import { TransformTool } from '../transform-tool/transform-tool';
