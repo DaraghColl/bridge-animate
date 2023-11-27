@@ -23,7 +23,7 @@ const MockComponent = () => {
   );
 };
 
-describe('<ElementList />', () => {
+describe('<ConfirmDialog />', () => {
   it('should open dialog on click', () => {
     cy.mount(<MockComponent />);
 
