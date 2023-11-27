@@ -44,21 +44,21 @@ const ProjectList: FC = () => {
         openDialog={newAnimationDialogOpen}
         onDialogClose={() => setNewAnimationDialogOpen(false)}
       >
-        <div className="flex items-center gap-2 pb-4">
+        <div className="mb-4 flex items-center gap-2 border-b-2">
           <PencilSquareIcon className="h-5 w-5" />
           <input
             aria-label="new animation name"
             name="new-animation-name"
             type="text"
             autoComplete="off"
-            className="w-full rounded-sm border-b-2 bg-light-secondary px-2 py-2 text-dark-primary outline-none dark:bg-dark-secondary dark:text-gray-100"
+            className="w-full rounded-sm bg-light-secondary px-2 py-2 text-dark-primary outline-none dark:bg-dark-secondary dark:text-gray-100"
             value={newAnimationName}
             onChange={(e) => setNewAnimationName(e.target.value)}
           />
         </div>
         <button
           type="button"
-          className="inline-flex justify-center rounded-md border border-transparent bg-accent px-4 py-2 text-sm font-medium text-white transition-all ease-in-out hover:scale-105"
+          className="rounded-md border border-transparent bg-accent px-4 py-2 text-sm font-medium text-white transition-all ease-in-out hover:scale-105"
           onClick={createNewAnimationProject}
         >
           Create
