@@ -153,7 +153,7 @@ const Timeline: FC = () => {
             </div>
 
             <div className="flex w-full justify-center">
-              <div className="right-2 flex basis-1/4 items-center gap-4">
+              <div className="right-2 flex items-center gap-4">
                 <button
                   className="rounded-md bg-accent px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   onClick={handleStopAnimation}
