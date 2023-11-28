@@ -31,7 +31,7 @@ const ProjectList: FC = () => {
   };
 
   return (
-    <main className="flex h-screen flex-col gap-4 bg-light-secondary text-dark-primary dark:bg-dark-primary dark:text-white">
+    <main className="flex h-screen flex-col gap-4 bg-light-secondary text-dark-primary dark:bg-dark-secondary dark:text-white">
       <ProjectsListNavbar />
       <div className="mx-auto mt-10 w-full max-w-screen-lg p-4">
         {animationProjects.length <= 0 && <EmptyList createNewAnimation={setNewAnimationDialogOpen} />}
