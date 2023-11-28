@@ -54,7 +54,7 @@ const ConfirmDialog: FC<ConfirmDialogProps> = (props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-light-primary bg-light-secondary p-6 text-left align-middle text-dark-secondary shadow-sm shadow-indigo-600 transition-all dark:bg-dark-secondary dark:text-white">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-light-secondary p-6 text-left align-middle text-dark-secondary shadow-sm transition-all dark:border-2 dark:border-white dark:bg-dark-secondary dark:text-white">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-dark-primary dark:text-white"
