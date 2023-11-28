@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAnimationsContext } from '../../state/animations';
+import { useAnimationsContext } from '../../state/animations/animations';
 import { formatTransformAndScale } from '../../utils/format-animation/format-animaton';
 
 interface StyleObjectKeys {

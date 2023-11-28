@@ -2,8 +2,8 @@ import { FC, Fragment, ReactNode, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Disclosure } from '@headlessui/react';
 import { ChevronRightIcon, CubeTransparentIcon } from '@heroicons/react/24/solid';
-import { useSelectedElementContext } from '../../state/selected-element';
-import { useCanvasContext } from '../../state/canvas';
+import { useSelectedElementContext } from '../../state/selected-element/selected-element';
+import { useCanvasContext } from '../../state/canvas/canvas';
 import { ImportSvg } from '../import-svg/import-svg';
 import { formatRandomIdOnLabel } from '../../utils/format-animation/format-animaton';
 

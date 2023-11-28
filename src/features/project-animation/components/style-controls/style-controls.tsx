@@ -1,7 +1,7 @@
 import { FC, ChangeEvent, Fragment, useEffect, useState, useCallback } from 'react';
 import { SwatchIcon } from '@heroicons/react/24/outline';
-import { Style, StyleType, useAnimationsContext } from '../../state/animations';
-import { useSelectedElementContext } from '../../state/selected-element';
+import { Style, StyleType, useAnimationsContext } from '../../state/animations/animations';
+import { useSelectedElementContext } from '../../state/selected-element/selected-element';
 import { usePrevious } from '@hooks/use-previous/use-previous';
 import { formatTransformAndScale } from '../../utils/format-animation/format-animaton';
 

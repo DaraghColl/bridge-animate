@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { SelectedElementProvider } from '../state/selected-element';
-import { AnimationsProvider } from '../state/animations';
-import { CanvasProvider } from '../state/canvas';
+import { SelectedElementProvider } from '../state/selected-element/selected-element';
+import { AnimationsProvider } from '../state/animations/animations';
+import { CanvasProvider } from '../state/canvas/canvas';
 import { Timeline } from '../components/timeline/timeline';
 import { ElementList } from '../components/element-list/element-list';
 import { Canvas } from '../components/canvas/canvas';

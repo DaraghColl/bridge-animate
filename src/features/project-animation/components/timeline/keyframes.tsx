@@ -1,6 +1,6 @@
 import { FC, Fragment, useEffect } from 'react';
-import { useSelectedElementContext } from '../../state/selected-element';
-import { KeyframeTime, useAnimationsContext } from '../../state/animations';
+import { useSelectedElementContext } from '../../state/selected-element/selected-element';
+import { KeyframeTime, useAnimationsContext } from '../../state/animations/animations';
 import { keyframeTimes } from '../../constants/constants';
 import { usePrevious } from '@hooks/use-previous/use-previous';
 

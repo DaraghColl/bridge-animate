@@ -4,8 +4,8 @@ import {
   useAnimationsContext,
   AnimationConfig,
   AnimationConfigProperties,
-} from '@/features/project-animation/state/animations';
-import { useSelectedElementContext } from '@/features/project-animation/state/selected-element';
+} from '@/features/project-animation/state/animations/animations';
+import { useSelectedElementContext } from '@/features/project-animation/state/selected-element/selected-element';
 
 const timingFunctinOptions: { value: string; title: string }[] = [
   {

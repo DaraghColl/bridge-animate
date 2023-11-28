@@ -2,8 +2,8 @@ import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Tab, Transition } from '@headlessui/react';
 import hljs from 'highlight.js';
 import { ClipboardDocumentIcon, CodeBracketIcon, ArrowDownOnSquareIcon } from '@heroicons/react/24/outline';
-import { useAnimationsContext } from '../../state/animations';
-import { useCanvasContext } from '../../state/canvas';
+import { useAnimationsContext } from '../../state/animations/animations.tsx';
+import { useCanvasContext } from '../../state/canvas/canvas.tsx';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 
 const copyToClipboard = async (code: string[]) => {

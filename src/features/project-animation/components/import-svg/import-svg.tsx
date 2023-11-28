@@ -1,7 +1,7 @@
 import { FC, Fragment, useEffect, useRef, useState } from 'react';
 import { Dialog, Tab, Transition } from '@headlessui/react';
 import { DocumentIcon } from '@heroicons/react/24/outline';
-import { useCanvasContext } from '../../state/canvas';
+import { useCanvasContext } from '../../state/canvas/canvas';
 import { SVGFileUpload } from './svg-file-upload';
 import { Tooltip } from '@components/tooltip/tooltip';
 

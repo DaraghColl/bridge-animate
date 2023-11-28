@@ -3,8 +3,8 @@ import { ElementList } from './element-list';
 import {
   SelectedElementProvider,
   useSelectedElementContext,
-} from '@/features/project-animation/state/selected-element';
-import { CanvasProvider, useCanvasContext } from '@/features/project-animation/state/canvas';
+} from '@/features/project-animation/state/selected-element/selected-element';
+import { CanvasProvider, useCanvasContext } from '@/features/project-animation/state/canvas/canvas';
 import { useEffect } from 'react';
 
 const MockCanvas = () => {
