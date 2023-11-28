@@ -1,7 +1,11 @@
 import { FC } from 'react';
-import LandingImage from '@assets/landing-image.png';
+import LandingImageDark from '@assets/landing-image--dark.png';
+import LandingImageLight from '@assets/landing-image--light.png';
+import { useThemeContext } from '@/shared/state/theme/theme';
 
 const Landing: FC = () => {
+  const { theme } = useThemeContext();
+
   return (
     <div className="h-screen bg-light-secondary pt-20 text-dark-primary dark:bg-dark-secondary dark:text-white">
       <div className="absolute isolate px-6 pt-14 lg:px-8">
@@ -21,8 +25,12 @@ const Landing: FC = () => {
           <h2 className="mb-10 animate-fade-in-up text-xl font-thin opacity-0">
             simplify your animation process from design to code
           </h2>
-          <div className="max-w-screen-lg animate-fade-in-up px-36 opacity-0">
-            <img src={LandingImage} alt="landing image" className="rounded-md" />
+          <div className="max-w-screen-lg animate-fade-in-up px-28 opacity-0">
+            <img
+              src={theme === 'dark' ? LandingImageDark : LandingImageLight}
+              alt="landing image"
+              className="rounded-md"
+            />
           </div>
         </div>
       </div>
