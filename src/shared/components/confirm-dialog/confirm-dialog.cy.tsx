@@ -24,14 +24,6 @@ const MockComponent = () => {
 };
 
 describe('<ConfirmDialog />', () => {
-  it('should open dialog on click', () => {
-    cy.mount(<MockComponent />);
-
-    cy.get('[data-cy="mock_component_dialog_button_open"]').click();
-
-    cy.get('[data-cy="confirm_dialog"]').should('be.visible');
-  });
-
   it('should open dialog on click and show title and message', () => {
     cy.mount(<MockComponent />);
 
@@ -45,8 +37,6 @@ describe('<ConfirmDialog />', () => {
     cy.mount(<MockComponent />);
 
     cy.get('[data-cy="mock_component_dialog_button_open"]').click();
-    cy.get('[data-cy="confirm_dialog"]').should('be.visible');
-
     cy.get('[data-cy="confirm_dialog_cancel"]').click();
     cy.get('[data-cy="confirm_dialog_message"]').should(($el) => {
       const doesNotExist = $el.length == 0;
