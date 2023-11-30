@@ -11,9 +11,10 @@ const ThemeToggle: FC = () => {
       id="theme_toggle"
       aria-label="theme toggle button"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      data-cy="theme_toggle_button"
     >
-      {theme === 'light' && <MoonIcon className="h-4 w-4 cursor-pointer" />}
-      {theme === 'dark' && <SunIcon className="h-4 w-4 cursor-pointer" />}
+      {theme === 'light' && <MoonIcon className="h-4 w-4 cursor-pointer" data-cy="theme_toggle_moon_icon" />}
+      {theme === 'dark' && <SunIcon className="h-4 w-4 cursor-pointer" data-cy="theme_toggle_sun_icon" />}
     </button>
   );
 };
