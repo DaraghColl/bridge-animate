@@ -35,7 +35,7 @@ const MockSelectedElementText = () => {
   return <div data-cy="mock_selected_element_id">{selectedElementID}</div>;
 };
 
-describe('<ElementList />', () => {
+describe('ElementList component', () => {
   it('should show no element in canvas message', () => {
     cy.mount(
       <SelectedElementProvider>
