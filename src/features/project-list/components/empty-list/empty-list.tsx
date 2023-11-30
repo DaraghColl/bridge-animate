@@ -1,7 +1,7 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import { EmptyListIllustration } from './empty-list-illustration';
-import { Button } from '@/shared/components/button/button';
+import { Button } from '@shared/components/button/button';
 
 interface EmptyListProps {
   createNewAnimation: Dispatch<SetStateAction<boolean>>;

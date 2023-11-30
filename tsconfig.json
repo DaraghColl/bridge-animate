@@ -10,13 +10,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      "@assets/*": ["src/assets/*"],
       "@features/*": ["src/features/*"],
-      "@components/*": ["src/shared/components/*"],
-      "@constants/*": ["src/shared/constants/*"],
-      "@hooks/*": ["src/shared/hooks/*"],
-      "@state/*": ["src/shared/state/*"],
-      "@utils/*": ["src/shared/utils/*"],
-      "@assets/*": ["src/assets/*"]
+      "@shared/*": ["src/shared/*"]
     },
 
     /* Bundler mode */

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import LandingImageDark from '@assets/landing-image--dark.png';
 import LandingImageLight from '@assets/landing-image--light.png';
-import { useThemeContext } from '@/shared/state/theme/theme';
+import { useThemeContext } from '@shared/state/theme/theme';
 
 const Landing: FC = () => {
   const { theme } = useThemeContext();

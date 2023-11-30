@@ -3,9 +3,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { PencilSquareIcon, PlusCircleIcon } from '@heroicons/react/24/outline';
 import { ProjectsListNavbar } from '../components/projects-list-navbar/projects-list-navbar';
 import { EmptyList } from '../components/empty-list/empty-list';
-import { StandardDialog } from '@/shared/components/standard-dialog/standard-dialog';
 import { ListWithAnimations } from '../components/list-with-animations/lis-with-animations';
-import { Button } from '@/shared/components/button/button';
+import { StandardDialog } from '@shared/components/standard-dialog/standard-dialog';
+import { Button } from '@shared/components/button/button';
 
 export interface AnimationProject {
   id: string;

@@ -1,7 +1,7 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { ArchiveBoxIcon, PlusCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { AnimationProject } from '../../pages/project-list';
-import { Tooltip } from '@/shared/components/tooltip/tooltip';
+import { Tooltip } from '@shared/components/tooltip/tooltip';
 
 interface ListWithAnimationsProps {
   animationProjects: AnimationProject[];

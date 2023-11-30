@@ -6,7 +6,7 @@ import { keyframeTimes } from '../../constants/constants';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 import { useSelectedElementContext } from '../../state/selected-element/selected-element.tsx';
 import { usePrevious } from '@hooks/use-previous/use-previous.tsx';
-import { Button } from '@/shared/components/button/button.tsx';
+import { Button } from '@shared/components/button/button.tsx';
 
 const Timeline: FC = () => {
   const { selectedElementID } = useSelectedElementContext();

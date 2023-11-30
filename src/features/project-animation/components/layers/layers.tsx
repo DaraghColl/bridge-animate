@@ -2,8 +2,8 @@ import { FC, useState } from 'react';
 import { TrashIcon, Square3Stack3DIcon } from '@heroicons/react/24/solid';
 import { useAnimationsContext } from '../../state/animations/animations';
 import { useSelectedElementContext } from '../../state/selected-element/selected-element';
-import { ConfirmDialog } from '@components/confirm-dialog/confirm-dialog';
-import { Tooltip } from '@components/tooltip/tooltip';
+import { ConfirmDialog } from '@shared/components/confirm-dialog/confirm-dialog';
+import { Tooltip } from '@shared/components/tooltip/tooltip';
 
 const Layers: FC = () => {
   const { selectedElementID, setSelectedElementId } = useSelectedElementContext();

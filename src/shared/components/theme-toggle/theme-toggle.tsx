@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
-import { useThemeContext } from '@/shared/state/theme/theme';
+import { useThemeContext } from '@shared/state/theme/theme';
 
 const ThemeToggle: FC = () => {
   const { theme, setTheme } = useThemeContext();

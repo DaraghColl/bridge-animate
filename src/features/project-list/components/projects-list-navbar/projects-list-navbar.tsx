@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ViewfinderCircleIcon } from '@heroicons/react/24/outline';
-import { ThemeToggle } from '@components/theme-toggle/theme-toggle.tsx';
-import { Tooltip } from '@components/tooltip/tooltip.tsx';
+import { ThemeToggle } from '@shared/components/theme-toggle/theme-toggle.tsx';
+import { Tooltip } from '@shared/components/tooltip/tooltip.tsx';
 
 const ProjectsListNavbar: FC = () => {
   return (
