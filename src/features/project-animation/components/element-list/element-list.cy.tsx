@@ -4,6 +4,7 @@ import {
   SelectedElementProvider,
   useSelectedElementContext,
 } from '@/features/project-animation/state/selected-element/selected-element';
+import { ThemeProvider } from '@shared/state/theme/theme';
 import { CanvasProvider, useCanvasContext } from '@/features/project-animation/state/canvas/canvas';
 import { useEffect } from 'react';
 
@@ -40,7 +41,9 @@ describe('ElementList component', () => {
     cy.mount(
       <SelectedElementProvider>
         <CanvasProvider>
-          <ElementList />
+          <ThemeProvider>
+            <ElementList />
+          </ThemeProvider>
         </CanvasProvider>
       </SelectedElementProvider>,
     );
@@ -52,8 +55,10 @@ describe('ElementList component', () => {
     cy.mount(
       <SelectedElementProvider>
         <CanvasProvider>
-          <MockCanvas />
-          <ElementList />
+          <ThemeProvider>
+            <MockCanvas />
+            <ElementList />
+          </ThemeProvider>
         </CanvasProvider>
       </SelectedElementProvider>,
     );
@@ -65,9 +70,11 @@ describe('ElementList component', () => {
     cy.mount(
       <SelectedElementProvider>
         <CanvasProvider>
-          <MockCanvas />
-          <ElementList />
-          <MockSelectedElementText />
+          <ThemeProvider>
+            <MockCanvas />
+            <ElementList />
+            <MockSelectedElementText />
+          </ThemeProvider>
         </CanvasProvider>
       </SelectedElementProvider>,
     );

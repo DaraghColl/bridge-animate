@@ -1,9 +1,10 @@
 import { FC, Fragment, useEffect, useRef, useState } from 'react';
 import { Dialog, Tab, Transition } from '@headlessui/react';
 import { DocumentIcon } from '@heroicons/react/24/outline';
+import { Tooltip } from 'react-tooltip';
 import { useCanvasContext } from '../../state/canvas/canvas';
+import { useThemeContext } from '@/shared/state/theme/theme';
 import { SVGFileUpload } from './svg-file-upload';
-import { Tooltip } from '@shared/components/tooltip/tooltip';
 import { Button } from '@shared/components/button/button';
 
 function classNames(...classes: string[]) {
@@ -12,6 +13,7 @@ function classNames(...classes: string[]) {
 
 const ImportSvg: FC = () => {
   const { userSvg, setUserSvg } = useCanvasContext();
+  const { theme } = useThemeContext();
   const [file, setFile] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const svgUploadAreaRef = useRef(null);
@@ -42,13 +44,26 @@ const ImportSvg: FC = () => {
   return (
     <Fragment>
       <div className="flex justify-around">
-        <Tooltip message="upload new svg" position="left">
-          <Button variant="filled" color="accent" rounded="sm" onClick={() => setIsOpen(true)} data-cy="import_svg">
-            <div className="flex items-center gap-2">
-              <DocumentIcon className="h-4 w-4 text-white" />
-            </div>
-          </Button>
+        <Tooltip
+          anchorSelect="#import_svg_button"
+          place="top"
+          variant={theme === 'dark' ? 'light' : 'dark'}
+          delayShow={500}
+        >
+          upload new svg
         </Tooltip>
+        <Button
+          variant="filled"
+          color="accent"
+          rounded="sm"
+          onClick={() => setIsOpen(true)}
+          data-cy="import_svg"
+          id="import_svg_button"
+        >
+          <div className="flex items-center gap-2">
+            <DocumentIcon className="h-4 w-4 text-white" />
+          </div>
+        </Button>
       </div>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeDialog} initialFocus={svgUploadAreaRef}>

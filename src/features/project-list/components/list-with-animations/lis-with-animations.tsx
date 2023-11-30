@@ -1,7 +1,8 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { ArchiveBoxIcon, PlusCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import { Tooltip } from 'react-tooltip';
+import { useThemeContext } from '@/shared/state/theme/theme';
 import { AnimationProject } from '../../pages/project-list';
-import { Tooltip } from '@shared/components/tooltip/tooltip';
 
 interface ListWithAnimationsProps {
   animationProjects: AnimationProject[];
@@ -10,6 +11,8 @@ interface ListWithAnimationsProps {
 
 const ListWithAnimations: FC<ListWithAnimationsProps> = (props) => {
   const { animationProjects, createNewAnimation } = props;
+  const { theme } = useThemeContext();
+
   return (
     <div className="text-sm tracking-wide">
       <h2 className="font-bold">Your Animations</h2>
@@ -28,15 +31,33 @@ const ListWithAnimations: FC<ListWithAnimationsProps> = (props) => {
                 <td className="cursor-pointer pb-4">{animation.name}</td>
                 <td className="pb-4">{animation.createdAt.toLocaleDateString('en-US')}</td>
                 <td className="flex gap-2 pb-4">
-                  <button className="cursor-pointer transition-all ease-in-out hover:scale-110">
-                    <Tooltip message="delete animation" position="bottom">
-                      <XCircleIcon className="h-5 w-5" />
-                    </Tooltip>
+                  <Tooltip
+                    anchorSelect="#list_delete_animation"
+                    place="top"
+                    variant={theme === 'dark' ? 'light' : 'dark'}
+                    delayShow={800}
+                  >
+                    delete animation
+                  </Tooltip>
+                  <button
+                    id="list_delete_animation"
+                    className="cursor-pointer transition-all ease-in-out hover:scale-110"
+                  >
+                    <XCircleIcon className="h-5 w-5" />
                   </button>
-                  <button className="pointer-events-none cursor-pointer transition-all ease-in-out hover:scale-110">
-                    <Tooltip message="archive animation" position="bottom">
-                      <ArchiveBoxIcon className="h-5 w-5" />
-                    </Tooltip>
+                  <Tooltip
+                    anchorSelect="#list_delete_animation"
+                    place="top"
+                    variant={theme === 'dark' ? 'light' : 'dark'}
+                    delayShow={800}
+                  >
+                    archive animation
+                  </Tooltip>
+                  <button
+                    id="list_achive_animation"
+                    className="pointer-events-none cursor-pointer transition-all ease-in-out hover:scale-110"
+                  >
+                    <ArchiveBoxIcon className="h-5 w-5" />
                   </button>
                 </td>
               </tr>
