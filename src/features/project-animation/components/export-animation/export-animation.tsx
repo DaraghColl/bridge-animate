@@ -1,10 +1,11 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Tab, Transition } from '@headlessui/react';
-import hljs from 'highlight.js';
+import Highlight from 'react-highlight';
 import { ClipboardDocumentIcon, CodeBracketIcon, ArrowDownOnSquareIcon } from '@heroicons/react/24/outline';
 import { useAnimationsContext } from '../../state/animations/animations.tsx';
 import { useCanvasContext } from '../../state/canvas/canvas.tsx';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
+import { Button } from '@/shared/components/button/button.tsx';
 
 const copyToClipboard = async (code: string[]) => {
   try {
@@ -42,15 +43,6 @@ const ExportAnimation = () => {
       clearGeneratedAnimationCode();
     }, 500);
   };
-
-  useEffect(() => {
-    // TODO: fix & remove timeout for highlight
-    setTimeout(() => {
-      document.querySelectorAll('code').forEach((block) => {
-        hljs.highlightElement(block as HTMLElement);
-      });
-    }, 10);
-  }, [isOpen, activeTab]);
 
   useEffect(() => {
     if (!formattedSVGForDownload) return;
@@ -122,21 +114,22 @@ const ExportAnimation = () => {
                             type="button"
                             aria-label="Download Formatted Svg"
                             className="focus-visible:ring-indigp-500 indigo-900 flex items-center justify-center gap-2 rounded-md border border-transparent
-                        bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2"
+                        bg-accent px-4 py-2 text-sm font-medium text-white transition-all ease-in-out hover:scale-105 hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2"
                           >
                             <ArrowDownOnSquareIcon className="h-6 w-6 text-white" />
                             download svg
                           </a>
-                          <button
-                            type="button"
-                            aria-label="Copy code to clipboard"
-                            className="focus-visible:ring-indigp-500 indigo-900 flex items-center justify-center gap-2 rounded-md border border-transparent
-                        bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent focus:scale-90 focus:outline-none focus-visible:ring-2"
+                          <Button
+                            variant="filled"
+                            color="accent"
+                            rounded="md"
                             onClick={() => copyToClipboard(activeTab === 'js' ? jsAnimations : cssAnimations)}
                           >
-                            <ClipboardDocumentIcon className="h-6 w-6 text-white" />
-                            copy code
-                          </button>
+                            <div className="flex items-center gap-2">
+                              <ClipboardDocumentIcon className="h-6 w-6 text-white" />
+                              copy code
+                            </div>
+                          </Button>
                         </div>
                       </div>
                     </Tab.List>
@@ -156,11 +149,7 @@ const ExportAnimation = () => {
                             <div className="mb-5">
                               {jsAnimations.length &&
                                 jsAnimations.map((animation) => {
-                                  return (
-                                    <pre key={animation}>
-                                      <code className="language-javascript">{animation}</code>
-                                    </pre>
-                                  );
+                                  return <Highlight className="language-javascript">{animation}</Highlight>;
                                 })}
                             </div>
                           </div>
@@ -181,11 +170,7 @@ const ExportAnimation = () => {
                             <div className="mb-5">
                               {cssAnimations.length &&
                                 cssAnimations.map((animation) => {
-                                  return (
-                                    <pre key={animation}>
-                                      <code className="language-css">{animation}</code>
-                                    </pre>
-                                  );
+                                  return <Highlight className="language-css">{animation}</Highlight>;
                                 })}
                             </div>
                           </div>
