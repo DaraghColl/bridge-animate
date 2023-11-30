@@ -30,7 +30,7 @@ export type Style = {
 
 export type KeyframeTime = '0' | '0.25' | '0.50' | '0.75' | '1';
 
-interface Keyframe {
+export interface Keyframe {
   time: KeyframeTime;
   styles: Style;
 }

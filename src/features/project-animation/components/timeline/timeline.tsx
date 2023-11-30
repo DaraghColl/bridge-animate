@@ -125,36 +125,69 @@ const Timeline: FC = () => {
   };
 
   return (
-    <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll rounded-md bg-white p-4 dark:bg-dark-secondary">
+    <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll rounded-md bg-white text-dark-primary dark:bg-dark-secondary dark:text-white">
       {animations && animations.length <= 0 && (
         <span className="text-sm tracking-wide">Select Element and add an animation layer</span>
       )}
       {animations && animations.length > 0 && (
         <Fragment>
-          <div className="flex h-full flex-col justify-between">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                {keyframeTimes.map((time) => (
-                  <div key={time}>{keyframePercentageMap[time]}</div>
-                ))}
+          <div className="flex h-full flex-col">
+            <div className="sticky top-0 z-10 flex w-full gap-4 bg-white px-4 pb-4 pt-2 dark:bg-dark-secondary">
+              {/* controls */}
+              <div className="flex w-1/6 gap-2">
+                <button onClick={handleStopAnimation}>
+                  <div className="flex items-center gap-2">
+                    <StopIcon className="h-4 w-4" />
+                  </div>
+                </button>
+                <button onClick={handlePlayAnimation}>
+                  <div className="flex items-center gap-2">
+                    <PlayIcon className="h-4 w-4" />
+                  </div>
+                </button>
+                <button onClick={handlePauseAnimation}>
+                  <div className="flex items-center gap-2">
+                    <PauseIcon className="h-4 w-4" />
+                  </div>
+                </button>
               </div>
-              <div className="mb-5 flex items-center">
-                <input
-                  ref={scrubberRef}
-                  value={scrubberValue}
-                  id="scrubber"
-                  type="range"
-                  className="h-1 w-full cursor-pointer appearance-none rounded-lg bg-light-secondary accent-accent"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
-                  min="0"
-                  max="2500"
-                  disabled={animationsToPay.length <= 0}
-                ></input>
+              {/* controls */}
+              {/* scrub */}
+              <div className="w-5/6">
+                <div className="flex items-center justify-between">
+                  {keyframeTimes.map((time) => (
+                    <div className="text-sm" key={time}>
+                      {keyframePercentageMap[time]}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 flex items-center">
+                  <input
+                    ref={scrubberRef}
+                    value={scrubberValue}
+                    id="scrubber"
+                    type="range"
+                    className="h-1 w-full cursor-pointer appearance-none rounded-lg bg-light-secondary accent-accent"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => onScrubChange(e)}
+                    min="0"
+                    max="2500"
+                    disabled={animationsToPay.length <= 0}
+                  ></input>
+                </div>
               </div>
-              <Keyframe />
+              {/* scrub */}
             </div>
 
-            <div className="flex w-full justify-center">
+            <div className="mt-4 flex flex-col gap-4 px-4">
+              <div className="overflow-scroll">
+                {animations.map((animation) => {
+                  return <Keyframe animation={animation} />;
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* <div className="flex w-full justify-center">
               <div className="right-2 flex items-center gap-4">
                 <Button variant="filled" color="accent" rounded="md" onClick={handleStopAnimation}>
                   <div className="flex items-center gap-2">
@@ -172,8 +205,7 @@ const Timeline: FC = () => {
                   </div>
                 </Button>
               </div>
-            </div>
-          </div>
+            </div> */}
         </Fragment>
       )}
     </div>
