@@ -3,7 +3,8 @@ import { Dialog, Tab, Transition } from '@headlessui/react';
 import { DocumentIcon } from '@heroicons/react/24/outline';
 import { useCanvasContext } from '../../state/canvas/canvas';
 import { SVGFileUpload } from './svg-file-upload';
-import { Tooltip } from '@components/tooltip/tooltip';
+import { Tooltip } from '@/shared/components/tooltip/tooltip';
+import { Button } from '@/shared/components/button/button';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -42,14 +43,11 @@ const ImportSvg: FC = () => {
     <Fragment>
       <div className="flex justify-around">
         <Tooltip message="upload new svg" position="left">
-          <button
-            aria-label="import svg"
-            className="flex items-center justify-around gap-2 rounded-md bg-accent px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-            data-cy="import_svg"
-            onClick={() => setIsOpen(true)}
-          >
-            <DocumentIcon className="h-4 w-4 text-white" />
-          </button>
+          <Button variant="filled" color="accent" rounded="sm" onClick={() => setIsOpen(true)} data-cy="import_svg">
+            <div className="flex items-center gap-2">
+              <DocumentIcon className="h-4 w-4 text-white" />
+            </div>
+          </Button>
         </Tooltip>
       </div>
       <Transition appear show={isOpen} as={Fragment}>

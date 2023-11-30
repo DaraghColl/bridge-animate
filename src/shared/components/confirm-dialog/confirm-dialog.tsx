@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Dispatch, FC, Fragment, SetStateAction, useEffect, useState } from 'react';
+import { Button } from '../button/button';
 
 interface ConfirmDialogProps {
   openDialog: boolean;
@@ -67,24 +68,19 @@ const ConfirmDialog: FC<ConfirmDialogProps> = (props) => {
                     {message}
                   </p>
                 </div>
-
                 <div className="mt-4 flex gap-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-900 hover:bg-indigo-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
-                    onClick={cancel}
-                    data-cy="confirm_dialog_cancel"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-indigo-100 px-4 py-2 text-sm font-medium text-indigo-900 hover:bg-indigo-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                  <Button variant="ghost" color="inherit" onClick={cancel} data-cy="confirm_dialog_cancel">
+                    <div className="flex items-center gap-2">Cancel</div>
+                  </Button>
+                  <Button
+                    variant="filled"
+                    color="accent"
+                    rounded="md"
                     onClick={confirm}
                     data-cy="confirm_dialog_confirm"
                   >
-                    Confirm
-                  </button>
+                    <div className="flex items-center gap-2">Confirm</div>
+                  </Button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

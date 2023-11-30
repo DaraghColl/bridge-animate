@@ -1,10 +1,11 @@
 import { FC, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { PencilSquareIcon } from '@heroicons/react/24/outline';
+import { PencilSquareIcon, PlusCircleIcon } from '@heroicons/react/24/outline';
 import { ProjectsListNavbar } from '../components/projects-list-navbar/projects-list-navbar';
 import { EmptyList } from '../components/empty-list/empty-list';
 import { StandardDialog } from '@/shared/components/standard-dialog/standard-dialog';
 import { ListWithAnimations } from '../components/list-with-animations/lis-with-animations';
+import { Button } from '@/shared/components/button/button';
 
 export interface AnimationProject {
   id: string;
@@ -56,13 +57,12 @@ const ProjectList: FC = () => {
             onChange={(e) => setNewAnimationName(e.target.value)}
           />
         </div>
-        <button
-          type="button"
-          className="rounded-md border border-transparent bg-accent px-4 py-2 text-sm font-medium text-white transition-all ease-in-out hover:scale-105"
-          onClick={createNewAnimationProject}
-        >
-          Create
-        </button>
+        <Button variant="filled" color="accent" rounded="md" onClick={createNewAnimationProject}>
+          <div className="flex items-center gap-2">
+            <PlusCircleIcon className="h-4 w-4 text-white" />
+            <span>create</span>
+          </div>
+        </Button>
       </StandardDialog>
     </main>
   );
