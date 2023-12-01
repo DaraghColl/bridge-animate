@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 import { PlayIcon, PauseIcon, StopIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/shared/components/button/button';
 
@@ -12,7 +12,7 @@ const PlayControls: FC<PlayControlsProps> = (props) => {
   const { playAnimation, pauseAnimation, stopAnimation } = props;
 
   return (
-    <div className="flex w-1/6 justify-center gap-2 pt-2" data-cy="play_controls">
+    <Fragment>
       <Button
         variant="ghost"
         color="inherit"
@@ -49,7 +49,7 @@ const PlayControls: FC<PlayControlsProps> = (props) => {
           <PauseIcon className="h-4 w-4 text-dark-primary dark:text-white" />
         </div>
       </Button>
-    </div>
+    </Fragment>
   );
 };
 

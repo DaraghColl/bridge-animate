@@ -120,7 +120,13 @@ const Timeline: FC = () => {
       <Fragment>
         <div className="flex h-full flex-col">
           <div className="sticky top-0 z-10 flex w-full gap-4 border-light-secondary bg-white pb-2 pr-4 pt-2 dark:bg-dark-secondary">
-            <PlayControls playAnimation={playAnimation} pauseAnimation={pauseAnimation} stopAnimation={stopAnimation} />
+            <div className="flex w-1/6 justify-center gap-2 pt-2" data-cy="play_controls">
+              <PlayControls
+                playAnimation={playAnimation}
+                pauseAnimation={pauseAnimation}
+                stopAnimation={stopAnimation}
+              />
+            </div>
             <Scrubber
               scrubberRef={scrubberRef}
               scrubberValue={scrubberValue}
