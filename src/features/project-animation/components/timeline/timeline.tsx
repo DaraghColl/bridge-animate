@@ -11,8 +11,8 @@ const Timeline: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const { animations, isPlaying, setIsPlaying } = useAnimationsContext();
   const { animationsToPay } = useCreateJSAnimations();
-  const scrubberRef = useRef<HTMLInputElement>(null);
   const previousSelectedElementId = usePrevious(selectedElementID);
+  const scrubberRef = useRef<HTMLInputElement>(null);
   const [scrubberValue, setScrubberValue] = useState<number>(0);
   let requestAnimation: number;
 
