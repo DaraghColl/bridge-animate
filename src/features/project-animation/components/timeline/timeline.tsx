@@ -1,12 +1,11 @@
 import { ChangeEvent, FC, Fragment, useEffect, useRef, useState } from 'react';
-import { PlayIcon, PauseIcon, StopIcon } from '@heroicons/react/24/outline';
-import { Keyframe } from './keyframes';
 import { KeyframeTime, useAnimationsContext } from '../../state/animations/animations.tsx';
 import { keyframeTimes } from '../../constants/constants';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 import { useSelectedElementContext } from '../../state/selected-element/selected-element.tsx';
 import { usePrevious } from '@shared/hooks/use-previous/use-previous.tsx';
-import { Button } from '@shared/components/button/button.tsx';
+import { Keyframe } from './keyframes';
+import { PlayControls } from './play-controls/play-controls.tsx';
 
 const Timeline: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
@@ -27,7 +26,7 @@ const Timeline: FC = () => {
     cancelAnimationFrame(requestAnimation);
   };
 
-  const handlePlayAnimation = () => {
+  const playAnimation = () => {
     if (!selectedElementID) return;
 
     const selectedElement = document.getElementById(selectedElementID);
@@ -55,7 +54,7 @@ const Timeline: FC = () => {
     });
   };
 
-  const handlePauseAnimation = () => {
+  const pauseAnimation = () => {
     // have to create a finish event to trigger stop animation frame being called
     const fakePauseEvent = new Event('finish');
 
@@ -77,7 +76,7 @@ const Timeline: FC = () => {
     }
   };
 
-  const handleStopAnimation = () => {
+  const stopAnimation = () => {
     cancelGetAnimationTime();
     setIsPlaying(false);
     cancelGetAnimationTime();
@@ -133,25 +132,11 @@ const Timeline: FC = () => {
         <Fragment>
           <div className="flex h-full flex-col">
             <div className="sticky top-0 z-10 flex w-full gap-4 bg-white px-4 pb-4 pt-2 dark:bg-dark-secondary">
-              {/* controls */}
-              <div className="flex w-1/6 gap-2">
-                <button onClick={handleStopAnimation}>
-                  <div className="flex items-center gap-2">
-                    <StopIcon className="h-4 w-4" />
-                  </div>
-                </button>
-                <button onClick={handlePlayAnimation}>
-                  <div className="flex items-center gap-2">
-                    <PlayIcon className="h-4 w-4" />
-                  </div>
-                </button>
-                <button onClick={handlePauseAnimation}>
-                  <div className="flex items-center gap-2">
-                    <PauseIcon className="h-4 w-4" />
-                  </div>
-                </button>
-              </div>
-              {/* controls */}
+              <PlayControls
+                playAnimation={playAnimation}
+                pauseAnimation={pauseAnimation}
+                stopAnimation={stopAnimation}
+              />
               {/* scrub */}
               <div className="w-5/6">
                 <div className="flex items-center justify-between">
@@ -186,26 +171,6 @@ const Timeline: FC = () => {
               </div>
             </div>
           </div>
-
-          {/* <div className="flex w-full justify-center">
-              <div className="right-2 flex items-center gap-4">
-                <Button variant="filled" color="accent" rounded="md" onClick={handleStopAnimation}>
-                  <div className="flex items-center gap-2">
-                    <StopIcon className="h-4 w-4 text-white" />
-                  </div>
-                </Button>
-                <Button variant="filled" color="accent" rounded="md" onClick={handlePlayAnimation}>
-                  <div className="flex items-center gap-2">
-                    <PlayIcon className="h-4 w-4 text-white" />
-                  </div>
-                </Button>
-                <Button variant="filled" color="accent" rounded="md" onClick={handlePauseAnimation}>
-                  <div className="flex items-center gap-2">
-                    <PauseIcon className="h-4 w-4 text-white" />
-                  </div>
-                </Button>
-              </div>
-            </div> */}
         </Fragment>
       )}
     </div>
