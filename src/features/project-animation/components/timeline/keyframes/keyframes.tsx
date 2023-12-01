@@ -1,15 +1,15 @@
 import { FC, Fragment, useEffect } from 'react';
 import { flushSync } from 'react-dom';
-import { useSelectedElementContext } from '../../state/selected-element/selected-element';
-import { Animation, KeyframeTime, useAnimationsContext } from '../../state/animations/animations';
-import { keyframeTimes } from '../../constants/constants';
+import { useSelectedElementContext } from '../../../state/selected-element/selected-element';
+import { Animation, KeyframeTime, useAnimationsContext } from '../../../state/animations/animations';
+import { keyframeTimes } from '../../../constants/constants';
 import { usePrevious } from '@shared/hooks/use-previous/use-previous';
 
-interface KeyframeProps {
+interface KeyframesProps {
   animation: Animation;
 }
 
-const Keyframe: FC<KeyframeProps> = (props) => {
+const Keyframes: FC<KeyframesProps> = (props) => {
   const { animation } = props;
 
   const { selectedElementID, setSelectedElementId } = useSelectedElementContext();
@@ -101,4 +101,4 @@ const Keyframe: FC<KeyframeProps> = (props) => {
   );
 };
 
-export { Keyframe };
+export { Keyframes };

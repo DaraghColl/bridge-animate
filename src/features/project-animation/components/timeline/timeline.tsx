@@ -3,7 +3,7 @@ import { useAnimationsContext } from '../../state/animations/animations.tsx';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 import { useSelectedElementContext } from '../../state/selected-element/selected-element.tsx';
 import { usePrevious } from '@shared/hooks/use-previous/use-previous.tsx';
-import { Keyframe } from './keyframes';
+import { Keyframes } from './keyframes/keyframes.tsx';
 import { PlayControls } from './play-controls/play-controls.tsx';
 import { Scrubber } from './scrubber/scrubber.tsx';
 
@@ -138,7 +138,7 @@ const Timeline: FC = () => {
             <div className="overflow-scroll">
               {animations &&
                 animations.map((animation) => {
-                  return <Keyframe animation={animation} />;
+                  return <Keyframes animation={animation} />;
                 })}
             </div>
           </div>
