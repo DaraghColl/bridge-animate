@@ -7,7 +7,7 @@ export default {
     extend: {
       colors: {
         'dark-primary': '#181A1D',
-        'dark-secondary': '#131315',
+        'dark-secondary': '#111111',
         'light-primary': '#fffff',
         'light-secondary': slate[100],
         'slate-light': slate[50],

@@ -60,13 +60,15 @@ const Keyframe: FC<KeyframeProps> = (props) => {
   }, [previousSelectedElementId, selectedElementID, setSelectedKeyFrameTime]);
 
   return (
-    <div className="mb-2 flex flex-col items-center justify-around px-1 text-sm">
+    <div
+      className={`flex flex-col items-center justify-around text-sm ${selectedElementID === animation.name ? '' : ''}`}
+    >
       {selectedElementID && animations && animations?.length > 0 && animations !== null && (
         <div className="flex w-full items-center gap-4">
-          <div className="w-1/6 cursor-pointer">
+          <div className="flex w-1/6 cursor-pointer items-center self-stretch pl-2">
             <span className={`${selectedElementID === animation.name ? 'text-accent' : ''}`}>{animation.name}</span>
           </div>
-          <div className="mb-4 mt-4 w-5/6">
+          <div className="mb-4 mt-4 w-5/6 pr-1">
             <div className="relative flex h-1 w-full items-center justify-between rounded-sm bg-light-secondary dark:bg-white">
               {keyframeTimes.map((keyframeTime, index) => {
                 return (

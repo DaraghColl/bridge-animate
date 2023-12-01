@@ -117,36 +117,27 @@ const Timeline: FC = () => {
 
   return (
     <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll rounded-md bg-white text-dark-primary dark:bg-dark-secondary dark:text-white">
-      {animations && animations.length <= 0 && (
-        <span className="text-sm tracking-wide">Select Element and add an animation layer</span>
-      )}
-      {animations && animations.length > 0 && (
-        <Fragment>
-          <div className="flex h-full flex-col">
-            <div className="sticky top-0 z-10 flex w-full gap-4 bg-white px-4 pb-4 pt-2 dark:bg-dark-secondary">
-              <PlayControls
-                playAnimation={playAnimation}
-                pauseAnimation={pauseAnimation}
-                stopAnimation={stopAnimation}
-              />
-              <Scrubber
-                scrubberRef={scrubberRef}
-                scrubberValue={scrubberValue}
-                animationsToPay={animationsToPay}
-                onScrubChange={onScrubChange}
-              />
-            </div>
-
-            <div className="mt-4 flex flex-col gap-4 px-4">
-              <div className="overflow-scroll">
-                {animations.map((animation) => {
+      <Fragment>
+        <div className="flex h-full flex-col">
+          <div className="sticky top-0 z-10 flex w-full gap-4 border-light-secondary bg-white pb-2 pr-4 pt-2 dark:bg-dark-secondary">
+            <PlayControls playAnimation={playAnimation} pauseAnimation={pauseAnimation} stopAnimation={stopAnimation} />
+            <Scrubber
+              scrubberRef={scrubberRef}
+              scrubberValue={scrubberValue}
+              animationsToPay={animationsToPay}
+              onScrubChange={onScrubChange}
+            />
+          </div>
+          <div className="flex flex-col gap-4 pr-4 pt-4">
+            <div className="overflow-scroll">
+              {animations &&
+                animations.map((animation) => {
                   return <Keyframe animation={animation} />;
                 })}
-              </div>
             </div>
           </div>
-        </Fragment>
-      )}
+        </div>
+      </Fragment>
     </div>
   );
 };
