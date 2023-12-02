@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, Fragment, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FC, Fragment, useRef, useState } from 'react';
 import { useAnimationsContext } from '../../state/animations/animations.tsx';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 import { useSelectedElementContext } from '../../state/selected-element/selected-element.tsx';
@@ -15,6 +15,14 @@ const Timeline: FC = () => {
   const scrubberRef = useRef<HTMLInputElement>(null);
   const [scrubberValue, setScrubberValue] = useState<number>(0);
   let requestAnimation: number;
+
+  if (selectedElementID) {
+    if (isPlaying) {
+      document.getElementById(selectedElementID)?.classList.remove('outline', 'outline-accent');
+    } else if (!isPlaying) {
+      document.getElementById(selectedElementID)?.classList.add('outline', 'outline-accent');
+    }
+  }
 
   // use this function to make the timeline move using requestAnimationFrame
   const getAnimationTime = () => {
@@ -104,16 +112,6 @@ const Timeline: FC = () => {
       }
     });
   };
-
-  useEffect(() => {
-    if (!selectedElementID) return;
-
-    if (isPlaying) {
-      document.getElementById(selectedElementID)?.classList.remove('outline', 'outline-accent');
-    } else if (!isPlaying) {
-      document.getElementById(selectedElementID)?.classList.add('outline', 'outline-accent');
-    }
-  }, [isPlaying, selectedElementID]);
 
   return (
     <div className="relative flex basis-3/4 flex-col gap-4 overflow-scroll rounded-md bg-white text-dark-primary dark:bg-dark-secondary dark:text-white">
