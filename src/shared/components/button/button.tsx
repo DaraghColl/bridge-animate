@@ -45,7 +45,8 @@ const getDynamicClasses = (variant: Variant, color: Color, rounded: Rounded, spa
   return `${varient_map[variant]} ${color_map[color]} rounded-${rounded} ${space_map[space]}`;
 };
 
-const baseClasses = 'flex items-center gap-2 border-2 px-3 py-2 transition-all ease-in-out hover:scale-105 text-sm';
+const baseClasses =
+  'flex items-center gap-2 border-2 px-3 py-2 transition-all ease-in-out hover:scale-105 text-sm cursor-pointer';
 
 const Button: FC<ButtonComponentProps> = (props) => {
   const { variant = 'filled', color, rounded = 'sm', space = 'md', children, onClick, ...attributes } = props;

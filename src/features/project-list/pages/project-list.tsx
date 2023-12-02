@@ -57,7 +57,13 @@ const ProjectList: FC = () => {
             onChange={(e) => setNewAnimationName(e.target.value)}
           />
         </div>
-        <Button variant="filled" color="accent" rounded="md" onClick={createNewAnimationProject}>
+        <Button
+          variant="filled"
+          color="accent"
+          rounded="md"
+          onClick={createNewAnimationProject}
+          disabled={!newAnimationName || newAnimationName === ''}
+        >
           <div className="flex items-center gap-2">
             <PlusCircleIcon className="h-4 w-4 text-white" />
             <span>create</span>
