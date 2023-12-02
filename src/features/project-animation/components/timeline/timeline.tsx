@@ -138,7 +138,7 @@ const Timeline: FC = () => {
             <div className="overflow-scroll">
               {animations &&
                 animations.map((animation) => {
-                  return <Keyframes animation={animation} />;
+                  return <Keyframes animation={animation} key={animation.id} />;
                 })}
             </div>
           </div>
