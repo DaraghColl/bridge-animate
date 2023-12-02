@@ -1,70 +1,51 @@
-import { FC, ChangeEvent, Fragment, useEffect, useState, useCallback } from 'react';
+import { FC, ChangeEvent, Fragment, useEffect, useState } from 'react';
 import { SwatchIcon } from '@heroicons/react/24/outline';
 import { Style, StyleType, useAnimationsContext } from '../../state/animations/animations';
 import { useSelectedElementContext } from '../../state/selected-element/selected-element';
 import { usePrevious } from '@shared/hooks/use-previous/use-previous';
-import { formatTransformAndScale } from '../../utils/format-animation/format-animaton';
+import { useStyleUpdates } from '../../hooks/use-style-updates/use-style-updates';
 
 const StyleControls: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const { createKeyframeStyles, selectedKeyFrameTime, animations } = useAnimationsContext();
+  const { updateSelectedElementTemporaryStyles, removeElementStyles } = useStyleUpdates();
   const previousSelectedElementId = usePrevious(selectedElementID);
   const [currentKeyframe, setCurrentKeyframe] = useState<Style>({});
 
-  // set temporary styles so user can have real time feedback of style changes at keyframe point
-  const updateSelectedElementTemporaryStyles = useCallback(() => {
-    if (selectedElementID && selectedKeyFrameTime) {
-      const selectedElement = document.getElementById(selectedElementID);
-      if (selectedElement && currentKeyframe) {
-        if (currentKeyframe.opacity) selectedElement.style.opacity = currentKeyframe.opacity;
-        if (currentKeyframe.rotate) selectedElement.style.rotate = `${currentKeyframe.rotate}deg`;
-        if (currentKeyframe.scale) selectedElement.style.scale = currentKeyframe.scale;
-        if (currentKeyframe.fill) selectedElement.style.fill = currentKeyframe.fill;
-        if (currentKeyframe.stroke) selectedElement.style.stroke = currentKeyframe.stroke;
-        if (currentKeyframe.strokeDasharray) selectedElement.style.strokeDasharray = currentKeyframe.strokeDasharray;
-        if (currentKeyframe.strokeDashoffset) selectedElement.style.strokeDashoffset = currentKeyframe.strokeDashoffset;
-
-        const { translate, scale } = formatTransformAndScale(
-          currentKeyframe.translateX,
-          currentKeyframe.translateY,
-          currentKeyframe.scale,
-          currentKeyframe.scaleX,
-          currentKeyframe.scaleY,
-        );
-
-        if (translate && translate.length > 0) selectedElement.style.translate = translate;
-        if (scale && scale.length > 0) selectedElement.style.scale = scale;
-      }
-    }
-  }, [currentKeyframe, selectedElementID, selectedKeyFrameTime]);
-
   const handleInputChange = (style: StyleType, e: ChangeEvent<HTMLInputElement>) => {
     if (!selectedElementID) return;
+    const selectedElement = document.getElementById(selectedElementID);
+    if (!selectedElement) return;
+
+    selectedElement.removeAttribute('style');
 
     createKeyframeStyles(selectedElementID, style, e.target.value);
     setCurrentKeyframe({ ...currentKeyframe, [style]: e.target.value });
-    updateSelectedElementTemporaryStyles();
+    if (selectedElement) {
+      updateSelectedElementTemporaryStyles(selectedElement, currentKeyframe);
+    }
   };
 
   // set selected element temporary styles
   // reset previous styles when element changes
   useEffect(() => {
-    if (selectedElementID) {
-      const selectedElement = document.getElementById(selectedElementID);
+    if (!selectedElementID) return;
+    const selectedElement = document.getElementById(selectedElementID);
+    const previousSelectedElement = previousSelectedElementId
+      ? document.getElementById(previousSelectedElementId)
+      : null;
 
-      if (selectedElement) {
-        selectedElement.removeAttribute('style');
-      }
+    if (!selectedElement) return;
 
-      if (previousSelectedElementId && previousSelectedElementId !== selectedElementID) {
-        const previousSelectedElement = document.getElementById(previousSelectedElementId);
-        if (!previousSelectedElement) return;
-        previousSelectedElement.removeAttribute('style');
-      }
-
-      updateSelectedElementTemporaryStyles();
-    }
-  }, [previousSelectedElementId, selectedElementID, updateSelectedElementTemporaryStyles]);
+    removeElementStyles(selectedElement, previousSelectedElement);
+    updateSelectedElementTemporaryStyles(selectedElement, currentKeyframe);
+  }, [
+    currentKeyframe,
+    previousSelectedElementId,
+    selectedElementID,
+    removeElementStyles,
+    updateSelectedElementTemporaryStyles,
+  ]);
 
   // set current keyframe
   useEffect(() => {
@@ -78,17 +59,6 @@ const StyleControls: FC = () => {
 
     setCurrentKeyframe(currentKeyframe);
   }, [selectedElementID, animations, selectedKeyFrameTime]);
-
-  // this effect is specically for the transform tool - to change temp styles on update
-  useEffect(() => {
-    updateSelectedElementTemporaryStyles();
-  }, [
-    currentKeyframe.rotate,
-    currentKeyframe.scale,
-    currentKeyframe.translateX,
-    currentKeyframe.translateY,
-    updateSelectedElementTemporaryStyles,
-  ]);
 
   return (
     <div className="flex min-h-0 flex-col gap-4 p-4 text-sm font-normal">
