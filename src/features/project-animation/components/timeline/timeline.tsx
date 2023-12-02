@@ -2,7 +2,6 @@ import { ChangeEvent, FC, Fragment, useRef, useState } from 'react';
 import { useAnimationsContext } from '../../state/animations/animations.tsx';
 import { useCreateJSAnimations } from '../../hooks/use-create-js-animations.tsx/use-create-js-animations.tsx';
 import { useSelectedElementContext } from '../../state/selected-element/selected-element.tsx';
-import { usePrevious } from '@shared/hooks/use-previous/use-previous.tsx';
 import { Keyframes } from './keyframes/keyframes.tsx';
 import { PlayControls } from './play-controls/play-controls.tsx';
 import { Scrubber } from './scrubber/scrubber.tsx';
@@ -11,7 +10,6 @@ const Timeline: FC = () => {
   const { selectedElementID } = useSelectedElementContext();
   const { animations, isPlaying, setIsPlaying } = useAnimationsContext();
   const { animationsToPay } = useCreateJSAnimations();
-  const previousSelectedElementId = usePrevious(selectedElementID);
   const scrubberRef = useRef<HTMLInputElement>(null);
   const [scrubberValue, setScrubberValue] = useState<number>(0);
   let requestAnimation: number;
@@ -36,18 +34,6 @@ const Timeline: FC = () => {
 
   const playAnimation = () => {
     if (!selectedElementID) return;
-
-    const selectedElement = document.getElementById(selectedElementID);
-
-    if (selectedElement) {
-      selectedElement.removeAttribute('style');
-    }
-
-    if (previousSelectedElementId && previousSelectedElementId !== selectedElementID) {
-      const previousSelectedElement = document.getElementById(previousSelectedElementId);
-      if (!previousSelectedElement) return;
-      previousSelectedElement.removeAttribute('style');
-    }
 
     setIsPlaying(true);
     getAnimationTime();
