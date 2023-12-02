@@ -149,7 +149,11 @@ const ExportAnimation = () => {
                             <div className="mb-5">
                               {jsAnimations.length &&
                                 jsAnimations.map((animation) => {
-                                  return <Highlight className="language-javascript">{animation}</Highlight>;
+                                  return (
+                                    <Highlight className="language-javascript" key={animation}>
+                                      {animation}
+                                    </Highlight>
+                                  );
                                 })}
                             </div>
                           </div>
@@ -170,7 +174,11 @@ const ExportAnimation = () => {
                             <div className="mb-5">
                               {cssAnimations.length &&
                                 cssAnimations.map((animation) => {
-                                  return <Highlight className="language-css">{animation}</Highlight>;
+                                  return (
+                                    <Highlight className="language-css" key={animation}>
+                                      {animation}
+                                    </Highlight>
+                                  );
                                 })}
                             </div>
                           </div>
