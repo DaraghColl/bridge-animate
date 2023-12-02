@@ -133,6 +133,11 @@ const TransformTool: FC = () => {
       document.addEventListener('mousemove', handleMouseMovement);
       document.addEventListener('mouseup', mouseUp);
     }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMovement);
+      document.removeEventListener('mouseup', mouseUp);
+    };
   }, [mouseUp, handleMouseMovement, usingTransformTool]);
 
   return (
