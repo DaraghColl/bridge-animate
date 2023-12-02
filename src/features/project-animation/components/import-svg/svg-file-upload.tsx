@@ -1,13 +1,15 @@
-import { ChangeEvent, Dispatch, FC, useEffect } from 'react';
+import { ChangeEvent, FC, useCallback, useEffect, useRef } from 'react';
 import { CloudArrowUpIcon } from '@heroicons/react/24/outline';
 
 interface SVGFileUploadProps {
-  setFile: Dispatch<React.SetStateAction<File | null>>;
+  onFileUpload: (file: File) => void;
 }
-const SVGFileUpload: FC<SVGFileUploadProps> = (props) => {
-  const { setFile } = props;
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+const SVGFileUpload: FC<SVGFileUploadProps> = (props) => {
+  const { onFileUpload } = props;
+  const dropContainerRef = useRef<HTMLLabelElement>(null);
+
+  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const file = e.target.files[0];
     if (file.type !== 'image/svg+xml') {
@@ -15,40 +17,54 @@ const SVGFileUpload: FC<SVGFileUploadProps> = (props) => {
       return;
     }
 
-    setFile(file);
+    onFileUpload(file);
   };
 
-  useEffect(() => {
-    const dropContainer = document.getElementById('drop_container');
-    if (!dropContainer) return;
+  const dragOver = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
-    dropContainer.addEventListener(
-      'dragover',
-      (e) => {
-        // prevent default to allow drop
-        e.preventDefault();
-      },
-      false,
-    );
-
-    dropContainer.addEventListener('drop', (e) => {
+  const drop = useCallback(
+    (e: DragEvent) => {
       e.preventDefault();
-      dropContainer.classList.remove('drag-active');
-      if (e.dataTransfer) {
-        const file = e.dataTransfer.files[0];
-        if (file.type !== 'image/svg+xml') {
-          console.error('file type is not svg');
-          return;
-        }
+      e.stopPropagation();
 
-        setFile(file);
+      if (!e.dataTransfer) return;
+
+      const { files } = e.dataTransfer;
+
+      console.log(e);
+
+      const file = files[0];
+      if (file.type !== 'image/svg+xml') {
+        console.error('file type is not svg');
+        return;
       }
-    });
-  }, [setFile]);
+
+      if (files && files.length) {
+        onFileUpload(file);
+      }
+    },
+    [onFileUpload],
+  );
+
+  useEffect(() => {
+    const dropContainer = dropContainerRef.current;
+    if (!dropContainer) return;
+    dropContainer.addEventListener('dragover', dragOver);
+    dropContainer.addEventListener('drop', drop);
+
+    return () => {
+      dropContainer.removeEventListener('dragover', dragOver);
+      dropContainer.removeEventListener('drop', drop);
+    };
+  }, [drop]);
 
   return (
     <div className="flex w-full items-center justify-center">
       <label
+        ref={dropContainerRef}
         id="drop_container"
         htmlFor="dropzone-file"
         className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-light-secondary hover:bg-slate-light dark:border-gray-600 dark:bg-dark-secondary dark:hover:border-gray-500 dark:hover:bg-dark-primary"
@@ -60,7 +76,7 @@ const SVGFileUpload: FC<SVGFileUploadProps> = (props) => {
             <span className="font-semibold">Click to upload SVG</span> or drag and drop
           </p>
         </div>
-        <input id="dropzone-file" type="file" accept="image/svg+xml" className="hidden" onChange={handleFileChange} />
+        <input id="dropzone-file" type="file" accept="image/svg+xml" className="hidden" onChange={onFileChange} />
       </label>
     </div>
   );

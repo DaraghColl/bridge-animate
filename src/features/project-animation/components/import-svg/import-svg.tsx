@@ -14,7 +14,6 @@ function classNames(...classes: string[]) {
 const ImportSvg: FC = () => {
   const { userSvg, setUserSvg } = useCanvasContext();
   const { theme } = useThemeContext();
-  const [file, setFile] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const svgUploadAreaRef = useRef(null);
 
@@ -22,17 +21,16 @@ const ImportSvg: FC = () => {
     setIsOpen(false);
   };
 
-  useEffect(() => {
-    if (file) {
-      closeDialog();
+  const onFileUpload = (file: File) => {
+    if (!file) return;
+    closeDialog();
 
-      file.text().then((svgText) => {
-        if (!svgText) return;
+    file.text().then((svgText) => {
+      if (!svgText) return;
 
-        setUserSvg(svgText);
-      });
-    }
-  }, [file, setUserSvg]);
+      setUserSvg(svgText);
+    });
+  };
 
   useEffect(() => {
     if (!userSvg) {
@@ -130,7 +128,7 @@ const ImportSvg: FC = () => {
                           leaveTo="opacity-0 scale-95"
                         >
                           <div className="mt-2" ref={svgUploadAreaRef}>
-                            <SVGFileUpload setFile={setFile} />
+                            <SVGFileUpload onFileUpload={onFileUpload} />
                           </div>
                         </Transition.Child>
                       </Tab.Panel>
