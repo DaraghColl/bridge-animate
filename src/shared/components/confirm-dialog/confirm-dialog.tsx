@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Dispatch, FC, Fragment, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, FC, Fragment, SetStateAction } from 'react';
 import { Button } from '../button/button';
 
 interface ConfirmDialogProps {
@@ -12,26 +12,19 @@ interface ConfirmDialogProps {
 
 const ConfirmDialog: FC<ConfirmDialogProps> = (props) => {
   const { openDialog, onDialogClose, title, message, confirmCallback } = props;
-  const [isOpen, setIsOpen] = useState(false);
 
   const confirm = () => {
     confirmCallback();
-    setIsOpen(false);
     onDialogClose(false);
   };
 
   const cancel = () => {
-    setIsOpen(false);
     onDialogClose(false);
   };
 
-  useEffect(() => {
-    setIsOpen(openDialog);
-  }, [openDialog]);
-
   return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={cancel} data-cy="confirm_dialog">
+    <Transition appear show={openDialog} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={() => onDialogClose(false)} data-cy="confirm_dialog">
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"

@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Dispatch, FC, Fragment, ReactNode, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, FC, Fragment, ReactNode, SetStateAction } from 'react';
 
 interface StandardDialogProps {
   openDialog: boolean;
@@ -10,20 +10,10 @@ interface StandardDialogProps {
 
 const StandardDialog: FC<StandardDialogProps> = (props) => {
   const { openDialog, onDialogClose, title, children } = props;
-  const [isOpen, setIsOpen] = useState(false);
-
-  const close = () => {
-    setIsOpen(false);
-    onDialogClose(false);
-  };
-
-  useEffect(() => {
-    setIsOpen(openDialog);
-  }, [openDialog]);
 
   return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={close} data-cy="standard_dialog">
+    <Transition appear show={openDialog} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={() => onDialogClose(false)} data-cy="standard_dialog">
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
