@@ -34,8 +34,6 @@ const SVGFileUpload: FC<SVGFileUploadProps> = (props) => {
 
       const { files } = e.dataTransfer;
 
-      console.log(e);
-
       const file = files[0];
       if (file.type !== 'image/svg+xml') {
         console.error('file type is not svg');
