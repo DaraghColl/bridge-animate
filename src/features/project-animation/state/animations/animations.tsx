@@ -86,8 +86,197 @@ interface AnimationsProviderProps {
 }
 
 const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
-  const [animations, setAnimations] = useState<Animation[] | []>([]);
-  const [selectedKeyFrameTime, setSelectedKeyFrameTime] = useState<KeyframeTime | null>(null);
+  const [animations, setAnimations] = useState<Animation[] | []>([
+    {
+      id: '84444aa4-92a5-4275-a1c1-d2e834532591',
+      name: 'square',
+      config: {
+        animationName: 'square',
+        animationDuration: '2.5',
+        animationDelay: '0',
+        animationInterationCount: '1',
+        animationDirection: 'normal',
+        animationTimingFunction: 'ease-in-out',
+        animationFillMode: 'forwards',
+      },
+      keyframes: [
+        {
+          time: '0',
+          styles: {
+            opacity: '0',
+            rotate: '',
+            translateX: '-20',
+            translateY: '',
+            scale: '',
+            scaleX: '',
+            scaleY: '',
+            fill: '',
+            stroke: '',
+            strokeDasharray: '',
+            strokeDashoffset: '',
+          },
+        },
+        {
+          time: '1',
+          styles: {
+            opacity: '1',
+            rotate: '',
+            translateX: '0',
+            translateY: '',
+            scale: '',
+            scaleX: '',
+            scaleY: '',
+            fill: '',
+            stroke: '',
+            strokeDasharray: '',
+            strokeDashoffset: '',
+          },
+        },
+      ],
+    },
+    {
+      id: 'c6beb92d-8af6-418b-9281-aad5a49933db',
+      name: 'triangle',
+      config: {
+        animationName: 'triangle',
+        animationDuration: '2.5',
+        animationDelay: '0',
+        animationInterationCount: '1',
+        animationDirection: 'normal',
+        animationTimingFunction: 'ease-in-out',
+        animationFillMode: 'forwards',
+      },
+      keyframes: [
+        {
+          time: '0',
+          styles: {
+            opacity: '0',
+            rotate: '',
+            translateX: '',
+            translateY: '-20',
+            scale: '',
+            scaleX: '',
+            scaleY: '',
+            fill: '',
+            stroke: '',
+            strokeDasharray: '',
+            strokeDashoffset: '',
+          },
+        },
+        {
+          time: '1',
+          styles: {
+            opacity: '1',
+            rotate: '',
+            translateX: '',
+            translateY: '0',
+            scale: '',
+            scaleX: '',
+            scaleY: '',
+            fill: '',
+            stroke: '',
+            strokeDasharray: '',
+            strokeDashoffset: '',
+          },
+        },
+      ],
+    },
+    {
+      id: '062e7000-2f82-4177-b854-d53efc209a71',
+      name: 'circle',
+      config: {
+        animationName: 'circle',
+        animationDuration: '2.5',
+        animationDelay: '0',
+        animationInterationCount: '1',
+        animationDirection: 'normal',
+        animationTimingFunction: 'ease-in-out',
+        animationFillMode: 'forwards',
+      },
+      keyframes: [
+        {
+          time: '0',
+          styles: {
+            opacity: '0',
+            rotate: '',
+            translateX: '20',
+            translateY: '',
+            scale: '',
+            scaleX: '',
+            scaleY: '',
+            fill: '',
+            stroke: '',
+            strokeDasharray: '',
+            strokeDashoffset: '',
+          },
+        },
+        {
+          time: '1',
+          styles: {
+            opacity: '1',
+            rotate: '',
+            translateX: '0',
+            translateY: '0',
+            scale: '',
+            scaleX: '',
+            scaleY: '',
+            fill: '',
+            stroke: '',
+            strokeDasharray: '',
+            strokeDashoffset: '',
+          },
+        },
+      ],
+    },
+    {
+      id: '96d65cfd-9ee6-4553-bb9f-cf236301b216',
+      name: 'x',
+      config: {
+        animationName: 'x',
+        animationDuration: '2.5',
+        animationDelay: '0',
+        animationInterationCount: '1',
+        animationDirection: 'normal',
+        animationTimingFunction: 'ease-in-out',
+        animationFillMode: 'forwards',
+      },
+      keyframes: [
+        {
+          time: '0',
+          styles: {
+            opacity: '0',
+            rotate: '',
+            translateX: '',
+            translateY: '20',
+            scale: '',
+            scaleX: '',
+            scaleY: '',
+            fill: '',
+            stroke: '',
+            strokeDasharray: '',
+            strokeDashoffset: '',
+          },
+        },
+        {
+          time: '1',
+          styles: {
+            opacity: '1',
+            rotate: '',
+            translateX: '',
+            translateY: '0',
+            scale: '',
+            scaleX: '',
+            scaleY: '',
+            fill: '',
+            stroke: '',
+            strokeDasharray: '',
+            strokeDashoffset: '',
+          },
+        },
+      ],
+    },
+  ]);
+  const [selectedKeyFrameTime, setSelectedKeyFrameTime] = useState<KeyframeTime | null>('1');
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const createNewAnimation = (elementId: string) => {
@@ -156,6 +345,8 @@ const AnimationsProvider: FC<AnimationsProviderProps> = ({ children }) => {
       // animate() will give error if keyframes not in correct order
       animation.keyframes.sort((a, b) => Number(a.time) - Number(b.time));
     });
+
+    console.log(animationsCopy);
 
     setAnimations(animationsCopy);
   };

@@ -242,6 +242,8 @@ const StyleControls: FC = () => {
           </div>
         </Fragment>
       )}
+
+      {!selectedElementID || (!selectedKeyFrameTime && <p>Select keyframe to change styles</p>)}
     </div>
   );
 };

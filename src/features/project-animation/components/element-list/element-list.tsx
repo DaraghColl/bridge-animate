@@ -4,7 +4,6 @@ import { Disclosure } from '@headlessui/react';
 import { ChevronRightIcon, CubeTransparentIcon } from '@heroicons/react/24/solid';
 import { useSelectedElementContext } from '../../state/selected-element/selected-element';
 import { useCanvasContext } from '../../state/canvas/canvas';
-import { ImportSvg } from '../import-svg/import-svg';
 import { formatRandomIdOnLabel } from '../../utils/format-animation/format-animaton';
 
 const listOfElementstoAllowAnimation = [
@@ -247,9 +246,6 @@ const ElementList: FC = () => {
         <div className="flex items-center gap-2">
           <CubeTransparentIcon className="h-4 w-4" />
           <span>Elements</span>
-        </div>
-        <div>
-          <ImportSvg />
         </div>
       </div>
 

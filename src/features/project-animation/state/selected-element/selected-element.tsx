@@ -12,7 +12,7 @@ interface SelectedElementProviderProps {
 }
 
 const SelectedElementProvider: FC<SelectedElementProviderProps> = ({ children }) => {
-  const [selectedElementID, setSelectedElementId] = useState<string | null>(null);
+  const [selectedElementID, setSelectedElementId] = useState<string | null>('square');
   const [previousSelectedElementID, setPreviousSelectedElementId] = useState<string>('');
 
   useEffect(() => {

@@ -103,6 +103,7 @@ const AnimationConfig: FC = () => {
             </label>
             <div className="w-2/3">
               <input
+                disabled
                 name="duration"
                 type="number"
                 className="w-full rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
@@ -119,6 +120,7 @@ const AnimationConfig: FC = () => {
             </label>
             <div className="w-2/3">
               <input
+                disabled
                 name="delay"
                 type="number"
                 className="w-full rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
@@ -135,6 +137,7 @@ const AnimationConfig: FC = () => {
             </label>
             <div className="w-2/3">
               <input
+                disabled
                 name="iteration"
                 type="text"
                 className="w-full rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
@@ -154,6 +157,7 @@ const AnimationConfig: FC = () => {
               direction
             </label>
             <select
+              disabled
               name="direction"
               className="w-2/3 rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
               onBlur={(e) => handleInputChange('animationDirection', e.target.value)}
@@ -174,6 +178,7 @@ const AnimationConfig: FC = () => {
               timing
             </label>
             <select
+              disabled
               name="timing"
               className="w-2/3 rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
               onBlur={(e) => handleInputChange('animationTimingFunction', e.target.value)}
@@ -194,6 +199,7 @@ const AnimationConfig: FC = () => {
               fill mode
             </label>
             <select
+              disabled
               name="fill"
               className="w-2/3 rounded-sm bg-light-secondary px-2  py-1 text-dark-primary outline-none dark:bg-dark-primary dark:dark:text-gray-100"
               onBlur={(e) => handleInputChange('animationFillMode', e.target.value)}
