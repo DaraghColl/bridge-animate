@@ -19,14 +19,20 @@ const ProjectAnimation: FC = () => {
         <CanvasProvider>
           <Fragment>
             <StandardDialog
-              title="This is a demo version of the app"
+              title="This is a early development demo version of the app. Some features have been disabled for demo purposes"
               openDialog={showDemoDialog}
               onDialogClose={() => setShowDemoDialog(false)}
             >
-              <div className="mb-4 flex flex-col gap-2 px-2">
-                <p>It has been laoded with an svg and some animations.</p>
-                <p>Use the play controls to play the animation, and the scrubber to move through the animation.</p>
-                <p>Select a keyframe in the timeline to show style options</p>
+              <div className="mb-4 flex flex-col gap-2 px-2 text-slate-400">
+                <p>It has been loaded with an svg and some animations.</p>
+                <p>Expand svg to see all selectable elements (left panel)</p>
+                <p>
+                  Use the play controls to play the animation, and the scrubber to move through the animation (bottom
+                  center panel).
+                </p>
+                <p>Select a keyframe (highlighted diamond shape) in the timeline to show / change animation style</p>
+                <p>Animation config have been disabled (bottom right panel).</p>
+                <p>Add new svg / delete layer have been disabled.</p>
               </div>
               <Button variant="filled" color="accent" rounded="md" onClick={() => setShowDemoDialog(false)}>
                 Close
