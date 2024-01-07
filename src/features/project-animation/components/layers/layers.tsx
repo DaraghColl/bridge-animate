@@ -1,17 +1,16 @@
 import { FC, useState } from 'react';
-import { TrashIcon, Square3Stack3DIcon, PlusCircleIcon } from '@heroicons/react/24/solid';
+import { Square3Stack3DIcon, PlusCircleIcon } from '@heroicons/react/24/solid';
 import { Tooltip } from 'react-tooltip';
 import { useAnimationsContext } from '../../state/animations/animations';
 import { useThemeContext } from '@/shared/state/theme/theme.tsx';
 import { useSelectedElementContext } from '../../state/selected-element/selected-element';
-import { ConfirmDialog } from '@shared/components/confirm-dialog/confirm-dialog';
 
 const Layers: FC = () => {
   const { selectedElementID, setSelectedElementId } = useSelectedElementContext();
-  const { animations, createNewAnimation, deleteAnimation } = useAnimationsContext();
+  const { animations, createNewAnimation } = useAnimationsContext();
   const { theme } = useThemeContext();
 
-  const [showDeleteAnimationLayer, setShowDeleteAnimationLayer] = useState(false);
+  const [_, setShowDeleteAnimationLayer] = useState(false);
 
   const handleCreateNewAnimation = () => {
     if (!selectedElementID) return;
@@ -26,17 +25,6 @@ const Layers: FC = () => {
 
   const elementSelect = (name: string) => {
     setSelectedElementId(name);
-  };
-
-  const deleteAnimationLayer = (id: string) => {
-    try {
-      deleteAnimation(id);
-      setShowDeleteAnimationLayer(false);
-    } catch (err) {
-      console.error(err);
-      // TODO: show error message in toast
-      setShowDeleteAnimationLayer(false);
-    }
   };
 
   return (
@@ -61,7 +49,7 @@ const Layers: FC = () => {
 
       <div className="flex flex-col items-start gap-4 font-thin">
         {animations &&
-          animations.map(({ id, name }, index) => {
+          animations.map(({ name }, index) => {
             return (
               <div key={index} className="w-full">
                 <div className="flex w-full cursor-pointer items-center gap-2">
@@ -71,19 +59,6 @@ const Layers: FC = () => {
                   >
                     {name}
                   </span>
-                  {/* <span>
-                    <TrashIcon
-                      className="w-4 text-dark-primary transition ease-in-out hover:-translate-y-[2px] dark:text-white"
-                      onClick={() => setShowDeleteAnimationLayer(true)}
-                    />
-                    <ConfirmDialog
-                      openDialog={showDeleteAnimationLayer}
-                      onDialogClose={setShowDeleteAnimationLayer}
-                      title="Delete Animation Layer"
-                      message="Are you sure you want to delete this animation layer?"
-                      confirmCallback={() => deleteAnimationLayer(id)}
-                    />
-                  </span> */}
                 </div>
               </div>
             );
