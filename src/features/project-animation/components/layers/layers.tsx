@@ -71,7 +71,7 @@ const Layers: FC = () => {
                   >
                     {name}
                   </span>
-                  <span>
+                  {/* <span>
                     <TrashIcon
                       className="w-4 text-dark-primary transition ease-in-out hover:-translate-y-[2px] dark:text-white"
                       onClick={() => setShowDeleteAnimationLayer(true)}
@@ -83,7 +83,7 @@ const Layers: FC = () => {
                       message="Are you sure you want to delete this animation layer?"
                       confirmCallback={() => deleteAnimationLayer(id)}
                     />
-                  </span>
+                  </span> */}
                 </div>
               </div>
             );
