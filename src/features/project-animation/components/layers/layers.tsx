@@ -7,6 +7,7 @@ import { useSelectedElementContext } from '../../state/selected-element/selected
 import { ConfirmDialog } from '@shared/components/confirm-dialog/confirm-dialog';
 
 const Layers: FC = () => {
+  const [elementToDelete, setElementToDelete] = useState<string | null>(null);
   const { selectedElementID, setSelectedElementId } = useSelectedElementContext();
   const { animations, createNewAnimation, deleteAnimation } = useAnimationsContext();
   const { theme } = useThemeContext();
@@ -28,9 +29,11 @@ const Layers: FC = () => {
     setSelectedElementId(name);
   };
 
-  const deleteAnimationLayer = (id: string) => {
+  const deleteAnimationLayer = () => {
+    if (!elementToDelete) return;
+
     try {
-      deleteAnimation(id);
+      deleteAnimation(elementToDelete);
       setShowDeleteAnimationLayer(false);
     } catch (err) {
       console.error(err);
@@ -74,14 +77,16 @@ const Layers: FC = () => {
                   <span>
                     <TrashIcon
                       className="w-4 text-dark-primary transition ease-in-out hover:-translate-y-[2px] dark:text-white"
-                      onClick={() => setShowDeleteAnimationLayer(true)}
+                      onClick={() => {
+                        setShowDeleteAnimationLayer(true), setElementToDelete(id);
+                      }}
                     />
                     <ConfirmDialog
                       openDialog={showDeleteAnimationLayer}
                       onDialogClose={setShowDeleteAnimationLayer}
                       title="Delete Animation Layer"
                       message="Are you sure you want to delete this animation layer?"
-                      confirmCallback={() => deleteAnimationLayer(id)}
+                      confirmCallback={() => deleteAnimationLayer()}
                     />
                   </span>
                 </div>
